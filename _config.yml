@@ -13,11 +13,11 @@ highlighter: rouge
 title : Soot Spirits
 tagline: Code, Science, Philosophy, Humor
 author :
-  name : Abhishek Nagekar
-  email : abhishek@nagekar.com
-  github : abhn
-  twitter : abhisheknagekar
-  feedburner : AbhishekN
+  name : 朱猛
+  email : 18351927991@163.com
+  github : https://github.com/ExistOrLive
+  twitter : 
+  feedburner : 
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt
@@ -27,7 +27,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : https://www.nagekar.com
+production_url : https://existorlive.github.io/
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
