@@ -11,15 +11,12 @@ type: page
 
 ## 关于我
 
-<iframe src="https://githubbadge.appspot.com/gaohaoyang?s=1" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameBorder="0"></iframe>
+> 苦逼码畜一枚
 
 ## 联系我
 
-* GitHub：[Gaohaoyang](https://github.com/ExistOrLive)
+* GitHub：[ExistOrLive](https://github.com/ExistOrLive)
 * email：2068531506@qq.com
-* [Weibo]()
-* [知乎]()
-* [Facebook]()
 
 ## 友情链接
 
