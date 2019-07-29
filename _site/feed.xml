@@ -5,9 +5,222 @@
     <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 29 Jul 2019 15:44:53 +0800</pubDate>
-    <lastBuildDate>Mon, 29 Jul 2019 15:44:53 +0800</lastBuildDate>
+    <pubDate>Mon, 29 Jul 2019 22:31:46 +0800</pubDate>
+    <lastBuildDate>Mon, 29 Jul 2019 22:31:46 +0800</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>百度HTTPS握手过程</title>
+        <description>&lt;h1 id=&quot;百度https过程&quot;&gt;百度HTTPS过程&lt;/h1&gt;
+
+ &amp;gt; 如下图所示，&lt;code class=&quot;highlighter-rouge&quot;&gt;https://www.baidu.com&lt;/code&gt;请求的抓包
+
+&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包.png&quot; alt=&quot;&quot; /&gt;
+
+&lt;blockquote&gt;
+  首先我们看到TCP的三次握手,然后是SSL/TLS的握手流程：
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    Client Hello ： 客户端向服务端发起握手
+
+    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ClientHello.png&quot; alt=&quot;&quot; /&gt;
+
+    该报文属于Handshake Protocol的一部分，报文内容包括随机数，客户端支持的加密算法套件，session id以及扩展部分。
+
+    随机数会用于之后对称秘钥的计算，属于混淆的一部分
+
+    session id 用于会话的复用，由服务端生成，首次创建为空
+
+    加密算法套件：服务端会选择其中一个加密算法使用(包括秘钥协商算法，对称加密和hash算法)
+  &lt;/li&gt;
+  &lt;li&gt;
+    Server Hello :
+
+    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ServerClient.png&quot; alt=&quot;&quot; /&gt;
+
+    该报文属于Handshake Protocol的一部分,用于回复Client Hello，报文内容包括随机数，选择的加密算法套件，sessionid以及扩展部分
+
+    随机数 ： 与客户端生成的不是同一个，用于之后的密钥生成
+
+    session id
+
+    加密套件： 服务端选择的加密算法，用于之后交互的加密
+  &lt;/li&gt;
+  &lt;li&gt;
+    Certificates
+
+    该报文属于Handshake Protocol的一部分,用于向客户端传递服务端数字证书
+
+    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_Certificates.png&quot; alt=&quot;&quot; /&gt;
+
+    数字证书： 包含服务端信息和服务端公钥，是由服务端向第三方CA机构申请; 注意证书链的顺序，最下层证书在前（用户证书在前，上级证书在后）。发送的证书是二进制格式，并非base64之后的格式。
+  &lt;/li&gt;
+  &lt;li&gt;
+    Server Key Exchange
+
+    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ServerKeyExchange.png&quot; alt=&quot;&quot; /&gt;
+
+    该报文只有秘钥协商选择DHE/ECDHE时，才会发送
+秘钥协商算法选择RSA，不会发送。
+
+    具体差异参看 ；&lt;a href=&quot;https://blog.csdn.net/mrpre/article/details/78025940&quot;&gt;TLS/SSL 协议详解 (30) SSL中的RSA、DHE、ECDHE、ECDH流程与区别&lt;/a&gt;
+
+    baidu这里采用的是ECDHE算法，主要包括椭圆曲线类型和公钥，用于主秘钥的计算；这里数字证书中的秘钥就不参与主秘钥的协商了
+  &lt;/li&gt;
+  &lt;li&gt;
+    Server Hello Done
+
+    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ServerHelloDone.png&quot; alt=&quot;&quot; /&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    Client Key Exchange
+
+    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ClientKeyExchange.png&quot; alt=&quot;&quot; /&gt;
+
+    该报文只有秘钥协商选择DHE/ECDHE时，才会发送
+秘钥协商算法选择RSA，不会发送。
+  &lt;/li&gt;
+  &lt;li&gt;
+    Change Cipher Spec
+
+    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ChangeCipherSpec.png&quot; alt=&quot;&quot; /&gt;
+
+    这是一个无关紧要的数据。在TLS1.3中就被废弃了(可以发送、也可以不发送)。
+
+    需要注意的是，该数据本身不被计算握手摘要，因为它的type不是Handshake。
+  &lt;/li&gt;
+  &lt;li&gt;
+    Encrypted HandShake Message
+
+    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_EncryptedHandShakeMessage.png&quot; alt=&quot;&quot; /&gt;
+
+    这个报文的目的就是告诉对端自己在整个握手过程中收到了什么数据，发送了什么数据。来保证中间没人篡改报文。
+
+    其次，这个报文作用就是确认秘钥的正确性。因为Encrypted handshake message是使用对称秘钥进行加密的第一个报文，如果这个报文加解密校验成功，那么就说明对称秘钥是正确的。
+  &lt;/li&gt;
+  &lt;li&gt;
+    Application Data
+
+    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ApplicationData.png&quot; alt=&quot;&quot; /&gt;
+
+    该报文就是实际的HTTP报文内容，已经被主秘钥加密；另外可以看到该报文不属于握手协议，而是Application_data_protocol http-over-tls
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Mon, 22 Jul 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/07/22/HTTPS-WITH_BAIDU/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/07/22/HTTPS-WITH_BAIDU/</guid>
+        
+        <category>HTTP</category>
+        
+        
+        <category>TCP/IP</category>
+        
+      </item>
+    
+      <item>
+        <title>HTTPS 概述</title>
+        <description>&lt;h1 id=&quot;https&quot;&gt;HTTPS&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  由于HTTP报文在网路上是以明文的方式传递的，因此很多时候在安全方面无法满足商用的要求，无法保证数据不被中间人截取和篡改(中间人攻击)。
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;对称加密&quot;&gt;对称加密&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  我们可以使用对称加密技术(DES,3DES,AES)对HTTP报文进行加密；AES加密技术是现在最流行且有效的加密算法，可以可靠的保证密文不被中间人解析，只要对称秘钥不泄漏。
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  如果中间人截取了对称秘钥，完全可以换成自己的秘钥传递给另一端，这样就不能解决中间人攻击。那么问题就变为怎么安全的传递对称秘钥？
+&lt;/blockquote&gt;
+
+&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS对称加密.png&quot; alt=&quot;对称加密的问题&quot; /&gt;
+
+&lt;blockquote&gt;
+  这个时候我们可以非对称加密技术加密对称秘钥，然后再在网路上传递
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;非对称加密&quot;&gt;非对称加密&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  非对称加密包含两个秘钥：公钥和私钥。公钥可以将私钥加密的数据明文化，私钥可以将公钥加密的数据明文化。
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  首先由客户端向服务端发出握手请求；接着由服务端返回公钥；客户端受到公钥，生成加密报文用的对称秘钥，由公钥加密传递给服务端；最后服务端受到对称秘钥用私钥解析出来，之后就可以进行正常的数据交互了。
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  但是这还是不能避免中间人攻击，如果中间人劫持了公钥，再生成自己的公钥传递给客户端。这样中间人和服务端建立连接，客户端和中间人建立连接，中间人攻击还是构成了。
+&lt;/blockquote&gt;
+
+&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS-非对称加密.png&quot; alt=&quot;非对称加密的问题&quot; /&gt;
+
+&lt;blockquote&gt;
+  因此客户端必须要判断公钥的可靠性和完整性(即公钥是不是确实从服务端传递来的，而没有被篡改)；为解决这个问题，我会可以引入可靠的第三方CA机构
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;数字证书&quot;&gt;数字证书&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  CA机构即证书颁发机构，服务端会事先向CA机构申请数字证书。
+&lt;/blockquote&gt;
+
+&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS-数字证书.png&quot; alt=&quot;数字证书的使用&quot; /&gt;
+
+&lt;h3 id=&quot;数字证书的作用&quot;&gt;数字证书的作用&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    认证正在访问的网站（是否为钓鱼网站）
+  &lt;/li&gt;
+  &lt;li&gt;
+    保证数据的私密性和可靠性
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;数字证书的申请&quot;&gt;数字证书的申请&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    首先服务端会生成自己的公钥和私钥，然后拿着&lt;strong&gt;公钥&lt;/strong&gt;和&lt;strong&gt;服务端的一些信息&lt;/strong&gt;向CA机构申请数字证书
+  &lt;/li&gt;
+  &lt;li&gt;
+    CA机构拿着公钥和服务端信息通过Hash算法生成消息摘要，然后将消息摘要用自己的私钥加密，生成后的密文即数字签名。数字签名和原本的公钥及服务端信息组成数字证书
+  &lt;/li&gt;
+  &lt;li&gt;
+    最后服务端拿到数字证书，等待客户端的握手请求
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;数字证书怎么保证交互的可靠性完整性及私密性&quot;&gt;数字证书怎么保证交互的可靠性，完整性及私密性&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;服务端受到握手请求后，首先会将数字证书传递给客户端&lt;/li&gt;
+  &lt;li&gt;我们的电脑和浏览器中已经内置了一部分权威机构的根证书，这些根证书中包含了CA的公匙。 数字证书包含公钥，服务端信息和数字签名。客户端首先会将公钥，服务端信息通过Hash算法生成一份消息摘要；然后将数字签名用CA的公钥解密出一份消息摘要；对比两份消息摘要，如果不一致即公钥被篡改，停止握手。&lt;/li&gt;
+  &lt;li&gt;HASH算法的不可逆性保证了消息摘要无法篡改，CA机构的非对称加密保证了公钥来源的可靠性&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;https的握手&quot;&gt;HTTPS的握手&lt;/h2&gt;
+
+&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS握手流程.jpg&quot; alt=&quot;HTTPS的握手&quot; /&gt;
+
+</description>
+        <pubDate>Sun, 12 May 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/05/12/HTTPS/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/05/12/HTTPS/</guid>
+        
+        <category>HTTP</category>
+        
+        
+        <category>TCP/IP</category>
+        
+      </item>
     
       <item>
         <title>OC 内存管理</title>
