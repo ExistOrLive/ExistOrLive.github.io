@@ -37,18 +37,21 @@ mathjax: true
 
  > 我们只需要关心，是否有循环引用带来的内存泄露 及 autorelease带来的 内存峰值
 
-```
+```objc
 
  for(int i = 0;i < 1000000; i++)
  {
       NSMutableString * str = [NSMutableString stringWithFormat:@"Hello world"];   
-    /* *  str 指向的对象不是自己生成的，该对象在生成时，会自动插入autorelease
-                                          *  的内存管理代码; 返回时，引用计数为 1，在被str持有后引用计数 为2
+
+    /** 
+      *  str 指向的对象不是自己生成的，该对象在生成时，会自动插入autorelease
+      *  的内存管理代码; 返回时，引用计数为 1，在被str持有后引用计数 为2
       *  当一次循环闭包结束,str的声明周期结束，自动插入release代码来释放对象
-     *   此时引用计数为 1 ,对象不会被销毁，内存泄露 ， 只有当autoreleasepool 调用 drain方法，同时为对象的引用计数减 1                                                                                       *  
+      *  此时引用计数为 1 ,对象不会被销毁，内存泄露 ， 只有当autoreleasepool 调用 drain方法，同时为对象的引用计数减 1                
+      **/
   }
 
-  解决方法 ：
+  // 解决方法 ：
   for(int i = 0; i <　1000000; i++)
   {
         @autoreleasepool
@@ -126,16 +129,16 @@ mathjax: true
 
  MRC中：
 
-```
+```objc
 
-retained return value:
+// retained return value:
                             
  // 调用者生成并持有，负责对象的释放                
 - (MyCustomCalss *) initWIthName:(NSString *) name     {
     return [ [MyCustomClass alloc] init];      
 }
                 
- unretained return value：
+// unretained return value：
 
 // 对象不是由调用者生成，不负责对象的释放，由autoreleasepool负责                      
 + (MyCustomClass * )  myCustomClassWithName:(NSString *) name           
