@@ -23,9 +23,11 @@ mathjax: true
 - [Gitee Source][2]
 
 
-[1]: /public/GithubClient/Github/manifest.plist
+[1]: itms-services://?action=download-manifest&url=https://existorlive.github.io/public/GithubClient/Github/manifest.plist
 
-[2]: /public/GithubClient/Gitee/manifest.plist
+
+
+[2]: itms-services://?action=download-manifest&url=https://existorlive.gitee.io/public/GithubClient/Gitee/manifest.plist
 
 [3]: /public/GithubClient/ipa/icon-57.png
 
