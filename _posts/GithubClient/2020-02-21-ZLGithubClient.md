@@ -14,7 +14,7 @@ mathjax: true
 > Github 自制iOS客户端
 
 
-![][3]
+![][4]
 
 ## 下载链接
 
@@ -22,14 +22,16 @@ mathjax: true
 
 - [Gitee Source][2]
 
+- [Coding Artifacts Source][3]
+
 
 [1]: itms-services://?action=download-manifest&url=https://existorlive.github.io/public/GithubClient/Github/manifest.plist
 
-
-
 [2]: itms-services://?action=download-manifest&url=https://existorlive.gitee.io/public/GithubClient/Gitee/manifest.plist
 
-[3]: /public/GithubClient/ipa/icon-57.png
+[3]: itms-services://?action=download-manifest&url=https://existorlive.gitee.io/public/GithubClient/CodingArtifacts/manifest.plist
+
+[4]: /public/GithubClient/ipa/icon-57.png
 
 
 
