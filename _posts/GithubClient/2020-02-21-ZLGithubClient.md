@@ -11,8 +11,7 @@ mathjax: true
 # ZLGithubClient Beta Download
 
 
-> Github 自制iOS客户端
-
+> Github 自制iOS客户端     
 
 ![][4]
 
@@ -20,9 +19,15 @@ mathjax: true
 
 - [Github Source][1]
 
+![][5]
+
 - [Gitee Source][2]
 
+![][6]
+
 - [Coding Artifacts Source][3]
+
+![][7]
 
 
 [1]: itms-services://?action=download-manifest&url=https://existorlive.github.io/public/GithubClient/Github/manifest.plist
@@ -33,7 +38,11 @@ mathjax: true
 
 [4]: /public/GithubClient/ipa/icon-57.png
 
+[5]: /public/GithubClient/QRCode/Github.png
 
+[6]: /public/GithubClient/QRCode/Gitee.png
+
+[7]: /public/GithubClient/QRCode/Coding.png
 
 
 
