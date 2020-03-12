@@ -1,186 +1,370 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>朱猛的博客</title>
-    <description></description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 29 Jul 2019 22:31:46 +0800</pubDate>
-    <lastBuildDate>Mon, 29 Jul 2019 22:31:46 +0800</lastBuildDate>
-    <generator>Jekyll v3.8.6</generator>
-    
-      <item>
-        <title>百度HTTPS握手过程</title>
-        <description>&lt;h1 id=&quot;百度https过程&quot;&gt;百度HTTPS过程&lt;/h1&gt;
-
- &amp;gt; 如下图所示，&lt;code class=&quot;highlighter-rouge&quot;&gt;https://www.baidu.com&lt;/code&gt;请求的抓包
-
-&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包.png&quot; alt=&quot;&quot; /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-12T20:22:45+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ExistOrLive’s Blog</title><subtitle>ExistOrLive's Blog
+</subtitle><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><entry><title type="html">ZLGithubClient Beta Download</title><link href="http://localhost:4000/2020/02/21/ZLGithubClient.html" rel="alternate" type="text/html" title="ZLGithubClient Beta Download" /><published>2020-02-21T00:00:00+08:00</published><updated>2020-02-21T00:00:00+08:00</updated><id>http://localhost:4000/2020/02/21/ZLGithubClient</id><content type="html" xml:base="http://localhost:4000/2020/02/21/ZLGithubClient.html">&lt;h1 id=&quot;zlgithubclient-beta-download&quot;&gt;ZLGithubClient Beta Download&lt;/h1&gt;
 
 &lt;blockquote&gt;
-  首先我们看到TCP的三次握手,然后是SSL/TLS的握手流程：
+  &lt;p&gt;Github 自制iOS客户端&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/GithubClient/ipa/icon-57.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;下载链接&quot;&gt;下载链接&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;itms-services://?action=download-manifest&amp;amp;url=https://existorlive.github.io/public/GithubClient/Github/manifest.plist&quot;&gt;Github Source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/GithubClient/QRCode/Github.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;itms-services://?action=download-manifest&amp;amp;url=https://existorlive.gitee.io/public/GithubClient/Gitee/manifest.plist&quot;&gt;Gitee Source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/GithubClient/QRCode/Gitee.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;itms-services://?action=download-manifest&amp;amp;url=https://existorlive.gitee.io/public/GithubClient/CodingArtifacts/manifest.plist&quot;&gt;Coding Artifacts Source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/GithubClient/QRCode/Coding.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="App" /><summary type="html">ZLGithubClient Beta Download Github 自制iOS客户端 下载链接 Github Source Gitee Source Coding Artifacts Source</summary></entry><entry><title type="html">HTTP请求方法</title><link href="http://localhost:4000/2019/08/19/HTTP_Method.html" rel="alternate" type="text/html" title="HTTP请求方法" /><published>2019-08-19T00:00:00+08:00</published><updated>2019-08-19T00:00:00+08:00</updated><id>http://localhost:4000/2019/08/19/HTTP_Method</id><content type="html" xml:base="http://localhost:4000/2019/08/19/HTTP_Method.html">&lt;h1 id=&quot;http请求方法&quot;&gt;HTTP请求方法&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/HTTP_Method.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;以下为对于同一uri使用不同方法时的抓包&quot;&gt;以下为对于同一URI使用不同方法时的抓包&lt;/h2&gt;
+
+&lt;h2 id=&quot;get--获取资源&quot;&gt;GET : 获取资源&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/GET.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;可以看到GET请求报文只有报文首部(请求行和首部字段)，没有HTTP报文主体；而响应报文包括报文首部(状态行和请求字段)和报文主体&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;head-获得报文首部&quot;&gt;HEAD 获得报文首部&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;HEAD方法和GET方法一样，只是不返回报文的主体部分。用于确认URI的有效性以及资源更新的日期时间。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/HEAD.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;可以看到，和GET方法相同的URI，HEAD方法却没有响应报文的主体&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;post-传输实体主体&quot;&gt;POST 传输实体主体&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;POST方法用来传输实体的主体，因此使用POST方法时，请求的参数通常放在报文的主体中。虽然POST的功能和GET很相似，但是POST的主要目的并不是获取响应的主体内容。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/POST.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;可以看到POST请求是可以包含HTTP报文主体&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;put&quot;&gt;PUT&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;PUT方法用来传输文件。就像FTP协议一样，要求在请求报文主体中包含文件内容，然后保存到请求URI指定的位置&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;但是鉴于HTTP/1.1的PUT方法本身不带验证机制，任何人都可以上传文件，存在安全性问题，因此一般的Web网站不使用该方法。若配合Web应用程序的验证机制，或架构设计采用REST(REpresentational State Transfer，表征状态转移)标准的同类网站，就可能会开放使用PUT方法&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/PUT.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;这里PUT请求，我试了几个网站应该都被禁止了，所以没有抓包结果&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;delete&quot;&gt;DELETE&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;DELETE方法用来删除URI指定的资源&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;但是鉴于HTTP/1.1的DELETE方法本身不带验证机制，任何人都可以上传文件，存在安全性问题，因此一般的Web网站不使用该方法。若配合Web应用程序的验证机制，或架构设计采用REST(REpresentational State Transfer，表征状态转移)标准的同类网站，就可能会开放使用DELETE方法&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/DELETE.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;options&quot;&gt;OPTIONS&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;OPTIONS 方法用来查询针对请求URI指定资源支持的方法&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/OPTIONS.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;trace&quot;&gt;TRACE&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;TRACE方法是让web服务器将之前的请求通信环回给客户端的方法。发送请求是，在Max-Forwards首部字段中填入数值，没经过一个服务器端就将改数值减1，当数值刚好减到0时，就停止继续传输，最后接受到请求的服务器端则返回状态码200 OK的响应。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;客户端通过TRACE方法可以查询发送出去的请求是怎么被加工修改的。这是因为，请求想要连接到源目标服务器可能回通过代理中转，TRACE方法就是用来确认连接过程中发生的一系列操作&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;但是TRACE方法容易引起XST(Cross-Site Tracing,跨站追踪)攻击，通常不会用到&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/TRACE.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;可以看到该URI的TRACE请求被禁止了（405 Not Allowed）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/TRACE2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;connect&quot;&gt;CONNECT&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;CONNECT 方法要求在与代理服务器通信时建立隧道，实现用隧道协议进行TCP通信。主要使用SSL和TLS协议将通信内容加密经网络隧道传输&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如下图，是移动端访问&lt;code class=&quot;highlighter-rouge&quot;&gt;https://gihub.com&lt;/code&gt;,经过Charle代理。移动端首先会和代理建立隧道，然后是TLS的握手和秘钥协商过程，最后数据在TLS加密下传输&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/CONNECT1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPHead/CONNECT2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;get-与-post的区别&quot;&gt;GET 与 POST的区别&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;GET方法用于获取资源，POST方法用于传输数据实体&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;GET请求的数据附加在URI之后；POST请求的数据存放在HTTP报文的包体中。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;HTTP请求的URI一般会有1024字节的限制（这是有浏览器或服务器限制的），所以GET请求的参数长度也有限制；POST请求参数在包体中，长度理论上没有限制，但是由于性能或处理能力的考量，开发者都会限制长度&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;条件get&quot;&gt;条件GET&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;GET 请求用于获取资源，是安全且幂等的&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    Client Hello ： 客户端向服务端发起握手
-
-    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ClientHello.png&quot; alt=&quot;&quot; /&gt;
-
-    该报文属于Handshake Protocol的一部分，报文内容包括随机数，客户端支持的加密算法套件，session id以及扩展部分。
-
-    随机数会用于之后对称秘钥的计算，属于混淆的一部分
-
-    session id 用于会话的复用，由服务端生成，首次创建为空
-
-    加密算法套件：服务端会选择其中一个加密算法使用(包括秘钥协商算法，对称加密和hash算法)
+    &lt;p&gt;这里的安全是指GET请求只会获取信息而不会修改信息&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    Server Hello :
-
-    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ServerClient.png&quot; alt=&quot;&quot; /&gt;
-
-    该报文属于Handshake Protocol的一部分,用于回复Client Hello，报文内容包括随机数，选择的加密算法套件，sessionid以及扩展部分
-
-    随机数 ： 与客户端生成的不是同一个，用于之后的密钥生成
-
-    session id
-
-    加密套件： 服务端选择的加密算法，用于之后交互的加密
-  &lt;/li&gt;
-  &lt;li&gt;
-    Certificates
-
-    该报文属于Handshake Protocol的一部分,用于向客户端传递服务端数字证书
-
-    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_Certificates.png&quot; alt=&quot;&quot; /&gt;
-
-    数字证书： 包含服务端信息和服务端公钥，是由服务端向第三方CA机构申请; 注意证书链的顺序，最下层证书在前（用户证书在前，上级证书在后）。发送的证书是二进制格式，并非base64之后的格式。
-  &lt;/li&gt;
-  &lt;li&gt;
-    Server Key Exchange
-
-    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ServerKeyExchange.png&quot; alt=&quot;&quot; /&gt;
-
-    该报文只有秘钥协商选择DHE/ECDHE时，才会发送
-秘钥协商算法选择RSA，不会发送。
-
-    具体差异参看 ；&lt;a href=&quot;https://blog.csdn.net/mrpre/article/details/78025940&quot;&gt;TLS/SSL 协议详解 (30) SSL中的RSA、DHE、ECDHE、ECDH流程与区别&lt;/a&gt;
-
-    baidu这里采用的是ECDHE算法，主要包括椭圆曲线类型和公钥，用于主秘钥的计算；这里数字证书中的秘钥就不参与主秘钥的协商了
-  &lt;/li&gt;
-  &lt;li&gt;
-    Server Hello Done
-
-    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ServerHelloDone.png&quot; alt=&quot;&quot; /&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    Client Key Exchange
-
-    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ClientKeyExchange.png&quot; alt=&quot;&quot; /&gt;
-
-    该报文只有秘钥协商选择DHE/ECDHE时，才会发送
-秘钥协商算法选择RSA，不会发送。
-  &lt;/li&gt;
-  &lt;li&gt;
-    Change Cipher Spec
-
-    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ChangeCipherSpec.png&quot; alt=&quot;&quot; /&gt;
-
-    这是一个无关紧要的数据。在TLS1.3中就被废弃了(可以发送、也可以不发送)。
-
-    需要注意的是，该数据本身不被计算握手摘要，因为它的type不是Handshake。
-  &lt;/li&gt;
-  &lt;li&gt;
-    Encrypted HandShake Message
-
-    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_EncryptedHandShakeMessage.png&quot; alt=&quot;&quot; /&gt;
-
-    这个报文的目的就是告诉对端自己在整个握手过程中收到了什么数据，发送了什么数据。来保证中间没人篡改报文。
-
-    其次，这个报文作用就是确认秘钥的正确性。因为Encrypted handshake message是使用对称秘钥进行加密的第一个报文，如果这个报文加解密校验成功，那么就说明对称秘钥是正确的。
-  &lt;/li&gt;
-  &lt;li&gt;
-    Application Data
-
-    &lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ApplicationData.png&quot; alt=&quot;&quot; /&gt;
-
-    该报文就是实际的HTTP报文内容，已经被主秘钥加密；另外可以看到该报文不属于握手协议，而是Application_data_protocol http-over-tls
+    &lt;p&gt;幂等只对于同一URI的多个请求应该返回相同的结果&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-</description>
-        <pubDate>Mon, 22 Jul 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/07/22/HTTPS-WITH_BAIDU/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/07/22/HTTPS-WITH_BAIDU/</guid>
-        
-        <category>HTTP</category>
-        
-        
-        <category>TCP/IP</category>
-        
-      </item>
-    
-      <item>
-        <title>HTTPS 概述</title>
-        <description>&lt;h1 id=&quot;https&quot;&gt;HTTPS&lt;/h1&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;客户端向服务器发送一个包询问是否在上一次访问网站的时间后是否更改了页面，如果服务器没有更新，显然不需要把整个网页传给客户端，客户端只要使用本地缓存即可，如果服务器对照客户端给出的时间已经更新了客户端请求的网页，则发送这个更新了的网页给用户。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; GET / HTTP/1.1  
+ Host: www.sina.com.cn:80  
+ If-Modified-Since:Thu, 4 Feb 2010 20:39:13 GMT  
+ Connection: Close  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;第一次请求时，服务器端返回请求数据，之后的请求，服务器根据请求中的 If-Modified-Since 字段判断响应文件没有更新，如果没有更新，服务器返回一个 304 Not Modified响应，告诉浏览器请求的资源在浏览器上没有更新，可以使用已缓存的上次获取的文件。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; HTTP/1.0 304 Not Modified  
+ Date: Thu, 04 Feb 2010 12:38:41 GMT  
+ Content-Type: text/html  
+ Expires: Thu, 04 Feb 2010 12:39:41 GMT  
+ Last-Modified: Thu, 04 Feb 2010 12:29:04 GMT  
+ Age: 28  
+ X-Cache: HIT from sy32-21.sina.com.cn  
+ Connection: close 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;post请求分两次发送&quot;&gt;POST请求分两次发送&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  由于HTTP报文在网路上是以明文的方式传递的，因此很多时候在安全方面无法满足商用的要求，无法保证数据不被中间人截取和篡改(中间人攻击)。
+  &lt;p&gt;相比于GET请求，POST需要发送HTTP报文的包体。POST请求会分两次发送，第一次发送请求行和请求首部，服务器响应100 Continue；之后才会发送HTTP报文的包体。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;参考文档&quot;&gt;参考文档&lt;/h2&gt;
+
+&lt;h2 id=&quot;原文章地址&quot;&gt;原文章地址&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/HTTP%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/HTTP%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="HTTP" /><summary type="html">HTTP请求方法 以下为对于同一URI使用不同方法时的抓包 GET : 获取资源 可以看到GET请求报文只有报文首部(请求行和首部字段)，没有HTTP报文主体；而响应报文包括报文首部(状态行和请求字段)和报文主体 HEAD 获得报文首部 HEAD方法和GET方法一样，只是不返回报文的主体部分。用于确认URI的有效性以及资源更新的日期时间。 可以看到，和GET方法相同的URI，HEAD方法却没有响应报文的主体 POST 传输实体主体 POST方法用来传输实体的主体，因此使用POST方法时，请求的参数通常放在报文的主体中。虽然POST的功能和GET很相似，但是POST的主要目的并不是获取响应的主体内容。 可以看到POST请求是可以包含HTTP报文主体 PUT PUT方法用来传输文件。就像FTP协议一样，要求在请求报文主体中包含文件内容，然后保存到请求URI指定的位置 但是鉴于HTTP/1.1的PUT方法本身不带验证机制，任何人都可以上传文件，存在安全性问题，因此一般的Web网站不使用该方法。若配合Web应用程序的验证机制，或架构设计采用REST(REpresentational State Transfer，表征状态转移)标准的同类网站，就可能会开放使用PUT方法 这里PUT请求，我试了几个网站应该都被禁止了，所以没有抓包结果 DELETE DELETE方法用来删除URI指定的资源 但是鉴于HTTP/1.1的DELETE方法本身不带验证机制，任何人都可以上传文件，存在安全性问题，因此一般的Web网站不使用该方法。若配合Web应用程序的验证机制，或架构设计采用REST(REpresentational State Transfer，表征状态转移)标准的同类网站，就可能会开放使用DELETE方法 OPTIONS OPTIONS 方法用来查询针对请求URI指定资源支持的方法 TRACE TRACE方法是让web服务器将之前的请求通信环回给客户端的方法。发送请求是，在Max-Forwards首部字段中填入数值，没经过一个服务器端就将改数值减1，当数值刚好减到0时，就停止继续传输，最后接受到请求的服务器端则返回状态码200 OK的响应。 客户端通过TRACE方法可以查询发送出去的请求是怎么被加工修改的。这是因为，请求想要连接到源目标服务器可能回通过代理中转，TRACE方法就是用来确认连接过程中发生的一系列操作 但是TRACE方法容易引起XST(Cross-Site Tracing,跨站追踪)攻击，通常不会用到 可以看到该URI的TRACE请求被禁止了（405 Not Allowed） CONNECT CONNECT 方法要求在与代理服务器通信时建立隧道，实现用隧道协议进行TCP通信。主要使用SSL和TLS协议将通信内容加密经网络隧道传输 如下图，是移动端访问https://gihub.com,经过Charle代理。移动端首先会和代理建立隧道，然后是TLS的握手和秘钥协商过程，最后数据在TLS加密下传输 GET 与 POST的区别 GET方法用于获取资源，POST方法用于传输数据实体 GET请求的数据附加在URI之后；POST请求的数据存放在HTTP报文的包体中。 HTTP请求的URI一般会有1024字节的限制（这是有浏览器或服务器限制的），所以GET请求的参数长度也有限制；POST请求参数在包体中，长度理论上没有限制，但是由于性能或处理能力的考量，开发者都会限制长度 条件GET GET 请求用于获取资源，是安全且幂等的 这里的安全是指GET请求只会获取信息而不会修改信息 幂等只对于同一URI的多个请求应该返回相同的结果 客户端向服务器发送一个包询问是否在上一次访问网站的时间后是否更改了页面，如果服务器没有更新，显然不需要把整个网页传给客户端，客户端只要使用本地缓存即可，如果服务器对照客户端给出的时间已经更新了客户端请求的网页，则发送这个更新了的网页给用户。 GET / HTTP/1.1 Host: www.sina.com.cn:80 If-Modified-Since:Thu, 4 Feb 2010 20:39:13 GMT Connection: Close 第一次请求时，服务器端返回请求数据，之后的请求，服务器根据请求中的 If-Modified-Since 字段判断响应文件没有更新，如果没有更新，服务器返回一个 304 Not Modified响应，告诉浏览器请求的资源在浏览器上没有更新，可以使用已缓存的上次获取的文件。 HTTP/1.0 304 Not Modified Date: Thu, 04 Feb 2010 12:38:41 GMT Content-Type: text/html Expires: Thu, 04 Feb 2010 12:39:41 GMT Last-Modified: Thu, 04 Feb 2010 12:29:04 GMT Age: 28 X-Cache: HIT from sy32-21.sina.com.cn Connection: close POST请求分两次发送 相比于GET请求，POST需要发送HTTP报文的包体。POST请求会分两次发送，第一次发送请求行和请求首部，服务器响应100 Continue；之后才会发送HTTP报文的包体。 参考文档 原文章地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/HTTP%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95.md</summary></entry><entry><title type="html">百度HTTPS握手过程</title><link href="http://localhost:4000/2019/07/22/HTTPS-WITH_BAIDU.html" rel="alternate" type="text/html" title="百度HTTPS握手过程" /><published>2019-07-22T00:00:00+08:00</published><updated>2019-07-22T00:00:00+08:00</updated><id>http://localhost:4000/2019/07/22/HTTPS-WITH_BAIDU</id><content type="html" xml:base="http://localhost:4000/2019/07/22/HTTPS-WITH_BAIDU.html">&lt;h1 id=&quot;百度https过程&quot;&gt;百度HTTPS过程&lt;/h1&gt;
+
+&lt;p&gt; &amp;gt; 如下图所示，&lt;code class=&quot;highlighter-rouge&quot;&gt;https://www.baidu.com&lt;/code&gt;请求的抓包&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;首先我们看到TCP的三次握手,然后是SSL/TLS的握手流程：&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Client Hello ： 客户端向服务端发起握手&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ClientHello.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;该报文属于Handshake Protocol的一部分，报文内容包括随机数，客户端支持的加密算法套件，session id以及扩展部分。&lt;/p&gt;
+
+    &lt;p&gt;随机数会用于之后对称秘钥的计算，属于混淆的一部分&lt;/p&gt;
+
+    &lt;p&gt;session id 用于会话的复用，由服务端生成，首次创建为空&lt;/p&gt;
+
+    &lt;p&gt;加密算法套件：服务端会选择其中一个加密算法使用(包括秘钥协商算法，对称加密和hash算法)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Server Hello :&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ServerClient.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;该报文属于Handshake Protocol的一部分,用于回复Client Hello，报文内容包括随机数，选择的加密算法套件，sessionid以及扩展部分&lt;/p&gt;
+
+    &lt;p&gt;随机数 ： 与客户端生成的不是同一个，用于之后的密钥生成&lt;/p&gt;
+
+    &lt;p&gt;session id&lt;/p&gt;
+
+    &lt;p&gt;加密套件： 服务端选择的加密算法，用于之后交互的加密&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Certificates&lt;/p&gt;
+
+    &lt;p&gt;该报文属于Handshake Protocol的一部分,用于向客户端传递服务端数字证书&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_Certificates.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;数字证书： 包含服务端信息和服务端公钥，是由服务端向第三方CA机构申请; 注意证书链的顺序，最下层证书在前（用户证书在前，上级证书在后）。发送的证书是二进制格式，并非base64之后的格式。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Server Key Exchange&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ServerKeyExchange.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;该报文只有秘钥协商选择DHE/ECDHE时，才会发送
+秘钥协商算法选择RSA，不会发送。&lt;/p&gt;
+
+    &lt;p&gt;具体差异参看 ；&lt;a href=&quot;https://blog.csdn.net/mrpre/article/details/78025940&quot;&gt;TLS/SSL 协议详解 (30) SSL中的RSA、DHE、ECDHE、ECDH流程与区别&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;baidu这里采用的是ECDHE算法，主要包括椭圆曲线类型和公钥，用于主秘钥的计算；这里数字证书中的秘钥就不参与主秘钥的协商了&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Server Hello Done&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ServerHelloDone.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Client Key Exchange&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ClientKeyExchange.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;该报文只有秘钥协商选择DHE/ECDHE时，才会发送
+秘钥协商算法选择RSA，不会发送。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Change Cipher Spec&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ChangeCipherSpec.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;这是一个无关紧要的数据。在TLS1.3中就被废弃了(可以发送、也可以不发送)。&lt;/p&gt;
+
+    &lt;p&gt;需要注意的是，该数据本身不被计算握手摘要，因为它的type不是Handshake。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Encrypted HandShake Message&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_EncryptedHandShakeMessage.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;这个报文的目的就是告诉对端自己在整个握手过程中收到了什么数据，发送了什么数据。来保证中间没人篡改报文。&lt;/p&gt;
+
+    &lt;p&gt;其次，这个报文作用就是确认秘钥的正确性。因为Encrypted handshake message是使用对称秘钥进行加密的第一个报文，如果这个报文加解密校验成功，那么就说明对称秘钥是正确的。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Application Data&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/百度Https抓包_ApplicationData.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;该报文就是实际的HTTP报文内容，已经被主秘钥加密；另外可以看到该报文不属于握手协议，而是Application_data_protocol http-over-tls&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;参考文档&quot;&gt;参考文档&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/mrpre/article/details/77867439&quot;&gt;TLS/SSL 协议详解 (9) Client hello&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/sosfnima/article/details/84075406&quot;&gt;TLS/SSL 协议详解(10) server hello&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/mrpre/article/details/77867770&quot;&gt;TLS/SSL 协议详解(11) Server Certificate&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/mrpre/article/details/77867831&quot;&gt;TLS/SSL 协议详解(12) server key exchange&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/mrpre/article/details/77868570&quot;&gt;TLS/SSL 协议详解 (19) Encrypted handshake message&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;原文章地址&quot;&gt;原文章地址&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/HTTPS.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/HTTPS.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="HTTP" /><summary type="html">百度HTTPS过程  &amp;gt; 如下图所示，https://www.baidu.com请求的抓包 首先我们看到TCP的三次握手,然后是SSL/TLS的握手流程： Client Hello ： 客户端向服务端发起握手 该报文属于Handshake Protocol的一部分，报文内容包括随机数，客户端支持的加密算法套件，session id以及扩展部分。 随机数会用于之后对称秘钥的计算，属于混淆的一部分 session id 用于会话的复用，由服务端生成，首次创建为空 加密算法套件：服务端会选择其中一个加密算法使用(包括秘钥协商算法，对称加密和hash算法) Server Hello : 该报文属于Handshake Protocol的一部分,用于回复Client Hello，报文内容包括随机数，选择的加密算法套件，sessionid以及扩展部分 随机数 ： 与客户端生成的不是同一个，用于之后的密钥生成 session id 加密套件： 服务端选择的加密算法，用于之后交互的加密 Certificates 该报文属于Handshake Protocol的一部分,用于向客户端传递服务端数字证书 数字证书： 包含服务端信息和服务端公钥，是由服务端向第三方CA机构申请; 注意证书链的顺序，最下层证书在前（用户证书在前，上级证书在后）。发送的证书是二进制格式，并非base64之后的格式。 Server Key Exchange 该报文只有秘钥协商选择DHE/ECDHE时，才会发送 秘钥协商算法选择RSA，不会发送。 具体差异参看 ；TLS/SSL 协议详解 (30) SSL中的RSA、DHE、ECDHE、ECDH流程与区别 baidu这里采用的是ECDHE算法，主要包括椭圆曲线类型和公钥，用于主秘钥的计算；这里数字证书中的秘钥就不参与主秘钥的协商了 Server Hello Done Client Key Exchange 该报文只有秘钥协商选择DHE/ECDHE时，才会发送 秘钥协商算法选择RSA，不会发送。 Change Cipher Spec 这是一个无关紧要的数据。在TLS1.3中就被废弃了(可以发送、也可以不发送)。 需要注意的是，该数据本身不被计算握手摘要，因为它的type不是Handshake。 Encrypted HandShake Message 这个报文的目的就是告诉对端自己在整个握手过程中收到了什么数据，发送了什么数据。来保证中间没人篡改报文。 其次，这个报文作用就是确认秘钥的正确性。因为Encrypted handshake message是使用对称秘钥进行加密的第一个报文，如果这个报文加解密校验成功，那么就说明对称秘钥是正确的。 Application Data 该报文就是实际的HTTP报文内容，已经被主秘钥加密；另外可以看到该报文不属于握手协议，而是Application_data_protocol http-over-tls 参考文档 TLS/SSL 协议详解 (9) Client hello TLS/SSL 协议详解(10) server hello TLS/SSL 协议详解(11) Server Certificate TLS/SSL 协议详解(12) server key exchange TLS/SSL 协议详解 (19) Encrypted handshake message 原文章地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/HTTPS.md</summary></entry><entry><title type="html">HTTPS 概述</title><link href="http://localhost:4000/2019/05/12/HTTPS.html" rel="alternate" type="text/html" title="HTTPS 概述" /><published>2019-05-12T00:00:00+08:00</published><updated>2019-05-12T00:00:00+08:00</updated><id>http://localhost:4000/2019/05/12/HTTPS</id><content type="html" xml:base="http://localhost:4000/2019/05/12/HTTPS.html">&lt;h1 id=&quot;https&quot;&gt;HTTPS&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;由于HTTP报文在网路上是以明文的方式传递的，因此很多时候在安全方面无法满足商用的要求，无法保证数据不被中间人截取和篡改(中间人攻击)。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;对称加密&quot;&gt;对称加密&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  我们可以使用对称加密技术(DES,3DES,AES)对HTTP报文进行加密；AES加密技术是现在最流行且有效的加密算法，可以可靠的保证密文不被中间人解析，只要对称秘钥不泄漏。
+  &lt;p&gt;我们可以使用对称加密技术(DES,3DES,AES)对HTTP报文进行加密；AES加密技术是现在最流行且有效的加密算法，可以可靠的保证密文不被中间人解析，只要对称秘钥不泄漏。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  如果中间人截取了对称秘钥，完全可以换成自己的秘钥传递给另一端，这样就不能解决中间人攻击。那么问题就变为怎么安全的传递对称秘钥？
+  &lt;p&gt;如果中间人截取了对称秘钥，完全可以换成自己的秘钥传递给另一端，这样就不能解决中间人攻击。那么问题就变为怎么安全的传递对称秘钥？&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS对称加密.png&quot; alt=&quot;对称加密的问题&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS对称加密.png&quot; alt=&quot;对称加密的问题&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  这个时候我们可以非对称加密技术加密对称秘钥，然后再在网路上传递
+  &lt;p&gt;这个时候我们可以非对称加密技术加密对称秘钥，然后再在网路上传递&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;非对称加密&quot;&gt;非对称加密&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  非对称加密包含两个秘钥：公钥和私钥。公钥可以将私钥加密的数据明文化，私钥可以将公钥加密的数据明文化。
+  &lt;p&gt;非对称加密包含两个秘钥：公钥和私钥。公钥可以将私钥加密的数据明文化，私钥可以将公钥加密的数据明文化。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  首先由客户端向服务端发出握手请求；接着由服务端返回公钥；客户端受到公钥，生成加密报文用的对称秘钥，由公钥加密传递给服务端；最后服务端受到对称秘钥用私钥解析出来，之后就可以进行正常的数据交互了。
+  &lt;p&gt;首先由客户端向服务端发出握手请求；接着由服务端返回公钥；客户端受到公钥，生成加密报文用的对称秘钥，由公钥加密传递给服务端；最后服务端受到对称秘钥用私钥解析出来，之后就可以进行正常的数据交互了。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  但是这还是不能避免中间人攻击，如果中间人劫持了公钥，再生成自己的公钥传递给客户端。这样中间人和服务端建立连接，客户端和中间人建立连接，中间人攻击还是构成了。
+  &lt;p&gt;但是这还是不能避免中间人攻击，如果中间人劫持了公钥，再生成自己的公钥传递给客户端。这样中间人和服务端建立连接，客户端和中间人建立连接，中间人攻击还是构成了。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS-非对称加密.png&quot; alt=&quot;非对称加密的问题&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS-非对称加密.png&quot; alt=&quot;非对称加密的问题&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  因此客户端必须要判断公钥的可靠性和完整性(即公钥是不是确实从服务端传递来的，而没有被篡改)；为解决这个问题，我会可以引入可靠的第三方CA机构
+  &lt;p&gt;因此客户端必须要判断公钥的可靠性和完整性(即公钥是不是确实从服务端传递来的，而没有被篡改)；为解决这个问题，我会可以引入可靠的第三方CA机构&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;数字证书&quot;&gt;数字证书&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  CA机构即证书颁发机构，服务端会事先向CA机构申请数字证书。
+  &lt;p&gt;CA机构即证书颁发机构，服务端会事先向CA机构申请数字证书。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS-数字证书.png&quot; alt=&quot;数字证书的使用&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS-数字证书.png&quot; alt=&quot;数字证书的使用&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;数字证书的作用&quot;&gt;数字证书的作用&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    认证正在访问的网站（是否为钓鱼网站）
+    &lt;p&gt;认证正在访问的网站（是否为钓鱼网站）&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    保证数据的私密性和可靠性
+    &lt;p&gt;保证数据的私密性和可靠性&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -188,13 +372,13 @@
 
 &lt;ol&gt;
   &lt;li&gt;
-    首先服务端会生成自己的公钥和私钥，然后拿着&lt;strong&gt;公钥&lt;/strong&gt;和&lt;strong&gt;服务端的一些信息&lt;/strong&gt;向CA机构申请数字证书
+    &lt;p&gt;首先服务端会生成自己的公钥和私钥，然后拿着&lt;strong&gt;公钥&lt;/strong&gt;和&lt;strong&gt;服务端的一些信息&lt;/strong&gt;向CA机构申请数字证书&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    CA机构拿着公钥和服务端信息通过Hash算法生成消息摘要，然后将消息摘要用自己的私钥加密，生成后的密文即数字签名。数字签名和原本的公钥及服务端信息组成数字证书
+    &lt;p&gt;CA机构拿着公钥和服务端信息通过Hash算法生成消息摘要，然后将消息摘要用自己的私钥加密，生成后的密文即数字签名。数字签名和原本的公钥及服务端信息组成数字证书&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    最后服务端拿到数字证书，等待客户端的握手请求
+    &lt;p&gt;最后服务端拿到数字证书，等待客户端的握手请求&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -208,105 +392,24 @@
 
 &lt;h2 id=&quot;https的握手&quot;&gt;HTTPS的握手&lt;/h2&gt;
 
-&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS握手流程.jpg&quot; alt=&quot;HTTPS的握手&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Network/HTTP/HTTPS握手流程.jpg&quot; alt=&quot;HTTPS的握手&quot; /&gt;&lt;/p&gt;
 
-</description>
-        <pubDate>Sun, 12 May 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/05/12/HTTPS/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/05/12/HTTPS/</guid>
-        
-        <category>HTTP</category>
-        
-        
-        <category>TCP/IP</category>
-        
-      </item>
-    
-      <item>
-        <title>OC 内存管理</title>
-        <description>&lt;h1 id=&quot;oc-内存管理&quot;&gt;OC 内存管理&lt;/h1&gt;
+&lt;h2 id=&quot;参考文档&quot;&gt;参考文档&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&amp;amp;mid=2653197101&amp;amp;idx=1&amp;amp;sn=d1fe482561d3d079363032ec182c5b3b&amp;amp;chksm=8c99e1f7bbee68e10f8470453637a7d434751a9414ceeffbbb9601f5ae2ba64e26fa6a88a99b&amp;amp;mpshare=1&amp;amp;scene=23&amp;amp;srcid=0512XHp7xpxPZXqajKBMiNS3#rd&quot;&gt;漫画：什么是 HTTPS 协议？&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzAwNTA5NTYxOA==&amp;amp;mid=2650867290&amp;amp;idx=3&amp;amp;sn=53076dc2a2766fa3bb650c81467a41eb&amp;amp;chksm=80d44ff7b7a3c6e1fc0da9520d16213ea6e6fe6205c8e4c05f003d44d21904ea4da73edb1b24&amp;amp;mpshare=1&amp;amp;scene=23&amp;amp;srcid=0512GXiZmnGC7G8MYzVzzdxv#rd&quot;&gt;一篇文章读懂HTTPS及其背后的加密原理&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;原文章地址&quot;&gt;原文章地址&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/%E7%99%BE%E5%BA%A6HTTPS%E8%BF%87%E7%A8%8B.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/%E7%99%BE%E5%BA%A6HTTPS%E8%BF%87%E7%A8%8B.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="HTTP" /><summary type="html">HTTPS 由于HTTP报文在网路上是以明文的方式传递的，因此很多时候在安全方面无法满足商用的要求，无法保证数据不被中间人截取和篡改(中间人攻击)。 对称加密 我们可以使用对称加密技术(DES,3DES,AES)对HTTP报文进行加密；AES加密技术是现在最流行且有效的加密算法，可以可靠的保证密文不被中间人解析，只要对称秘钥不泄漏。 如果中间人截取了对称秘钥，完全可以换成自己的秘钥传递给另一端，这样就不能解决中间人攻击。那么问题就变为怎么安全的传递对称秘钥？ 这个时候我们可以非对称加密技术加密对称秘钥，然后再在网路上传递 非对称加密 非对称加密包含两个秘钥：公钥和私钥。公钥可以将私钥加密的数据明文化，私钥可以将公钥加密的数据明文化。 首先由客户端向服务端发出握手请求；接着由服务端返回公钥；客户端受到公钥，生成加密报文用的对称秘钥，由公钥加密传递给服务端；最后服务端受到对称秘钥用私钥解析出来，之后就可以进行正常的数据交互了。 但是这还是不能避免中间人攻击，如果中间人劫持了公钥，再生成自己的公钥传递给客户端。这样中间人和服务端建立连接，客户端和中间人建立连接，中间人攻击还是构成了。 因此客户端必须要判断公钥的可靠性和完整性(即公钥是不是确实从服务端传递来的，而没有被篡改)；为解决这个问题，我会可以引入可靠的第三方CA机构 数字证书 CA机构即证书颁发机构，服务端会事先向CA机构申请数字证书。 数字证书的作用 认证正在访问的网站（是否为钓鱼网站） 保证数据的私密性和可靠性 数字证书的申请 首先服务端会生成自己的公钥和私钥，然后拿着公钥和服务端的一些信息向CA机构申请数字证书 CA机构拿着公钥和服务端信息通过Hash算法生成消息摘要，然后将消息摘要用自己的私钥加密，生成后的密文即数字签名。数字签名和原本的公钥及服务端信息组成数字证书 最后服务端拿到数字证书，等待客户端的握手请求 数字证书怎么保证交互的可靠性，完整性及私密性 服务端受到握手请求后，首先会将数字证书传递给客户端 我们的电脑和浏览器中已经内置了一部分权威机构的根证书，这些根证书中包含了CA的公匙。 数字证书包含公钥，服务端信息和数字签名。客户端首先会将公钥，服务端信息通过Hash算法生成一份消息摘要；然后将数字签名用CA的公钥解密出一份消息摘要；对比两份消息摘要，如果不一致即公钥被篡改，停止握手。 HASH算法的不可逆性保证了消息摘要无法篡改，CA机构的非对称加密保证了公钥来源的可靠性 HTTPS的握手 参考文档 漫画：什么是 HTTPS 协议？ 一篇文章读懂HTTPS及其背后的加密原理 原文章地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/%E7%99%BE%E5%BA%A6HTTPS%E8%BF%87%E7%A8%8B.md</summary></entry><entry><title type="html">OC Block</title><link href="http://localhost:4000/2019/05/09/Block.html" rel="alternate" type="text/html" title="OC Block" /><published>2019-05-09T00:00:00+08:00</published><updated>2019-05-09T00:00:00+08:00</updated><id>http://localhost:4000/2019/05/09/Block</id><content type="html" xml:base="http://localhost:4000/2019/05/09/Block.html">&lt;h1 id=&quot;block-代码块&quot;&gt;Block （代码块）&lt;/h1&gt;
 
 &lt;blockquote&gt;
-  OC 的内存管理是通过引用计数的机制实现。每一个OC对象都有一个&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;的无符号整数属性，当对象被创建时，&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;为1；当对象被变量持有时，&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;加1；当变量不再持有对象时，&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;减1；在&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;为0时，对象被销毁。
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;mrc&quot;&gt;MRC&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  手动管理引用计数和内存,需要手动在代码的相应地方添加内存管理的代码。
-&lt;/blockquote&gt;
-
-&lt;img src=&quot;/public/pageImage/Objective_c/MemoryManagement/MRC_Method.png&quot; alt=&quot;MRC_Mehod&quot; /&gt;
-
-手动内存管理的原则 ：
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1、自己生成的对象，自己持有
-2、不是自己生成的对象也可以持有
-3、不需要自己持有的对象时，释放
-4、不是自己持有的对象，不可以释放
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;img src=&quot;/public/pageImage/Objective_c/MemoryManagement/MRC_Rule.png&quot; alt=&quot;MRC_Rule&quot; /&gt;
-
-&lt;h2 id=&quot;arc&quot;&gt;ARC&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  ARC 是苹果引入的一种自动内存管理机制，会根据引用计数自动监视对象的生存周期，实现方式是在编译时期自动在已有代码中插入合适的内存管理代码以及在 Runtime 做一些优化
+  &lt;p&gt;&lt;strong&gt;Block&lt;/strong&gt;是iOS 4 引入的C语言扩展功能，实质上是带有自动变量(局部变量)的匿名函数。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  在ARC环境下，一切内存管理代码都不可见，release，ratain，autorelease。retainCount都不可用（编译的时候会报错）,@autoreleasepool 在代码中可以使用.
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  我们只需要关心，是否有循环引用带来的内存泄露 及 autorelease带来的 内存峰值
-&lt;/blockquote&gt;
-
-```objc
-
-for(int i = 0;i &amp;lt; 1000000; i++)
- {
-      NSMutableString * str = [NSMutableString stringWithFormat:@”Hello world”];
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/** 
-  *  str 指向的对象不是自己生成的，该对象在生成时，会自动插入autorelease
-  *  的内存管理代码; 返回时，引用计数为 1，在被str持有后引用计数 为2
-  *  当一次循环闭包结束,str的声明周期结束，自动插入release代码来释放对象
-  *  此时引用计数为 1 ,对象不会被销毁，内存泄露 ， 只有当autoreleasepool 调用 drain方法，同时为对象的引用计数减 1                
-  **/   }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-// 解决方法 ：
-  for(int i = 0; i &amp;lt;　1000000; i++)
-  {
-        @autoreleasepool
-        {
-             NSMutableString * str = [NSMutableString stringWithFormat:@”Hello world”];  &lt;br /&gt;
-        }
-  }
-
-</description>
-        <pubDate>Thu, 09 May 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/05/09/MemoryManagement-of-OC/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/05/09/MemoryManagement-of-OC/</guid>
-        
-        <category>Objective-c</category>
-        
-        
-        <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>OC Block</title>
-        <description>&lt;h1 id=&quot;block-代码块&quot;&gt;Block （代码块）&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;strong&gt;Block&lt;/strong&gt;是iOS 4 引入的C语言扩展功能，实质上是带有自动变量(局部变量)的匿名函数。
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  如下，函数的定义是必须有名字的,函数可以通过函数指针来传递和调用;Block的定义不需要名字，但是需要赋给Block变量才可以使用
+  &lt;p&gt;如下，函数的定义是必须有名字的,函数可以通过函数指针来传递和调用;Block的定义不需要名字，但是需要赋给Block变量才可以使用&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
@@ -339,7 +442,7 @@ for(int i = 0;i &amp;lt; 1000000; i++)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;blockquote&gt;
-  我们知道在函数的函数体中可以访问以下的变量：
+  &lt;p&gt;我们知道在函数的函数体中可以访问以下的变量：&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;ul&gt;
@@ -351,137 +454,137 @@ for(int i = 0;i &amp;lt; 1000000; i++)
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  而在Block的闭包中，不仅可以访问以上的变量，还可以访问在定义Block的闭包中可以访问的一切变量（包括self，局部变量，实例变量).这些变量就是Block可以访问的&lt;code class=&quot;highlighter-rouge&quot;&gt;自动变量&lt;/code&gt;.
+  &lt;p&gt;而在Block的闭包中，不仅可以访问以上的变量，还可以访问在定义Block的闭包中可以访问的一切变量（包括self，局部变量，实例变量).这些变量就是Block可以访问的&lt;code class=&quot;highlighter-rouge&quot;&gt;自动变量&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-如下图：在block中访问了局部变量，self，实例变量
+&lt;p&gt;如下图：在block中访问了局部变量，self，实例变量&lt;/p&gt;
 
-&lt;img src=&quot;/public/pageImage/Objective_c/Block/test.png&quot; alt=&quot;&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/test.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;img src=&quot;/public/pageImage/Objective_c/Block/result.png&quot; alt=&quot;&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/result.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  如上图，打印了block中访问自动变量的地址，只有局部变量的地址是相同的。因此Block访问这些变量是将变量值做了一个浅拷贝，这样就没有办法修改原有的变量了。即&lt;code class=&quot;highlighter-rouge&quot;&gt;截获自动变量的瞬时值&lt;/code&gt;
+  &lt;p&gt;如上图，打印了block中访问自动变量的地址，只有局部变量的地址是相同的。因此Block访问这些变量是将变量值做了一个浅拷贝，这样就没有办法修改原有的变量了。即&lt;code class=&quot;highlighter-rouge&quot;&gt;截获自动变量的瞬时值&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;block的实现&quot;&gt;Block的实现&lt;/h2&gt;
 
-&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现1.png&quot; alt=&quot;block_实现1&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现1.png&quot; alt=&quot;block_实现1&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  如上图所示，我们在main函数中定义了一个block。接下来，我们用clang编译器命令(&lt;code class=&quot;highlighter-rouge&quot;&gt;clang -rewrite-objc main.m&lt;/code&gt;)将OC的代码翻译为C语言的实现。
+  &lt;p&gt;如上图所示，我们在main函数中定义了一个block。接下来，我们用clang编译器命令(&lt;code class=&quot;highlighter-rouge&quot;&gt;clang -rewrite-objc main.m&lt;/code&gt;)将OC的代码翻译为C语言的实现。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-C语言实现如下：
+&lt;p&gt;C语言实现如下：&lt;/p&gt;
 
-&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现2.png&quot; alt=&quot;&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;__main_block_impl_0&quot;&gt;__main_block_impl_0&lt;/h3&gt;
 
 &lt;blockquote&gt;
-  &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;的定义翻译为&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;这个结构体变量的定义。&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;的结构如下：
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;的定义翻译为&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;这个结构体变量的定义。&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;的结构如下：&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现3.png&quot; alt=&quot;&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  在&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;结构体中包括&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构体变量，&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;结构体指针，构造函数以及&lt;code class=&quot;highlighter-rouge&quot;&gt;e&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;str&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;等其他变量。
+  &lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;结构体中包括&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构体变量，&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;结构体指针，构造函数以及&lt;code class=&quot;highlighter-rouge&quot;&gt;e&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;str&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;等其他变量。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;中保存的是Block的类型以及具体实现（函数指针）；&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;中记录的是block的附加信息；&lt;code class=&quot;highlighter-rouge&quot;&gt;e&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;str&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;等变量保存的是block捕获的自动变量，在ARC中是强引用。
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;中保存的是Block的类型以及具体实现（函数指针）；&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;中记录的是block的附加信息；&lt;code class=&quot;highlighter-rouge&quot;&gt;e&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;str&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;等变量保存的是block捕获的自动变量，在ARC中是强引用。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;__block_impl&quot;&gt;__block_impl&lt;/h3&gt;
 
 &lt;blockquote&gt;
-  &lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构体如下：
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构体如下：&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现5.png&quot; alt=&quot;&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  可以看到&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构中包含&lt;code class=&quot;highlighter-rouge&quot;&gt;isa&lt;/code&gt;变量，保存block的类型，所以block是一个OC对象；
+  &lt;p&gt;可以看到&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构中包含&lt;code class=&quot;highlighter-rouge&quot;&gt;isa&lt;/code&gt;变量，保存block的类型，所以block是一个OC对象；&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;code class=&quot;highlighter-rouge&quot;&gt;FuncPtr&lt;/code&gt;是一个函数指针，指向Block的具体实现。可以看到该函数的参数不只有block的参数，还有一个&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_Impl_0&lt;/code&gt;指针，通过这个指针函数可以访问block的自动变量。
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;FuncPtr&lt;/code&gt;是一个函数指针，指向Block的具体实现。可以看到该函数的参数不只有block的参数，还有一个&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_Impl_0&lt;/code&gt;指针，通过这个指针函数可以访问block的自动变量。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现4.png&quot; alt=&quot;&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;__main_block_desc_0&quot;&gt;__main_block_desc_0&lt;/h3&gt;
 
 &lt;blockquote&gt;
-  &lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;结构如下，主要记录block的附加信息，包括结构体的大小，需要capture和dispose的变量列表
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;结构如下，主要记录block的附加信息，包括结构体的大小，需要capture和dispose的变量列表&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现6.png&quot; alt=&quot;&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;自动变量&quot;&gt;自动变量&lt;/h3&gt;
 
 &lt;blockquote&gt;
-  Block捕获的自动变量，会保存的在&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中。
+  &lt;p&gt;Block捕获的自动变量，会保存的在&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    对于基本数据类型，是将值拷贝到&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中，所以在Block中就无法访问原来的变量了。
+    &lt;p&gt;对于基本数据类型，是将值拷贝到&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中，所以在Block中就无法访问原来的变量了。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    在ARC中，捕获的OC对象是通过强引用保存到&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中，因此需要注意引用循环的问题。
+    &lt;p&gt;在ARC中，捕获的OC对象是通过强引用保存到&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中，因此需要注意引用循环的问题。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;实质上是一种结构体，结构如下：其中&lt;code class=&quot;highlighter-rouge&quot;&gt;__forwarding&lt;/code&gt;保存的是&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;的地址，&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;保存的是&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;的值。&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;中会保存该结构体的指针。
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;实质上是一种结构体，结构如下：其中&lt;code class=&quot;highlighter-rouge&quot;&gt;__forwarding&lt;/code&gt;保存的是&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;的地址，&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;保存的是&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;的值。&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;中会保存该结构体的指针。&lt;/p&gt;
 
-    &lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现7.png&quot; alt=&quot;&quot; /&gt;
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;block的类型以及内存管理&quot;&gt;Block的类型以及内存管理&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  在 OC中，总共由三种block类型：
+  &lt;p&gt;在 OC中，总共由三种block类型：&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
-    _NSGlobalBlock,全局的静态block，不会访问任何的外部变量，它的生命周期是全局的。
+    &lt;p&gt;_NSGlobalBlock,全局的静态block，不会访问任何的外部变量，它的生命周期是全局的。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    _NSStackBlock,保存在栈上的block，当定义block的闭包结束，就会被销毁
+    &lt;p&gt;_NSStackBlock,保存在栈上的block，当定义block的闭包结束，就会被销毁&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    _NSMallocBlock,保存在堆上的block，当引用计数为0时，会被销毁。
+    &lt;p&gt;_NSMallocBlock,保存在堆上的block，当引用计数为0时，会被销毁。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;_nsglobalblock&quot;&gt;_NSGlobalBlock&lt;/h3&gt;
 
 &lt;blockquote&gt;
-  不访问任何自动变量的Block都是_NSGlobalBlock类型，且类型不会改变。
+  &lt;p&gt;不访问任何自动变量的Block都是_NSGlobalBlock类型，且类型不会改变。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;_nsstackblock&quot;&gt;_NSStackBlock&lt;/h3&gt;
 
 &lt;blockquote&gt;
-  访问自动变量的block在定义时默认是_NSStackBlock类型，只有调用了copy类型，才会变成_NSMallocBlock类型。
+  &lt;p&gt;访问自动变量的block在定义时默认是_NSStackBlock类型，只有调用了copy类型，才会变成_NSMallocBlock类型。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;_nsmallocblock&quot;&gt;_NSMallocBlock&lt;/h3&gt;
 
 &lt;blockquote&gt;
-  在ARC中，当Block被定义后，传给一个OC变量，会自动调用Block的copy方法，这个时候Block就会变为_NSMallocBlock类型。在MRC，则需要手动调用Copy
+  &lt;p&gt;在ARC中，当Block被定义后，传给一个OC变量，会自动调用Block的copy方法，这个时候Block就会变为_NSMallocBlock类型。在MRC，则需要手动调用Copy&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;img src=&quot;/public/pageImage/Objective_c/Block/Block的类型以及内存管理1.png&quot; alt=&quot;&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/Block的类型以及内存管理1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;img src=&quot;/public/pageImage/Objective_c/Block/Block的类型以及内存管理2.png&quot; alt=&quot;&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/Block的类型以及内存管理2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;避免循环引用&quot;&gt;避免循环引用&lt;/h2&gt;
 
 &lt;blockquote&gt;
-  由于Block在访问自动变量时，比较容易造成循环引用。对于这个问题，需要将引用的一方变为weak，避免循环引用。
+  &lt;p&gt;由于Block在访问自动变量时，比较容易造成循环引用。对于这个问题，需要将引用的一方变为weak，避免循环引用。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;div class=&quot;language-objc highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;__weak&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__typeof__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weakSelf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// 将引用一方变为weak&lt;/span&gt;
@@ -500,33 +603,211 @@ C语言实现如下：
 
 &lt;h2 id=&quot;原文章地址&quot;&gt;原文章地址&lt;/h2&gt;
 
-&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md&lt;/a&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="Objective-c" /><summary type="html">Block （代码块） Block是iOS 4 引入的C语言扩展功能，实质上是带有自动变量(局部变量)的匿名函数。 如下，函数的定义是必须有名字的,函数可以通过函数指针来传递和调用;Block的定义不需要名字，但是需要赋给Block变量才可以使用 /** * * 函数的定义必须是有名字的 **/ int func(int count) { printf(&quot;%d&quot;,count); return count; } int (*funcpter)(int) = &amp;amp;func; (*funcpter)(10); ／** * * block的定义不需要名字，然后赋给一个block变量 **／ int (^testBlock)(int) = ^int(int count){ printf(&quot;%d&quot;,count); return count; } testBlock(10); 我们知道在函数的函数体中可以访问以下的变量： 在函数体中定义的局部变量 函数的参数 静态变量 静态全局变量 全局变量 而在Block的闭包中，不仅可以访问以上的变量，还可以访问在定义Block的闭包中可以访问的一切变量（包括self，局部变量，实例变量).这些变量就是Block可以访问的自动变量. 如下图：在block中访问了局部变量，self，实例变量 如上图，打印了block中访问自动变量的地址，只有局部变量的地址是相同的。因此Block访问这些变量是将变量值做了一个浅拷贝，这样就没有办法修改原有的变量了。即截获自动变量的瞬时值 Block的实现 如上图所示，我们在main函数中定义了一个block。接下来，我们用clang编译器命令(clang -rewrite-objc main.m)将OC的代码翻译为C语言的实现。 C语言实现如下： __main_block_impl_0 Block的定义翻译为__main_block_impl_0这个结构体变量的定义。__main_block_impl_0的结构如下： 在__main_block_impl_0结构体中包括__block_impl结构体变量，__main_block_desc_0结构体指针，构造函数以及e,str,c等其他变量。 __block_impl中保存的是Block的类型以及具体实现（函数指针）；__main_block_desc_0中记录的是block的附加信息；e,str,c等变量保存的是block捕获的自动变量，在ARC中是强引用。 __block_impl __block_impl结构体如下： 可以看到__block_impl结构中包含isa变量，保存block的类型，所以block是一个OC对象； FuncPtr是一个函数指针，指向Block的具体实现。可以看到该函数的参数不只有block的参数，还有一个__main_block_Impl_0指针，通过这个指针函数可以访问block的自动变量。 __main_block_desc_0 __main_block_desc_0结构如下，主要记录block的附加信息，包括结构体的大小，需要capture和dispose的变量列表 自动变量 Block捕获的自动变量，会保存的在__main_block_impl结构体中。 对于基本数据类型，是将值拷贝到__main_block_impl结构体中，所以在Block中就无法访问原来的变量了。 在ARC中，捕获的OC对象是通过强引用保存到__main_block_impl结构体中，因此需要注意引用循环的问题。 __block变量实质上是一种结构体，结构如下：其中__forwarding保存的是__block变量的地址，c保存的是__block变量的值。__main_block_impl中会保存该结构体的指针。 Block的类型以及内存管理 在 OC中，总共由三种block类型： _NSGlobalBlock,全局的静态block，不会访问任何的外部变量，它的生命周期是全局的。 _NSStackBlock,保存在栈上的block，当定义block的闭包结束，就会被销毁 _NSMallocBlock,保存在堆上的block，当引用计数为0时，会被销毁。 _NSGlobalBlock 不访问任何自动变量的Block都是_NSGlobalBlock类型，且类型不会改变。 _NSStackBlock 访问自动变量的block在定义时默认是_NSStackBlock类型，只有调用了copy类型，才会变成_NSMallocBlock类型。 _NSMallocBlock 在ARC中，当Block被定义后，传给一个OC变量，会自动调用Block的copy方法，这个时候Block就会变为_NSMallocBlock类型。在MRC，则需要手动调用Copy 避免循环引用 由于Block在访问自动变量时，比较容易造成循环引用。对于这个问题，需要将引用的一方变为weak，避免循环引用。 __weak __typeof__(self) weakSelf = self; // 将引用一方变为weak NSBlockOperation *op = [[NSBlockOperation alloc] init]; [ op addExecutionBlock:^ { __strong __typeof__(self) strongSelf = weakSelf; // 在这里强引用一下weakself，避免在block执行过程中，weakself被销毁 [strongSelf doSomething]; [strongSelf doMoreThing]; } ]; [someOperationQueue addOperation:op]; 原文章地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md</summary></entry><entry><title type="html">OC 内存管理</title><link href="http://localhost:4000/2019/05/09/MemoryManagement-of-OC.html" rel="alternate" type="text/html" title="OC 内存管理" /><published>2019-05-09T00:00:00+08:00</published><updated>2019-05-09T00:00:00+08:00</updated><id>http://localhost:4000/2019/05/09/MemoryManagement-of-OC</id><content type="html" xml:base="http://localhost:4000/2019/05/09/MemoryManagement-of-OC.html">&lt;h1 id=&quot;oc-内存管理&quot;&gt;OC 内存管理&lt;/h1&gt;
 
-</description>
-        <pubDate>Thu, 09 May 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/05/09/Block/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/05/09/Block/</guid>
-        
-        <category>Objective-c</category>
-        
-        
-        <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>Welcome to ExistOrLive's Blog</title>
-        <description>第一篇博客</description>
-        <pubDate>Sat, 05 May 2018 23:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2018/05/05/welcome-to-jekyll/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/05/05/welcome-to-jekyll/</guid>
-        
-        <category>other</category>
-        
-        
-        <category>other</category>
-        
-      </item>
-    
-  </channel>
-</rss>
+&lt;blockquote&gt;
+  &lt;p&gt;OC 的内存管理是通过引用计数的机制实现。每一个OC对象都有一个&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;的无符号整数属性，当对象被创建时，&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;为1；当对象被变量持有时，&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;加1；当变量不再持有对象时，&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;减1；在&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;为0时，对象被销毁。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;mrc&quot;&gt;MRC&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;手动管理引用计数和内存,需要手动在代码的相应地方添加内存管理的代码。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/MemoryManagement/MRC_Method.png&quot; alt=&quot;MRC_Mehod&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;手动内存管理的原则 ：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1、自己生成的对象，自己持有
+2、不是自己生成的对象也可以持有
+3、不需要自己持有的对象时，释放
+4、不是自己持有的对象，不可以释放
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/MemoryManagement/MRC_Rule.png&quot; alt=&quot;MRC_Rule&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;arc&quot;&gt;ARC&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ARC 是苹果引入的一种自动内存管理机制，会根据引用计数自动监视对象的生存周期，实现方式是在编译时期自动在已有代码中插入合适的内存管理代码以及在 Runtime 做一些优化&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在ARC环境下，一切内存管理代码都不可见，release，ratain，autorelease。retainCount都不可用（编译的时候会报错）,@autoreleasepool 在代码中可以使用.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我们只需要关心，是否有循环引用带来的内存泄露 及 autorelease带来的 内存峰值&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-objc highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+ &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;NSMutableString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSMutableString&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stringWithFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&quot;Hello world&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;   
+
+    &lt;span class=&quot;cm&quot;&gt;/** 
+      *  str 指向的对象不是自己生成的，该对象在生成时，会自动插入autorelease
+      *  的内存管理代码; 返回时，引用计数为 1，在被str持有后引用计数 为2
+      *  当一次循环闭包结束,str的声明周期结束，自动插入release代码来释放对象
+      *  此时引用计数为 1 ,对象不会被销毁，内存泄露 ， 只有当autoreleasepool 调用 drain方法，同时为对象的引用计数减 1                
+      **/&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// 解决方法 ：&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;　&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;@autoreleasepool&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;n&quot;&gt;NSMutableString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSMutableString&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stringWithFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&quot;Hello world&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;    
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+
+
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;NSMutableString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSMutableString&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initWithFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&quot;asdasdasda&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+      &lt;span class=&quot;cm&quot;&gt;/** 
+        * 这里不会有内存泄露的问题，对象由str生成并持有 ，引用计数为 1
+        * 当一次循环结束，str声明周期结束，自动插入release代码，引用计数减 1 
+        * 此时对象引用计数为0，对象销毁  
+        **/&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;变量标识符&quot;&gt;变量标识符&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;__strong                是默认使用的标识符。只有还有一个强指针指向某个对象，这个对象就会一直存活。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;__weak                  声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，弱引用会被置为 nil&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;__unsafe_unretained     声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，它不会被置为 nil。如果它引用的对象被回收掉了，该指针就变成了野指针。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;__autoreleasing         用于标示使用引用传值的参数（id *），在函数返回时会被自动释放掉。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;属性标识符&quot;&gt;属性标识符&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;assign 表明 setter 仅仅是一个简单的赋值操作，通常用于基本的数值类型，例如CGFloat和NSInteger。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;strong 表明属性定义一个拥有者关系。当给属性设定一个新值的时候，首先这个值进行 retain ，旧值进行 release ，然后进行赋值操作。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;weak 表明属性定义了一个非拥有者关系。当给属性设定一个新值的时候，这个值不会进行 retain，旧值也不会进行 release， 而是进行类似 assign 的操作。不过当属性指向的对象被销毁时，该属性会被置为nil。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;unsafe_unretained 的语义和 assign 类似，不过是用于对象类型的，表示一个非拥有(unretained)的，同时也不会在对象被销毁时置为nil的(unsafe)关系。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;copy 类似于 strong，不过在赋值时进行 copy 操作而不是 retain 操作。通常在需要保留某个不可变对象（NSString最常见），并且防止它被意外改变时使用。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;自动释放池&quot;&gt;自动释放池&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Autorelase Pool 提供了一种可以允许你向一个对象延迟发送release消息的机制。当你想放弃一个对象的所有权，同时又不希望这个对象立即被释放掉（例如在一个方法中返回一个对象时），Autorelease Pool 的作用就显现出来了&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;使用方式&quot;&gt;使用方式&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;由RunLoop在每次事件循环开启前创建&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;NSAutoreleasePool&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;@autoreleasepool&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;自动释放池-释放的契机&quot;&gt;自动释放池 释放的契机&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;系统在 runloop 中创建的 autoreleaspool 会在 runloop 一个 event 结束时进行释放操作。我们手动创建的 autoreleasepool 会在 block 执行完成之后进行 drain 操作&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;自动释放池和返回值&quot;&gt;自动释放池和返回值&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果一个函数的返回值是指向一个对象的指针，那么这个对象肯定不能在函数返回之前进行 release，这样调用者在调用这个函数时得到的就是野指针了，在函数返回之后也不能立刻就 release，因为我们不知道调用者是不是 retain 了这个对象，如果我们直接 release 了，可能导致后面在使用这个对象时它已经成为 nil 了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;为了解决这个纠结的问题， Objective-C 中对对象指针的返回值进行了区分，一种叫做 retained return value，另一种叫做 unretained return value。前者表示调用者拥有这个返回值，后者表示调用者不拥有这个返回值，按照“谁拥有谁释放”的原则，对于前者调用者是要负责释放的，对于后者就不需要了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;按照苹果的命名 convention，以 alloc, copy, init, mutableCopy 和 new 这些方法打头的方法，返回的都是 retained return value，例如 [[NSString alloc] initWithFormat:]，而其他的则是 unretained return value，例如 [NSString stringWithFormat:]。我们在编写代码时也应该遵守这个 convention&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;MRC中：&lt;/p&gt;
+
+&lt;div class=&quot;language-objc highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;c1&quot;&gt;// retained return value:&lt;/span&gt;
+                            
+ &lt;span class=&quot;c1&quot;&gt;// 调用者生成并持有，负责对象的释放                &lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyCustomCalss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initWIthName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyCustomClass&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;      
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                
+&lt;span class=&quot;c1&quot;&gt;// unretained return value：&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 对象不是由调用者生成，不负责对象的释放，由autoreleasepool负责                      &lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyCustomClass&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nf&quot;&gt;myCustomClassWithName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;           
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;                                                     
+    &lt;span class=&quot;c1&quot;&gt;//  添加autorelease ，是为了管理 对象生成时，引用计数的 加一&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyCustomClass&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;autorelease&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;          
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ARC中：&lt;/p&gt;
+
+&lt;p&gt;对于这两种方法，在ARC不需要过多关注他们的区别，ARC会自动为我们插入相应的内存管理代码，但还是要了解相应的原理&lt;/p&gt;
+
+&lt;p&gt;retained return value：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/MemoryManagement/retained_return_value.png&quot; alt=&quot;retained return value&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;对于retained return value 方法 ， ARC 会在离开方法闭包的范围前，返回值赋值的时候，持有这个对象。当从方法中接收到返回值时，ARC会释放这个对象&lt;/p&gt;
+
+&lt;p&gt;unretained return value：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/MemoryManagement/unretained_return_value.png&quot; alt=&quot;unretained return value&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ARC会在返回 返回值的时候，持有这个对象，然后离开局部闭包，之后当对象离开调用者生命周期的时候，释放；最坏的情况，会调用autorelease，但是调用者不能确定这个对象是否调用了autorelease
+ARC虽然会做一些工作来缩短返回值的生命时间，但不会在强制调用者做额外的工作&lt;/p&gt;
+
+&lt;h2 id=&quot;allocretainreleasedealloc的实现&quot;&gt;alloc/retain/release/dealloc的实现&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;苹果是以散列表的方式保存对象的引用计数，散列表的key为对象内存块地址的散列值，value为对象的引用计数&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;autoreleasepool的实现&quot;&gt;autoreleasepool的实现&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在苹果的实现中，&lt;code class=&quot;highlighter-rouge&quot;&gt;NSAutoreleasePool&lt;/code&gt;是保存在堆栈中的；当某个对象调用autorelease，是将该对象添加到栈顶的&lt;code class=&quot;highlighter-rouge&quot;&gt;NSAutoreleasePool&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;参考文档&quot;&gt;参考文档&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.importnew.com/16433.html&quot;&gt;Java内存管理原理及内存区域详解&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000004943276#articaleHeader6&quot;&gt;Objective-C 内存管理——你需要知道的一切&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;文章原地址&quot;&gt;文章原地址&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/OC%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/OC%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="Objective-c" /><summary type="html">OC 内存管理 OC 的内存管理是通过引用计数的机制实现。每一个OC对象都有一个retainCount的无符号整数属性，当对象被创建时，retainCount为1；当对象被变量持有时，retainCount加1；当变量不再持有对象时，retainCount减1；在retainCount为0时，对象被销毁。 MRC 手动管理引用计数和内存,需要手动在代码的相应地方添加内存管理的代码。 手动内存管理的原则 ： 1、自己生成的对象，自己持有 2、不是自己生成的对象也可以持有 3、不需要自己持有的对象时，释放 4、不是自己持有的对象，不可以释放 ARC ARC 是苹果引入的一种自动内存管理机制，会根据引用计数自动监视对象的生存周期，实现方式是在编译时期自动在已有代码中插入合适的内存管理代码以及在 Runtime 做一些优化 在ARC环境下，一切内存管理代码都不可见，release，ratain，autorelease。retainCount都不可用（编译的时候会报错）,@autoreleasepool 在代码中可以使用. 我们只需要关心，是否有循环引用带来的内存泄露 及 autorelease带来的 内存峰值 for(int i = 0;i &amp;lt; 1000000; i++) { NSMutableString * str = [NSMutableString stringWithFormat:@&quot;Hello world&quot;]; /** * str 指向的对象不是自己生成的，该对象在生成时，会自动插入autorelease * 的内存管理代码; 返回时，引用计数为 1，在被str持有后引用计数 为2 * 当一次循环闭包结束,str的声明周期结束，自动插入release代码来释放对象 * 此时引用计数为 1 ,对象不会被销毁，内存泄露 ， 只有当autoreleasepool 调用 drain方法，同时为对象的引用计数减 1 **/ } // 解决方法 ： for(int i = 0; i &amp;lt;　1000000; i++) { @autoreleasepool { NSMutableString * str = [NSMutableString stringWithFormat:@&quot;Hello world&quot;]; } } for(int i = 0;i &amp;lt; 1000000; i++) { NSMutableString * str = [[NSMutableString alloc] initWithFormat:@&quot;asdasdasda&quot;]; /** * 这里不会有内存泄露的问题，对象由str生成并持有 ，引用计数为 1 * 当一次循环结束，str声明周期结束，自动插入release代码，引用计数减 1 * 此时对象引用计数为0，对象销毁 **/ } 变量标识符 __strong 是默认使用的标识符。只有还有一个强指针指向某个对象，这个对象就会一直存活。 __weak 声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，弱引用会被置为 nil __unsafe_unretained 声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，它不会被置为 nil。如果它引用的对象被回收掉了，该指针就变成了野指针。 __autoreleasing 用于标示使用引用传值的参数（id *），在函数返回时会被自动释放掉。 属性标识符 assign 表明 setter 仅仅是一个简单的赋值操作，通常用于基本的数值类型，例如CGFloat和NSInteger。 strong 表明属性定义一个拥有者关系。当给属性设定一个新值的时候，首先这个值进行 retain ，旧值进行 release ，然后进行赋值操作。 weak 表明属性定义了一个非拥有者关系。当给属性设定一个新值的时候，这个值不会进行 retain，旧值也不会进行 release， 而是进行类似 assign 的操作。不过当属性指向的对象被销毁时，该属性会被置为nil。 unsafe_unretained 的语义和 assign 类似，不过是用于对象类型的，表示一个非拥有(unretained)的，同时也不会在对象被销毁时置为nil的(unsafe)关系。 copy 类似于 strong，不过在赋值时进行 copy 操作而不是 retain 操作。通常在需要保留某个不可变对象（NSString最常见），并且防止它被意外改变时使用。 自动释放池 Autorelase Pool 提供了一种可以允许你向一个对象延迟发送release消息的机制。当你想放弃一个对象的所有权，同时又不希望这个对象立即被释放掉（例如在一个方法中返回一个对象时），Autorelease Pool 的作用就显现出来了 使用方式 由RunLoop在每次事件循环开启前创建 NSAutoreleasePool @autoreleasepool 自动释放池 释放的契机 系统在 runloop 中创建的 autoreleaspool 会在 runloop 一个 event 结束时进行释放操作。我们手动创建的 autoreleasepool 会在 block 执行完成之后进行 drain 操作 自动释放池和返回值 如果一个函数的返回值是指向一个对象的指针，那么这个对象肯定不能在函数返回之前进行 release，这样调用者在调用这个函数时得到的就是野指针了，在函数返回之后也不能立刻就 release，因为我们不知道调用者是不是 retain 了这个对象，如果我们直接 release 了，可能导致后面在使用这个对象时它已经成为 nil 了。 为了解决这个纠结的问题， Objective-C 中对对象指针的返回值进行了区分，一种叫做 retained return value，另一种叫做 unretained return value。前者表示调用者拥有这个返回值，后者表示调用者不拥有这个返回值，按照“谁拥有谁释放”的原则，对于前者调用者是要负责释放的，对于后者就不需要了。 按照苹果的命名 convention，以 alloc, copy, init, mutableCopy 和 new 这些方法打头的方法，返回的都是 retained return value，例如 [[NSString alloc] initWithFormat:]，而其他的则是 unretained return value，例如 [NSString stringWithFormat:]。我们在编写代码时也应该遵守这个 convention MRC中： // retained return value: // 调用者生成并持有，负责对象的释放 - (MyCustomCalss *) initWIthName:(NSString *) name { return [ [MyCustomClass alloc] init]; } // unretained return value： // 对象不是由调用者生成，不负责对象的释放，由autoreleasepool负责 + (MyCustomClass * ) myCustomClassWithName:(NSString *) name { // 添加autorelease ，是为了管理 对象生成时，引用计数的 加一 return [ [ [MyCustomClass alloc] init] autorelease]; } ARC中： 对于这两种方法，在ARC不需要过多关注他们的区别，ARC会自动为我们插入相应的内存管理代码，但还是要了解相应的原理 retained return value： 对于retained return value 方法 ， ARC 会在离开方法闭包的范围前，返回值赋值的时候，持有这个对象。当从方法中接收到返回值时，ARC会释放这个对象 unretained return value： ARC会在返回 返回值的时候，持有这个对象，然后离开局部闭包，之后当对象离开调用者生命周期的时候，释放；最坏的情况，会调用autorelease，但是调用者不能确定这个对象是否调用了autorelease ARC虽然会做一些工作来缩短返回值的生命时间，但不会在强制调用者做额外的工作 alloc/retain/release/dealloc的实现 苹果是以散列表的方式保存对象的引用计数，散列表的key为对象内存块地址的散列值，value为对象的引用计数 autoreleasepool的实现 在苹果的实现中，NSAutoreleasePool是保存在堆栈中的；当某个对象调用autorelease，是将该对象添加到栈顶的NSAutoreleasePool 参考文档 Java内存管理原理及内存区域详解 Objective-C 内存管理——你需要知道的一切 文章原地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/OC%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md</summary></entry></feed>

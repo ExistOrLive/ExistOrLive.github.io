@@ -1,0 +1,204 @@
+I"�,<h1 id="block-代码块">Block （代码块）</h1>
+
+<blockquote>
+  <p><strong>Block</strong>是iOS 4 引入的C语言扩展功能，实质上是带有自动变量(局部变量)的匿名函数。</p>
+</blockquote>
+
+<blockquote>
+  <p>如下，函数的定义是必须有名字的,函数可以通过函数指针来传递和调用;Block的定义不需要名字，但是需要赋给Block变量才可以使用</p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ *
+ * 函数的定义必须是有名字的
+ **/</span>
+<span class="kt">int</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="n">count</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">count</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">funcpter</span><span class="p">)(</span><span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">func</span><span class="p">;</span>
+
+<span class="p">(</span><span class="o">*</span><span class="n">funcpter</span><span class="p">)(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="err">／</span><span class="o">**</span>
+  <span class="o">*</span>
+  <span class="o">*</span> <span class="n">block</span><span class="err">的定义不需要名字，然后赋给一个</span><span class="n">block</span><span class="err">变量</span>
+  <span class="o">**</span><span class="err">／</span>
+
+  <span class="kt">int</span> <span class="p">(</span><span class="o">^</span><span class="n">testBlock</span><span class="p">)(</span><span class="kt">int</span><span class="p">)</span> <span class="o">=</span> <span class="o">^</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span> <span class="n">count</span><span class="p">){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">count</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">testBlock</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>我们知道在函数的函数体中可以访问以下的变量：</p>
+</blockquote>
+
+<ul>
+  <li>在函数体中定义的局部变量</li>
+  <li>函数的参数</li>
+  <li>静态变量</li>
+  <li>静态全局变量</li>
+  <li>全局变量</li>
+</ul>
+
+<blockquote>
+  <p>而在Block的闭包中，不仅可以访问以上的变量，还可以访问在定义Block的闭包中可以访问的一切变量（包括self，局部变量，实例变量).这些变量就是Block可以访问的<code class="highlighter-rouge">自动变量</code>.</p>
+</blockquote>
+
+<p>如下图：在block中访问了局部变量，self，实例变量</p>
+
+<p><img src="/public/pageImage/Objective_c/Block/test.png" alt="" /></p>
+
+<p><img src="/public/pageImage/Objective_c/Block/result.png" alt="" /></p>
+
+<blockquote>
+  <p>如上图，打印了block中访问自动变量的地址，只有局部变量的地址是相同的。因此Block访问这些变量是将变量值做了一个浅拷贝，这样就没有办法修改原有的变量了。即<code class="highlighter-rouge">截获自动变量的瞬时值</code></p>
+</blockquote>
+
+<h2 id="block的实现">Block的实现</h2>
+
+<p><img src="/public/pageImage/Objective_c/Block/block_实现1.png" alt="block_实现1" /></p>
+
+<blockquote>
+  <p>如上图所示，我们在main函数中定义了一个block。接下来，我们用clang编译器命令(<code class="highlighter-rouge">clang -rewrite-objc main.m</code>)将OC的代码翻译为C语言的实现。</p>
+</blockquote>
+
+<p>C语言实现如下：</p>
+
+<p><img src="/public/pageImage/Objective_c/Block/block_实现2.png" alt="" /></p>
+
+<h3 id="__main_block_impl_0">__main_block_impl_0</h3>
+
+<blockquote>
+  <p><code class="highlighter-rouge">Block</code>的定义翻译为<code class="highlighter-rouge">__main_block_impl_0</code>这个结构体变量的定义。<code class="highlighter-rouge">__main_block_impl_0</code>的结构如下：</p>
+</blockquote>
+
+<p><img src="/public/pageImage/Objective_c/Block/block_实现3.png" alt="" /></p>
+
+<blockquote>
+  <p>在<code class="highlighter-rouge">__main_block_impl_0</code>结构体中包括<code class="highlighter-rouge">__block_impl</code>结构体变量，<code class="highlighter-rouge">__main_block_desc_0</code>结构体指针，构造函数以及<code class="highlighter-rouge">e</code>,<code class="highlighter-rouge">str</code>,<code class="highlighter-rouge">c</code>等其他变量。</p>
+</blockquote>
+
+<blockquote>
+  <p><code class="highlighter-rouge">__block_impl</code>中保存的是Block的类型以及具体实现（函数指针）；<code class="highlighter-rouge">__main_block_desc_0</code>中记录的是block的附加信息；<code class="highlighter-rouge">e</code>,<code class="highlighter-rouge">str</code>,<code class="highlighter-rouge">c</code>等变量保存的是block捕获的自动变量，在ARC中是强引用。</p>
+</blockquote>
+
+<h3 id="__block_impl">__block_impl</h3>
+
+<blockquote>
+  <p><code class="highlighter-rouge">__block_impl</code>结构体如下：</p>
+</blockquote>
+
+<p><img src="/public/pageImage/Objective_c/Block/block_实现5.png" alt="" /></p>
+
+<blockquote>
+  <p>可以看到<code class="highlighter-rouge">__block_impl</code>结构中包含<code class="highlighter-rouge">isa</code>变量，保存block的类型，所以block是一个OC对象；</p>
+</blockquote>
+
+<blockquote>
+  <p><code class="highlighter-rouge">FuncPtr</code>是一个函数指针，指向Block的具体实现。可以看到该函数的参数不只有block的参数，还有一个<code class="highlighter-rouge">__main_block_Impl_0</code>指针，通过这个指针函数可以访问block的自动变量。</p>
+</blockquote>
+
+<p><img src="/public/pageImage/Objective_c/Block/block_实现4.png" alt="" /></p>
+
+<h3 id="__main_block_desc_0">__main_block_desc_0</h3>
+
+<blockquote>
+  <p><code class="highlighter-rouge">__main_block_desc_0</code>结构如下，主要记录block的附加信息，包括结构体的大小，需要capture和dispose的变量列表</p>
+</blockquote>
+
+<p><img src="/public/pageImage/Objective_c/Block/block_实现6.png" alt="" /></p>
+
+<h3 id="自动变量">自动变量</h3>
+
+<blockquote>
+  <p>Block捕获的自动变量，会保存的在<code class="highlighter-rouge">__main_block_impl</code>结构体中。</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p>对于基本数据类型，是将值拷贝到<code class="highlighter-rouge">__main_block_impl</code>结构体中，所以在Block中就无法访问原来的变量了。</p>
+  </li>
+  <li>
+    <p>在ARC中，捕获的OC对象是通过强引用保存到<code class="highlighter-rouge">__main_block_impl</code>结构体中，因此需要注意引用循环的问题。</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">__block变量</code>实质上是一种结构体，结构如下：其中<code class="highlighter-rouge">__forwarding</code>保存的是<code class="highlighter-rouge">__block变量</code>的地址，<code class="highlighter-rouge">c</code>保存的是<code class="highlighter-rouge">__block变量</code>的值。<code class="highlighter-rouge">__main_block_impl</code>中会保存该结构体的指针。</p>
+
+    <p><img src="/public/pageImage/Objective_c/Block/block_实现7.png" alt="" /></p>
+  </li>
+</ul>
+
+<h2 id="block的类型以及内存管理">Block的类型以及内存管理</h2>
+
+<blockquote>
+  <p>在 OC中，总共由三种block类型：</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>_NSGlobalBlock,全局的静态block，不会访问任何的外部变量，它的生命周期是全局的。</p>
+  </li>
+  <li>
+    <p>_NSStackBlock,保存在栈上的block，当定义block的闭包结束，就会被销毁</p>
+  </li>
+  <li>
+    <p>_NSMallocBlock,保存在堆上的block，当引用计数为0时，会被销毁。</p>
+  </li>
+</ol>
+
+<h3 id="_nsglobalblock">_NSGlobalBlock</h3>
+
+<blockquote>
+  <p>不访问任何自动变量的Block都是_NSGlobalBlock类型，且类型不会改变。</p>
+</blockquote>
+
+<h3 id="_nsstackblock">_NSStackBlock</h3>
+
+<blockquote>
+  <p>访问自动变量的block在定义时默认是_NSStackBlock类型，只有调用了copy类型，才会变成_NSMallocBlock类型。</p>
+</blockquote>
+
+<h3 id="_nsmallocblock">_NSMallocBlock</h3>
+
+<blockquote>
+  <p>在ARC中，当Block被定义后，传给一个OC变量，会自动调用Block的copy方法，这个时候Block就会变为_NSMallocBlock类型。在MRC，则需要手动调用Copy</p>
+</blockquote>
+
+<p><img src="/public/pageImage/Objective_c/Block/Block的类型以及内存管理1.png" alt="" /></p>
+
+<p><img src="/public/pageImage/Objective_c/Block/Block的类型以及内存管理2.png" alt="" /></p>
+
+<h2 id="避免循环引用">避免循环引用</h2>
+
+<blockquote>
+  <p>由于Block在访问自动变量时，比较容易造成循环引用。对于这个问题，需要将引用的一方变为weak，避免循环引用。</p>
+</blockquote>
+
+<div class="language-objc highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">__weak</span> <span class="n">__typeof__</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="n">weakSelf</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>    <span class="c1">// 将引用一方变为weak</span>
+
+<span class="n">NSBlockOperation</span> <span class="o">*</span><span class="n">op</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBlockOperation</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+<span class="p">[</span> <span class="n">op</span> <span class="nf">addExecutionBlock</span><span class="p">:</span><span class="o">^</span> <span class="p">{</span>
+
+    <span class="n">__strong</span> <span class="n">__typeof__</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="n">strongSelf</span> <span class="o">=</span> <span class="n">weakSelf</span><span class="p">;</span>
+    <span class="c1">// 在这里强引用一下weakself，避免在block执行过程中，weakself被销毁</span>
+    <span class="p">[</span><span class="n">strongSelf</span> <span class="nf">doSomething</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">strongSelf</span> <span class="nf">doMoreThing</span><span class="p">];</span>
+<span class="p">}</span> <span class="p">];</span>
+<span class="p">[</span><span class="n">someOperationQueue</span> <span class="nf">addOperation</span><span class="p">:</span><span class="n">op</span><span class="p">];</span>
+
+</code></pre></div></div>
+
+<h2 id="原文章地址">原文章地址</h2>
+
+<p><a href="https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md">https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md</a></p>
+
+:ET

@@ -1,11 +1,11 @@
 ---
-layout: post
 title:  "HTTP请求方法"
 date:   2019-08-19
-categories: TCP/IP
 tags: HTTP
-excerpt: 
-mathjax: true
+article_header:
+  type: cover
+  image:
+    src: /screenshot.jpg
 ---
 
 # HTTP请求方法

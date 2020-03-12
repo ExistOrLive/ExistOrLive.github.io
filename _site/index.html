@@ -1,724 +1,1089 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html lang="en">
+  <head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Home - ExistOrLive's Blog</title>
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ExistOrLive's Blog
+">
+<link rel="canonical" href="http://localhost:4000/"><link rel="alternate" type="application/rss+xml" title="ExistOrLive's Blog" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
-    <title>朱猛的博客</title>
-    <meta name="description" content="">
+<meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
 
-    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css">
-    <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/">
-    <link rel="alternate" type="application/rss+xml" title="朱猛的博客" href="http://localhost:4000/feed.xml ">
+<meta name="theme-color" content="#ffffff">
+<!-- end favicons snippet --><link rel="stylesheet" href="/assets/css/main.css"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" ><!-- start custom head snippets -->
 
+<!-- end custom head snippets -->
+<script>(function() {
+  window.isArray = function(val) {
+    return Object.prototype.toString.call(val) === '[object Array]';
+  };
+  window.isString = function(val) {
+    return typeof val === 'string';
+  };
 
+  window.hasEvent = function(event) {
+    return 'on'.concat(event) in window.document;
+  };
 
+  window.isOverallScroller = function(node) {
+    return node === document.documentElement || node === document.body || node === window;
+  };
 
+  window.isFormElement = function(node) {
+    var tagName = node.tagName;
+    return tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA';
+  };
 
+  window.pageLoad = (function () {
+    var loaded = false, cbs = [];
+    window.addEventListener('load', function () {
+      var i;
+      loaded = true;
+      if (cbs.length > 0) {
+        for (i = 0; i < cbs.length; i++) {
+          cbs[i]();
+        }
+      }
+    });
+    return {
+      then: function(cb) {
+        cb && (loaded ? cb() : (cbs.push(cb)));
+      }
+    };
+  })();
+})();
+(function() {
+  window.throttle = function(func, wait) {
+    var args, result, thisArg, timeoutId, lastCalled = 0;
+
+    function trailingCall() {
+      lastCalled = new Date;
+      timeoutId = null;
+      result = func.apply(thisArg, args);
+    }
+    return function() {
+      var now = new Date,
+        remaining = wait - (now - lastCalled);
+
+      args = arguments;
+      thisArg = this;
+
+      if (remaining <= 0) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+        lastCalled = now;
+        result = func.apply(thisArg, args);
+      } else if (!timeoutId) {
+        timeoutId = setTimeout(trailingCall, remaining);
+      }
+      return result;
+    };
+  };
+})();
+(function() {
+  var Set = (function() {
+    var add = function(item) {
+      var i, data = this._data;
+      for (i = 0; i < data.length; i++) {
+        if (data[i] === item) {
+          return;
+        }
+      }
+      this.size ++;
+      data.push(item);
+      return data;
+    };
+
+    var Set = function(data) {
+      this.size = 0;
+      this._data = [];
+      var i;
+      if (data.length > 0) {
+        for (i = 0; i < data.length; i++) {
+          add.call(this, data[i]);
+        }
+      }
+    };
+    Set.prototype.add = add;
+    Set.prototype.get = function(index) { return this._data[index]; };
+    Set.prototype.has = function(item) {
+      var i, data = this._data;
+      for (i = 0; i < data.length; i++) {
+        if (this.get(i) === item) {
+          return true;
+        }
+      }
+      return false;
+    };
+    Set.prototype.is = function(map) {
+      if (map._data.length !== this._data.length) { return false; }
+      var i, j, flag, tData = this._data, mData = map._data;
+      for (i = 0; i < tData.length; i++) {
+        for (flag = false, j = 0; j < mData.length; j++) {
+          if (tData[i] === mData[j]) {
+            flag = true;
+            break;
+          }
+        }
+        if (!flag) { return false; }
+      }
+      return true;
+    };
+    Set.prototype.values = function() {
+      return this._data;
+    };
+    return Set;
+  })();
+
+  window.Lazyload = (function(doc) {
+    var queue = {js: [], css: []}, sources = {js: {}, css: {}}, context = this;
+    var createNode = function(name, attrs) {
+      var node = doc.createElement(name), attr;
+      for (attr in attrs) {
+        if (attrs.hasOwnProperty(attr)) {
+          node.setAttribute(attr, attrs[attr]);
+        }
+      }
+      return node;
+    };
+    var end = function(type, url) {
+      var s, q, qi, cbs, i, j, cur, val, flag;
+      if (type === 'js' || type ==='css') {
+        s = sources[type], q = queue[type];
+        s[url] = true;
+        for (i = 0; i < q.length; i++) {
+          cur = q[i];
+          if (cur.urls.has(url)) {
+            qi = cur, val = qi.urls.values();
+            qi && (cbs = qi.callbacks);
+            for (flag = true, j = 0; j < val.length; j++) {
+              cur = val[j];
+              if (!s[cur]) {
+                flag = false;
+              }
+            }
+            if (flag && cbs && cbs.length > 0) {
+              for (j = 0; j < cbs.length; j++) {
+                cbs[j].call(context);
+              }
+              qi.load = true;
+            }
+          }
+        }
+      }
+    };
+    var load = function(type, urls, callback) {
+      var s, q, qi, node, i, cur,
+        _urls = typeof urls === 'string' ? new Set([urls]) : new Set(urls), val, url;
+      if (type === 'js' || type ==='css') {
+        s = sources[type], q = queue[type];
+        for (i = 0; i < q.length; i++) {
+          cur = q[i];
+          if (_urls.is(cur.urls)) {
+            qi = cur;
+            break;
+          }
+        }
+        val = _urls.values();
+        if (qi) {
+          callback && (qi.load || qi.callbacks.push(callback));
+          callback && (qi.load && callback());
+        } else {
+          q.push({
+            urls: _urls,
+            callbacks: callback ? [callback] : [],
+            load: false
+          });
+          for (i = 0; i < val.length; i++) {
+            node = null, url = val[i];
+            if (s[url] === undefined) {
+              (type === 'js' ) && (node = createNode('script', { src: url }));
+              (type === 'css') && (node = createNode('link', { rel: 'stylesheet', href: url }));
+              if (node) {
+                node.onload = (function(type, url) {
+                  return function() {
+                    end(type, url);
+                  };
+                })(type, url);
+                (doc.head || doc.body).appendChild(node);
+                s[url] = false;
+              }
+            }
+          }
+        }
+      }
+    };
+    return {
+      js: function(url, callback) {
+        load('js', url, callback);
+      },
+      css: function(url, callback) {
+        load('css', url, callback);
+      }
+    };
+  })(this.document);
+})();
+</script><script>
+  (function() {
+    var TEXT_VARIABLES = {
+      version: '2.2.6',
+      sources: {
+        font_awesome: 'https://use.fontawesome.com/releases/v5.0.13/css/all.css',
+        jquery: 'https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js',
+        leancloud_js_sdk: '//cdn.jsdelivr.net/npm/leancloud-storage@3.13.2/dist/av-min.js',
+        chart: 'https://cdn.bootcss.com/Chart.js/2.7.2/Chart.bundle.min.js',
+        gitalk: {
+          js: 'https://cdn.bootcss.com/gitalk/1.2.2/gitalk.min.js',
+          css: 'https://cdn.bootcss.com/gitalk/1.2.2/gitalk.min.css'
+        },
+        valine: 'https://unpkg.com/valine/dist/Valine.min.js',
+        mathjax: 'https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML',
+        mermaid: 'https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js'
+      },
+      site: {
+        toc: {
+          selectors: 'h1,h2,h3'
+        }
+      },
+      paths: {
+        search_js: '/assets/search.js'
+      }
+    };
+    window.TEXT_VARIABLES = TEXT_VARIABLES;
+  })();
+</script>
 </head>
-
-
   <body>
+    <div class="root" data-is-touch="false">
+      <div class="layout--page js-page-root"><div class="page__main js-page-main page__viewport cell cell--auto">
 
-    <header id="top">
-    <div class="wrapper">
-        <a href="/" class="brand">朱猛的博客</a>
-        <small>iOS Dev</small>
-        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
-        <nav id="headerNav">
-            <ul>
-                <li>
-                    
-                    <a class="active" href="/">
-                        
-                        <i class="fa fa-home"></i>Home
-                    </a>
-                </li>
+      <div class="page__main-inner"><div class="page__header d-print-none"><header class="header"><div class="main">
+      <div class="header__title">
+        <div class="header__brand"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="24px" height="24px" viewBox="0 0 24 24">
+<style type="text/css">
+	.st0{fill:#515151;}
+</style>
+<path class="st0" d="M1.7,22.3c5.7-5.7,11.3-5.7,17,0c3.3-3.3,3.5-5.3,0.8-6c2.7,0.7,3.5-1.1,2.3-5.6s-3.3-5.2-6.3-2.1
+	c3-3,2.3-5.2-2.1-6.3S7,1.8,7.7,4.6C7,1.8,5,2.1,1.7,5.3C7.3,11,7.3,16.7,1.7,22.3"/>
+</svg>
+<a title="ExistOrLive's Blog
+" href="/">ExistOrLive's Blog</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
+        <ul><li class="navigation__item"><a href="/archive.html">Archive</a></li><li class="navigation__item"><a href="/about.html">About</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
+      </nav></div>
+  </header>
+</div><div class="page__content"><div class ="main"><div class="grid grid--reverse">
 
-                
-                    
-                    <li>
-                        
-                        <a href="/archive/">
-                        
-                            <i class="fa fa-archive"></i>Archives
-                        </a>
-                    </li>
-                    
-                
-                    
-                    <li>
-                        
-                        <a href="/category/">
-                        
-                            <i class="fa fa-th-list"></i>Categories
-                        </a>
-                    </li>
-                    
-                
-                    
-                    <li>
-                        
-                        <a href="/tag/">
-                        
-                            <i class="fa fa-tags"></i>Tags
-                        </a>
-                    </li>
-                    
-                
-                    
-                    <li>
-                        
-                        <a href="/collection/">
-                        
-                            <i class="fa fa-bookmark"></i>Collections
-                        </a>
-                    </li>
-                    
-                
-                    
-                    <li>
-                        
-                        <a href="/demo/">
-                        
-                            <i class="fa fa-play"></i>Demo
-                        </a>
-                    </li>
-                    
-                
-                    
-                    <li>
-                        
-                        <a href="/about/">
-                        
-                            <i class="fa fa-heart"></i>About
-                        </a>
-                    </li>
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-            </ul>
-        </nav>
-    </div>
-</header>
+              <div class="col-aside d-print-none js-col-aside"></div>
+
+              <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
+
+<!-- end custom main top snippet -->
+<article itemscope itemtype="http://schema.org/WebPage"><header style="display:none;"><h1>Home</h1></header><meta itemprop="headline" content="Home"><meta itemprop="author" content="ExistOrLive"/><div class="js-article-content"><div class="layout--articles"><div class="article-list items items--divided"><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2020/02/21/ZLGithubClient.html"><h2 itemprop="headline" class="item__header">ZLGithubClient Beta Download</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">ZLGithubClient Beta Download
 
 
-        <div class="page clearfix" index>
-    <div class="left">
-        <h1>Welcome to ExistOrLive's Blog!</h1>
-        <small>苦逼码畜学习之路</small>
-        <hr>
-        <ul>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2019/07/22/HTTPS-WITH_BAIDU/">百度HTTPS握手过程</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2019-07-22
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
+  Github 自制iOS客户端
 
 
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
+
+
+下载链接
+
+
+  Github Source
+
+
+
+
+
+  Gitee Source
+
+
+
+
+
+  Coding Artifacts Source</div><p><a href="/2020/02/21/ZLGithubClient.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=App">App</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Feb 21, 2020</span>
+            </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2020-02-21T00:00:00+08:00">
+    <meta itemprop="keywords" content="App"></div>
+      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2019/08/19/HTTP_Method.html"><h2 itemprop="headline" class="item__header">HTTP请求方法</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">HTTP请求方法
+
+
+
+以下为对于同一URI使用不同方法时的抓包
+
+GET : 获取资源
+
+
+
+
+  可以看到GET请求报文只有报文首部(请求行和首部字段)，没有HTTP报文主体；而响应报文包括报文首部(状态行和请求字段)和报文主体
+
+
+HEAD 获得报文首部
+
+
+  HEAD方法和GET方法一样，只是不返回报文的主体部分。用于确认URI的有效性以及资源更新的日期时间。
+
+
+
+
+
+  可以看到，和GET方法相同的URI，HEAD方法却没有响应报文的主体
+
+
+POST 传输实体主体
+
+
+  POST方法用来传输实体的主体，因此使用POST方法时，请求的参数通常放在报文的主体中。虽然POST的功能和GET很相似，但是POST的主要目的并不是获取响应的主体内容。
+
+
+
+
+
+  可以看到POS...</div><p><a href="/2019/08/19/HTTP_Method.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=HTTP">HTTP</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Aug 19, 2019</span>
+            </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2019-08-19T00:00:00+08:00">
+    <meta itemprop="keywords" content="HTTP"></div>
+      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2019/07/22/HTTPS-WITH_BAIDU.html"><h2 itemprop="headline" class="item__header">百度HTTPS握手过程</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">百度HTTPS过程
+
+ &gt; 如下图所示，https://www.baidu.com请求的抓包
+
+
+
+
+  首先我们看到TCP的三次握手,然后是SSL/TLS的握手流程：
+
+
+
   
+    Client Hello ： 客户端向服务端发起握手
+
     
-        <a href="/category/#TCP/IP" title="Category: TCP/IP" rel="category">TCP/IP</a>
-    
+
+    该报文属于Handshake Protocol的一部分，报文内容包括随机数，客户端支持的加密算法套件，session id以及扩展部分。
+
+    随机数会用于之后对称秘钥的计算，属于混淆的一部分
+
+    session id 用于会话的复用，由服务端生成，首次创建为空
+
+    加密算法套件：服务端会选择其中一个加密算法使用(包括秘钥协商算法，对称加密和hash算法)
   
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
   
-    
-        <a href="/tag/#HTTP" title="Tag: HTTP" rel="tag">HTTP</a>
-    
-  
+    Server Hello ...</div><p><a href="/2019/07/22/HTTPS-WITH_BAIDU.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=HTTP">HTTP</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Jul 22, 2019</span>
+            </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2019-07-22T00:00:00+08:00">
+    <meta itemprop="keywords" content="HTTP"></div>
+      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2019/05/12/HTTPS.html"><h2 itemprop="headline" class="item__header">HTTPS 概述</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">HTTPS
 
-</span>
 
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <h1 id="百度https过程">百度HTTPS过程</h1>
+  由于HTTP报文在网路上是以明文的方式传递的，因此很多时候在安全方面无法满足商用的要求，无法保证数据不被中间人截取和篡改(中间人攻击)。
 
-<p> &gt; 如下图所示，<code class="highlighter-rouge">https://www.baidu.com</code>请求的抓包</p>
 
-<p><img src="/public/pageImage/Network/HTTP/百度Https抓包.png" alt="" /></p>
+对称加密
 
-<blockquote>
-  <p>首先我们看到TCP的三次握手,然后是SSL/TLS的握手流程：</p>
-</blockquote>
 
-<ul>
-  <li>
-    <p>Client Hello ： 客户端向服务端发起握手</p>
+  我们可以使用对称加密技术(DES,3DES,AES)对HTTP报文进行加密；AES加密技术是现在最流行且有效的加密算法，可以可靠的保证密文不被中间人解析，只要对称秘钥不泄漏。
 
-    <p><img src="/public/pageImage/Network/HTTP/百度Https抓包_ClientHello.png" alt="" /></p>
 
-    <p>该报文属于Handshake Protocol的一部分，报文内容包括随机数，客户端支持的加密算法套件，session id以及扩展部分。</p>
 
-    <p>随机数会用于之后对称秘钥的计算，属于混淆的一部分</p>
+  如果中间人截取了对称秘钥，完全可以换成自己的秘钥传递给另一端，这样就不能解决中间人攻击。那么问题就变为怎么安全的传递对称秘钥？
 
-    <p>session id 用于会话的复用，由服务端生成，首次创建为空</p>
 
-    <p>加密算法套件：服务端会选择其中一个加密算法使用(包括秘钥协商算法，对称加密和hash算法)</p>
-  </li>
-  <li>
-    <p>Server Hello :</p>
 
-    <p><img src="/public/pageImage/Network/HTTP/百度Https抓包_ServerClient.png" alt="" /></p>
 
-    <p>该报文属于Handshake Protocol的一部分,用于回复Client Hello，报文内容包括随机数，选择的加密算法套件，sessionid以及扩展部分</p>
 
-    <p>随机数 ： 与客户端生成的不是同一个，用于之后的密钥生成</p>
+  这个时候我们可以非对称加密技术加密对称秘钥，然后再在网路上传递
 
-    <p>session id</p>
 
-    <p>加密套件： 服务端选择的加密算法，用于之后交互的加密</p>
-  </li>
-  <li>
-    <p>Certificates</p>
+非对称加密
 
-    <p>该报文属于Handshake Protocol的一部分,用于向客户端传递服务端数字证书</p>
 
-    <p><img src="/public/pageImage/Network/HTTP/百度Https抓包_Certificates.png" alt="" /></p>
+  非对称加密包含两个秘钥：公钥和私钥。公钥可以将私钥加密的数据明文化，私钥可以将公钥加密的数据明文化...</div><p><a href="/2019/05/12/HTTPS.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=HTTP">HTTP</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>May 12, 2019</span>
+            </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2019-05-12T00:00:00+08:00">
+    <meta itemprop="keywords" content="HTTP"></div>
+      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2019/05/09/MemoryManagement-of-OC.html"><h2 itemprop="headline" class="item__header">OC 内存管理</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">OC 内存管理
 
-    <p>数字证书： 包含服务端信息和服务端公钥，是由服务端向第三方CA机构申请; 注意证书链的顺序，最下层证书在前（用户证书在前，上级证书在后）。发送的证书是二进制格式，并非base64之后的格式。</p>
-  </li>
-  <li>
-    <p>Server Key Exchange</p>
 
-    <p><img src="/public/pageImage/Network/HTTP/百度Https抓包_ServerKeyExchange.png" alt="" /></p>
+  OC 的内存管理是通过引用计数的机制实现。每一个OC对象都有一个retainCount的无符号整数属性，当对象被创建时，retainCount为1；当对象被变量持有时，retainCount加1；当变量不再持有对象时，retainCount减1；在retainCount为0时，对象被销毁。
 
-    <p>该报文只有秘钥协商选择DHE/ECDHE时，才会发送
-秘钥协商算法选择RSA，不会发送。</p>
 
-    <p>具体差异参看 ；<a href="https://blog.csdn.net/mrpre/article/details/78025940">TLS/SSL 协议详解 (30) SSL中的RSA、DHE、ECDHE、ECDH流程与区别</a></p>
+MRC
 
-    <p>baidu这里采用的是ECDHE算法，主要包括椭圆曲线类型和公钥，用于主秘钥的计算；这里数字证书中的秘钥就不参与主秘钥的协商了</p>
-  </li>
-  <li>
-    <p>Server Hello Done</p>
 
-    <p><img src="/public/pageImage/Network/HTTP/百度Https抓包_ServerHelloDone.png" alt="" /></p>
-  </li>
-  <li>
-    <p>Client Key Exchange</p>
+  手动管理引用计数和内存,需要手动在代码的相应地方添加内存管理的代码。
 
-    <p><img src="/public/pageImage/Network/HTTP/百度Https抓包_ClientKeyExchange.png" alt="" /></p>
 
-    <p>该报文只有秘钥协商选择DHE/ECDHE时，才会发送
-秘钥协商算法选择RSA，不会发送。</p>
-  </li>
-  <li>
-    <p>Change Cipher Spec</p>
 
-    <p><img src="/public/pageImage/Network/HTTP/百度Https抓包_ChangeCipherSpec.png" alt="" /></p>
 
-    <p>这是一个无关紧要的数据。在TLS1.3中就被废弃了(可以发送、也可以不发送)。</p>
+手动内存管理的原则 ：
 
-    <p>需要注意的是，该数据本身不被计算握手摘要，因为它的type不是Handshake。</p>
-  </li>
-  <li>
-    <p>Encrypted HandShake Message</p>
-
-    <p><img src="/public/pageImage/Network/HTTP/百度Https抓包_EncryptedHandShakeMessage.png" alt="" /></p>
-
-    <p>这个报文的目的就是告诉对端自己在整个握手过程中收到了什么数据，发送了什么数据。来保证中间没人篡改报文。</p>
-
-    <p>其次，这个报文作用就是确认秘钥的正确性。因为Encrypted handshake message是使用对称秘钥进行加密的第一个报文，如果这个报文加解密校验成功，那么就说明对称秘钥是正确的。</p>
-  </li>
-  <li>
-    <p>Application Data</p>
-
-    <p><img src="/public/pageImage/Network/HTTP/百度Https抓包_ApplicationData.png" alt="" /></p>
-
-    <p>该报文就是实际的HTTP报文内容，已经被主秘钥加密；另外可以看到该报文不属于握手协议，而是Application_data_protocol http-over-tls</p>
-  </li>
-</ul>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2019/07/22/HTTPS-WITH_BAIDU/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2019/05/12/HTTPS/">HTTPS 概述</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2019-05-12
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#TCP/IP" title="Category: TCP/IP" rel="category">TCP/IP</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#HTTP" title="Tag: HTTP" rel="tag">HTTP</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <h1 id="https">HTTPS</h1>
-
-<blockquote>
-  <p>由于HTTP报文在网路上是以明文的方式传递的，因此很多时候在安全方面无法满足商用的要求，无法保证数据不被中间人截取和篡改(中间人攻击)。</p>
-</blockquote>
-
-<h2 id="对称加密">对称加密</h2>
-
-<blockquote>
-  <p>我们可以使用对称加密技术(DES,3DES,AES)对HTTP报文进行加密；AES加密技术是现在最流行且有效的加密算法，可以可靠的保证密文不被中间人解析，只要对称秘钥不泄漏。</p>
-</blockquote>
-
-<blockquote>
-  <p>如果中间人截取了对称秘钥，完全可以换成自己的秘钥传递给另一端，这样就不能解决中间人攻击。那么问题就变为怎么安全的传递对称秘钥？</p>
-</blockquote>
-
-<p><img src="/public/pageImage/Network/HTTP/HTTPS对称加密.png" alt="对称加密的问题" /></p>
-
-<blockquote>
-  <p>这个时候我们可以非对称加密技术加密对称秘钥，然后再在网路上传递</p>
-</blockquote>
-
-<h2 id="非对称加密">非对称加密</h2>
-
-<blockquote>
-  <p>非对称加密包含两个秘钥：公钥和私钥。公钥可以将私钥加密的数据明文化，私钥可以将公钥加密的数据明文化。</p>
-</blockquote>
-
-<blockquote>
-  <p>首先由客户端向服务端发出握手请求；接着由服务端返回公钥；客户端受到公钥，生成加密报文用的对称秘钥，由公钥加密传递给服务端；最后服务端受到对称秘钥用私钥解析出来，之后就可以进行正常的数据交互了。</p>
-</blockquote>
-
-<blockquote>
-  <p>但是这还是不能避免中间人攻击，如果中间人劫持了公钥，再生成自己的公钥传递给客户端。这样中间人和服务端建立连接，客户端和中间人建立连接，中间人攻击还是构成了。</p>
-</blockquote>
-
-<p><img src="/public/pageImage/Network/HTTP/HTTPS-非对称加密.png" alt="非对称加密的问题" /></p>
-
-<blockquote>
-  <p>因此客户端必须要判断公钥的可靠性和完整性(即公钥是不是确实从服务端传递来的，而没有被篡改)；为解决这个问题，我会可以引入可靠的第三方CA机构</p>
-</blockquote>
-
-<h2 id="数字证书">数字证书</h2>
-
-<blockquote>
-  <p>CA机构即证书颁发机构，服务端会事先向CA机构申请数字证书。</p>
-</blockquote>
-
-<p><img src="/public/pageImage/Network/HTTP/HTTPS-数字证书.png" alt="数字证书的使用" /></p>
-
-<h3 id="数字证书的作用">数字证书的作用</h3>
-
-<ul>
-  <li>
-    <p>认证正在访问的网站（是否为钓鱼网站）</p>
-  </li>
-  <li>
-    <p>保证数据的私密性和可靠性</p>
-  </li>
-</ul>
-
-<h3 id="数字证书的申请">数字证书的申请</h3>
-
-<ol>
-  <li>
-    <p>首先服务端会生成自己的公钥和私钥，然后拿着<strong>公钥</strong>和<strong>服务端的一些信息</strong>向CA机构申请数字证书</p>
-  </li>
-  <li>
-    <p>CA机构拿着公钥和服务端信息通过Hash算法生成消息摘要，然后将消息摘要用自己的私钥加密，生成后的密文即数字签名。数字签名和原本的公钥及服务端信息组成数字证书</p>
-  </li>
-  <li>
-    <p>最后服务端拿到数字证书，等待客户端的握手请求</p>
-  </li>
-</ol>
-
-<h3 id="数字证书怎么保证交互的可靠性完整性及私密性">数字证书怎么保证交互的可靠性，完整性及私密性</h3>
-
-<ol>
-  <li>服务端受到握手请求后，首先会将数字证书传递给客户端</li>
-  <li>我们的电脑和浏览器中已经内置了一部分权威机构的根证书，这些根证书中包含了CA的公匙。 数字证书包含公钥，服务端信息和数字签名。客户端首先会将公钥，服务端信息通过Hash算法生成一份消息摘要；然后将数字签名用CA的公钥解密出一份消息摘要；对比两份消息摘要，如果不一致即公钥被篡改，停止握手。</li>
-  <li>HASH算法的不可逆性保证了消息摘要无法篡改，CA机构的非对称加密保证了公钥来源的可靠性</li>
-</ol>
-
-<h2 id="https的握手">HTTPS的握手</h2>
-
-<p><img src="/public/pageImage/Network/HTTP/HTTPS握手流程.jpg" alt="HTTPS的握手" /></p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2019/05/12/HTTPS/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-              <li>
-                <h2>
-                  <a class="post-link" href="/2019/05/09/MemoryManagement-of-OC/">OC 内存管理</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>2019-05-09
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-                    <div class="label-card">
-                        
-                    </div>
-
-                    <div class="label-card">
-                    
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                    </div>
-
-                    <div class="label-card">
-                    
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Objective-c" title="Tag: Objective-c" rel="tag">Objective-c</a>
-    
-  
-
-</span>
-
-                    </div>
-                </div>
-                <div class="excerpt">
-                    <h1 id="oc-内存管理">OC 内存管理</h1>
-
-<blockquote>
-  <p>OC 的内存管理是通过引用计数的机制实现。每一个OC对象都有一个<code class="highlighter-rouge">retainCount</code>的无符号整数属性，当对象被创建时，<code class="highlighter-rouge">retainCount</code>为1；当对象被变量持有时，<code class="highlighter-rouge">retainCount</code>加1；当变量不再持有对象时，<code class="highlighter-rouge">retainCount</code>减1；在<code class="highlighter-rouge">retainCount</code>为0时，对象被销毁。</p>
-</blockquote>
-
-<h2 id="mrc">MRC</h2>
-
-<blockquote>
-  <p>手动管理引用计数和内存,需要手动在代码的相应地方添加内存管理的代码。</p>
-</blockquote>
-
-<p><img src="/public/pageImage/Objective_c/MemoryManagement/MRC_Method.png" alt="MRC_Mehod" /></p>
-
-<p>手动内存管理的原则 ：</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1、自己生成的对象，自己持有
+1、自己生成的对象，自己持有
 2、不是自己生成的对象也可以持有
 3、不需要自己持有的对象时，释放
 4、不是自己持有的对象，不可以释放
-</code></pre></div></div>
-
-<p><img src="/public/pageImage/Objective_c/MemoryManagement/MRC_Rule.png" alt="MRC_Rule" /></p>
-
-<h2 id="arc">ARC</h2>
-
-<blockquote>
-  <p>ARC 是苹果引入的一种自动内存管理机制，会根据引用计数自动监视对象的生存周期，实现方式是在编译时期自动在已有代码中插入合适的内存管理代码以及在 Runtime 做一些优化</p>
-</blockquote>
-
-<blockquote>
-  <p>在ARC环境下，一切内存管理代码都不可见，release，ratain，autorelease。retainCount都不可用（编译的时候会报错）,@autoreleasepool 在代码中可以使用.</p>
-</blockquote>
-
-<blockquote>
-  <p>我们只需要关心，是否有循环引用带来的内存泄露 及 autorelease带来的 内存峰值</p>
-</blockquote>
-
-<p>```objc</p>
-
-<p>for(int i = 0;i &lt; 1000000; i++)
- {
-      NSMutableString * str = [NSMutableString stringWithFormat:@”Hello world”];</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/** 
-  *  str 指向的对象不是自己生成的，该对象在生成时，会自动插入autorelease
-  *  的内存管理代码; 返回时，引用计数为 1，在被str持有后引用计数 为2
-  *  当一次循环闭包结束,str的声明周期结束，自动插入release代码来释放对象
-  *  此时引用计数为 1 ,对象不会被销毁，内存泄露 ， 只有当autoreleasepool 调用 drain方法，同时为对象的引用计数减 1                
-  **/   }
-</code></pre></div></div>
-
-<p>// 解决方法 ：
-  for(int i = 0; i &lt;　1000000; i++)
-  {
-        @autoreleasepool
-        {
-             NSMutableString * str = [NSMutableString stringWithFormat:@”Hello world”];  <br />
-        }
-  }</p>
-
-
-                </div>
-                <div class="read-all">
-                    <a  href="/2019/05/09/MemoryManagement-of-OC/"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
-            
-        </ul>
 
 
 
-        <!-- Pagination links -->
-        <div class="pagination">
-          
-            <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
-            <span class="previous disable"><i class="fa fa-angle-left"></i></span>
-          
-          <span class="page_number ">1/2</span>
-          
-            <a href="/page2" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page2" class="next"><i class="fa fa-angle-double-right"></i></a>
-          
-        </div>
-    </div>
-    <!-- <button class="anchor"><i class="fa fa-anchor"></i></button> -->
-    <div class="right">
-        <div class="wrap">
-            <div class="side">
-                <div>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Recent Posts
-                </div>
-                <ul class="content-ul" recent>
-                    
-                        <li><a href="/2019/07/22/HTTPS-WITH_BAIDU/">百度HTTPS握手过程</a></li>
-                    
-                        <li><a href="/2019/05/12/HTTPS/">HTTPS 概述</a></li>
-                    
-                        <li><a href="/2019/05/09/MemoryManagement-of-OC/">OC 内存管理</a></li>
-                    
-                        <li><a href="/2019/05/09/Block/">OC Block</a></li>
-                    
-                        <li><a href="/2018/05/05/welcome-to-jekyll/">Welcome to ExistOrLive's Blog</a></li>
-                    
-                </ul>
-            </div>
 
-            <!-- Content -->
-            <div class="side ">
-                <div>
-                    <i class="fa fa-th-list"></i>
-                    Categories
-                </div>
-                <ul class="content-ul" cate>
-                    
-                    <li>
-                        <a href="/category/#other" class="categories-list-item" cate="other">
-                            <span class="name">
-                                other
-                            </span>
-                            <span class="badge">1</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#iOS" class="categories-list-item" cate="iOS">
-                            <span class="name">
-                                iOS
-                            </span>
-                            <span class="badge">2</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="/category/#TCP/IP" class="categories-list-item" cate="TCP/IP">
-                            <span class="name">
-                                TCP/IP
-                            </span>
-                            <span class="badge">2</span>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </div>
-            <!-- 其他div框放到这里 -->
-            <div class="side">
-                <div>
-                    <i class="fa fa-tags"></i>
-                    Tags
-                </div>
-                <div class="tags-cloud">
-                    
-                    
-                    
-                    
+ARC
 
-                    
 
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#other" style="font-size: 9pt; color: #999;">other</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#Objective-c" style="font-size: 18pt; color: #000;">Objective-c</a>
-                    
-                      
-                      
-                      
-                      
-                      
-                      <a href="/tag/#HTTP" style="font-size: 18pt; color: #000;">HTTP</a>
-                    
-                </div>
-            </div>
+  ARC 是苹果引入的一种自动内存管理机制，会根据引用计数自动监视对象的生存周期，实现方式是在编译...</div><p><a href="/2019/05/09/MemoryManagement-of-OC.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=Objective-c">Objective-c</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>May 09, 2019</span>
+            </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2019-05-09T00:00:00+08:00">
+    <meta itemprop="keywords" content="Objective-c"></div>
+      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2019/05/09/Block.html"><h2 itemprop="headline" class="item__header">OC Block</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">Block （代码块）
 
-            <!-- <div class="side">
-                <div>
-                    <i class="fa fa-external-link"></i>
-                    Links
-                </div>
-                <ul  class="content-ul">
 
-                </ul>
-            </div> -->
-        </div>
-    </div>
+  Block是iOS 4 引入的C语言扩展功能，实质上是带有自动变量(局部变量)的匿名函数。
+
+
+
+  如下，函数的定义是必须有名字的,函数可以通过函数指针来传递和调用;Block的定义不需要名字，但是需要赋给Block变量才可以使用
+
+
+/**
+ *
+ * 函数的定义必须是有名字的
+ **/
+int func(int count)
+{
+    printf("%d",count);
+    return count;
+}
+
+int (*funcpter)(int) = &amp;func;
+
+(*funcpter)(10);
+
+／**
+  *
+  * block的定义不需要名字，然后赋给一个block变量
+  **／
+
+  int (^testBlock...</div><p><a href="/2019/05/09/Block.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=Objective-c">Objective-c</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>May 09, 2019</span>
+            </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2019-05-09T00:00:00+08:00">
+    <meta itemprop="keywords" content="Objective-c"></div>
+      </article></div>
+</div><div class="layout--home"></div>
+<script>/*(function () {
+
+})();*/
+</script>
+
+
+
+</div><section class="page__comments d-print-none"></section></article><!-- start custom main bottom snippet -->
+
+<!-- end custom main bottom snippet -->
 </div>
-<!-- <script src="/js/scroll.min.js " charset="utf-8"></script> -->
-<!-- <script src="/js/pageContent.js " charset="utf-8"></script> -->
-
-
-    <footer class="site-footer">
-
-
-    <div class="wrapper">
-
-        <p class="description">
-             随便谢谢 
-        </p>
-        <p class="contact">
-            Contact me at: 
-            <a href="https://github.com/ExistOrLive" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
-            <a href="mailto:2068531506@qq.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
-        </p>
-        <p>
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-        </p>
-        <p class="power">
-            <span>
-                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
-            </span>
-            <span>
-                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
-            </span>
-        </p>
+            </div></div></div><div class="page__footer d-print-none">
+<footer class="footer py-4 js-page-footer">
+  <div class="main"><div itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ExistOrLive"><meta itemprop="url" content="https://existorlive.github.io"><meta itemprop="description" content="iOS 码畜"><div class="footer__author-links"><div class="author-links">
+  <ul class="menu menu--nowrap menu--inline"><link itemprop="url" href="https://existorlive.github.io"><li title="Send me an Email.">
+      <a class="button button--circle mail-button" itemprop="email" href="mailto:2068531506@qq.com" target="_blank">
+        <i class="fas fa-envelope"></i>
+      </a><li title="Follow me on Github.">
+        <a class="button button--circle github-button" itemprop="sameAs" href="https://github.com/ExistOrLive" target="_blank">
+          <div class="icon"><svg fill="#000000" width="24px" height="24px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path class="svgpath" data-index="path_0" fill="#272636" d="M0 525.2c0 223.6 143.3 413.7 343 483.5 26.9 6.8 22.8-12.4 22.8-25.4l0-88.7c-155.3 18.2-161.5-84.6-172-101.7-21.1-36-70.8-45.2-56-62.3 35.4-18.2 71.4 4.6 113.1 66.3 30.2 44.7 89.1 37.2 119 29.7 6.5-26.9 20.5-50.9 39.7-69.6C248.8 728.2 181.7 630 181.7 513.2c0-56.6 18.7-108.7 55.3-150.7-23.3-69.3 2.2-128.5 5.6-137.3 66.5-6 135.5 47.6 140.9 51.8 37.8-10.2 80.9-15.6 129.1-15.6 48.5 0 91.8 5.6 129.8 15.9 12.9-9.8 77-55.8 138.8-50.2 3.3 8.8 28.2 66.7 6.3 135 37.1 42.1 56 94.6 56 151.4 0 117-67.5 215.3-228.8 243.7 26.9 26.6 43.6 63.4 43.6 104.2l0 128.8c0.9 10.3 0 20.5 17.2 20.5C878.1 942.4 1024 750.9 1024 525.3c0-282.9-229.3-512-512-512C229.1 13.2 0 242.3 0 525.2L0 525.2z" />
+</svg>
+</div>
+        </a>
+      </li></ul>
+</div>
+</div>
+    </div><div class="site-info mt-2">
+      <div>© ExistOrLive's Blog 2020,
+        Powered by <a title="Jekyll is a simple, blog-aware, static site generator." href="http://jekyllrb.com/">Jekyll</a> & <a
+        title="TeXt is a super customizable Jekyll theme." href="https://github.com/kitian616/jekyll-TeXt-theme">TeXt Theme</a>.
+      </div>
     </div>
+  </div>
 </footer>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div></div>
+    </div><script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    var $body = $('body'), $window = $(window);
+    var $pageRoot = $('.js-page-root'), $pageMain = $('.js-page-main');
+    var activeCount = 0;
+    function modal(options) {
+      var $root = this, visible, onChange, hideWhenWindowScroll = false;
+      var scrollTop;
+      function setOptions(options) {
+        var _options = options || {};
+        visible = _options.initialVisible === undefined ? false : show;
+        onChange = _options.onChange;
+        hideWhenWindowScroll = _options.hideWhenWindowScroll;
+      }
+      function init() {
+        setState(visible);
+      }
+      function setState(isShow) {
+        if (isShow === visible) {
+          return;
+        }
+        visible = isShow;
+        if (visible) {
+          activeCount++;
+          scrollTop = $(window).scrollTop() || $pageMain.scrollTop();
+          $root.addClass('modal--show');
+          $pageMain.scrollTop(scrollTop);
+          activeCount === 1 && ($pageRoot.addClass('show-modal'), $body.addClass('of-hidden'));
+          hideWhenWindowScroll && window.hasEvent('touchstart') && $window.on('scroll', hide);
+          $window.on('keyup', handleKeyup);
+        } else {
+          activeCount > 0 && activeCount--;
+          $root.removeClass('modal--show');
+          $window.scrollTop(scrollTop);
+          activeCount === 0 && ($pageRoot.removeClass('show-modal'), $body.removeClass('of-hidden'));
+          hideWhenWindowScroll && window.hasEvent('touchstart') && $window.off('scroll', hide);
+          $window.off('keyup', handleKeyup);
+        }
+        onChange && onChange(visible);
+      }
+      function show() {
+        setState(true);
+      }
+      function hide() {
+        setState(false);
+      }
+      function handleKeyup(e) {
+        // Char Code: 27  ESC
+        if (e.which ===  27) {
+          hide();
+        }
+      }
+      setOptions(options);
+      init();
+      return {
+        show: show,
+        hide: hide,
+        $el: $root
+      };
+    }
+    $.fn.modal = modal;
+  });
+})();
+</script><div class="modal modal--overflow page__search-modal d-print-none js-page-search-modal"><script>
+(function () {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    // search panel
+    var search = (window.search || (window.search = {}));
+    var useDefaultSearchBox = window.useDefaultSearchBox === undefined ?
+      true : window.useDefaultSearchBox ;
 
-    <div class="back-to-top">
-    <a href="#top" data-scroll>
-        <i class="fa fa-arrow-up" aria-hidden="true"></i>
-    </a>
-</div>
+    var $searchModal = $('.js-page-search-modal');
+    var $searchToggle = $('.js-search-toggle');
+    var searchModal = $searchModal.modal({ onChange: handleModalChange, hideWhenWindowScroll: true });
+    var modalVisible = false;
+    search.searchModal = searchModal;
 
-    <script src=" /js/main.js " charset="utf-8"></script>
-    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
-    <script type="text/javascript">
-      smoothScroll.init({
-        speed: 500, // Integer. How fast to complete the scroll in milliseconds
-        easing: 'easeInOutCubic', // Easing pattern to use
-        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+    var $searchBox = null;
+    var $searchInput = null;
+    var $searchClear = null;
+
+    function getModalVisible() {
+      return modalVisible;
+    }
+    search.getModalVisible = getModalVisible;
+
+    function handleModalChange(visible) {
+      modalVisible = visible;
+      if (visible) {
+        search.onShow && search.onShow();
+        useDefaultSearchBox && $searchInput[0] && $searchInput[0].focus();
+      } else {
+        search.onShow && search.onHide();
+        useDefaultSearchBox && $searchInput[0] && $searchInput[0].blur();
+        setTimeout(function() {
+          useDefaultSearchBox && ($searchInput.val(''), $searchBox.removeClass('not-empty'));
+          search.clear && search.clear();
+          window.pageAsideAffix && window.pageAsideAffix.refresh();
+        }, 400);
+      }
+    }
+
+    $searchToggle.on('click', function() {
+      modalVisible ? searchModal.hide() : searchModal.show();
+    });
+    // Char Code: 83  S, 191 /
+    $(window).on('keyup', function(e) {
+      if (!modalVisible && !window.isFormElement(e.target || e.srcElement) && (e.which === 83 || e.which === 191)) {
+        modalVisible || searchModal.show();
+      }
+    });
+
+    if (useDefaultSearchBox) {
+      $searchBox = $('.js-search-box');
+      $searchInput = $searchBox.children('input');
+      $searchClear = $searchBox.children('.js-icon-clear');
+      search.getSearchInput = function() {
+        return $searchInput.get(0);
+      };
+      search.getVal = function() {
+        return $searchInput.val();
+      };
+      search.setVal = function(val) {
+        $searchInput.val(val);
+      };
+
+      $searchInput.on('focus', function() {
+        $(this).addClass('focus');
       });
-    </script>
-    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
-  </body>
+      $searchInput.on('blur', function() {
+        $(this).removeClass('focus');
+      });
+      $searchInput.on('input', window.throttle(function() {
+        var val = $(this).val();
+        if (val === '' || typeof val !== 'string') {
+          search.clear && search.clear();
+        } else {
+          $searchBox.addClass('not-empty');
+          search.onInputNotEmpty && search.onInputNotEmpty(val);
+        }
+      }, 400));
+      $searchClear.on('click', function() {
+        $searchInput.val(''); $searchBox.removeClass('not-empty');
+        search.clear && search.clear();
+      });
+    }
+  });
+})();
+</script><div class="search search--dark">
+  <div class="main">
+    <div class="search__header">Search</div>
+    <div class="search-bar">
+      <div class="search-box js-search-box">
+        <div class="search-box__icon-search"><i class="fas fa-search"></i></div>
+        <input type="text" />
+        <div class="search-box__icon-clear js-icon-clear">
+          <a><i class="fas fa-times"></i></a>
+        </div>
+      </div>
+      <button class="button button--theme-dark button--pill search__cancel js-search-toggle">
+        Cancel</button>
+    </div>
+    <div class="search-result js-search-result"></div>
+  </div>
+</div>
+<script>var SOURCES = window.TEXT_VARIABLES.sources;
+var PAHTS = window.TEXT_VARIABLES.paths;
+window.Lazyload.js([SOURCES.jquery, PAHTS.search_js], function() {
+  var search = (window.search || (window.search = {}));
+  var searchData = window.TEXT_SEARCH_DATA || {};
 
+  function memorize(f) {
+    var cache = {};
+    return function () {
+      var key = Array.prototype.join.call(arguments, ',');
+      if (key in cache) return cache[key];
+      else return cache[key] = f.apply(this, arguments);
+    };
+  }
+
+  /// search
+  function searchByQuery(query) {
+    var i, j, key, keys, cur, _title, result = {};
+    keys = Object.keys(searchData);
+    for (i = 0; i < keys.length; i++) {
+      key = keys[i];
+      for (j = 0; j < searchData[key].length; j++) {
+        cur = searchData[key][j], _title = cur.title;
+        if ((result[key] === undefined || result[key] && result[key].length < 4 )
+          && _title.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
+          if (result[key] === undefined) {
+            result[key] = [];
+          }
+          result[key].push(cur);
+        }
+      }
+    }
+    return result;
+  }
+
+  var renderHeader = memorize(function(header) {
+    return $('<p class="search-result__header">' + header + '</p>');
+  });
+
+  var renderItem = function(index, title, url) {
+    return $('<li class="search-result__item" data-index="' + index + '"><a class="button" href="' + url + '">' + title + '</a></li>');
+  };
+
+  function render(data) {
+    if (!data) { return null; }
+    var $root = $('<ul></ul>'), i, j, key, keys, cur, itemIndex = 0;
+    keys = Object.keys(data);
+    for (i = 0; i < keys.length; i++) {
+      key = keys[i];
+      $root.append(renderHeader(key));
+      for (j = 0; j < data[key].length; j++) {
+        cur = data[key][j];
+        $root.append(renderItem(itemIndex++, cur.title, cur.url));
+      }
+    }
+    return $root;
+  }
+
+  // search box
+  var $result = $('.js-search-result'), $resultItems;
+  var lastActiveIndex, activeIndex;
+
+  function clear() {
+    $result.html(null);
+    $resultItems = $('.search-result__item'); activeIndex = 0;
+  }
+  function onInputNotEmpty(val) {
+    $result.html(render(searchByQuery(val)));
+    $resultItems = $('.search-result__item'); activeIndex = 0;
+    $resultItems.eq(0).addClass('active');
+  }
+
+  search.clear = clear;
+  search.onInputNotEmpty = onInputNotEmpty;
+
+  function updateResultItems() {
+    lastActiveIndex >= 0 && $resultItems.eq(lastActiveIndex).removeClass('active');
+    activeIndex >= 0 && $resultItems.eq(activeIndex).addClass('active');
+  }
+
+  function moveActiveIndex(direction) {
+    var itemsCount = $resultItems ? $resultItems.length : 0;
+    if (itemsCount > 1) {
+      lastActiveIndex = activeIndex;
+      if (direction === 'up') {
+        activeIndex = (activeIndex - 1 + itemsCount) % itemsCount;
+      } else if (direction === 'down') {
+        activeIndex = (activeIndex + 1 + itemsCount) % itemsCount;
+      }
+      updateResultItems();
+    }
+  }
+
+  // Char Code: 13  Enter, 37  ⬅, 38  ⬆, 39  ➡, 40  ⬇
+  $(window).on('keyup', function(e) {
+    var modalVisible = search.getModalVisible && search.getModalVisible();
+    if (modalVisible) {
+      if (e.which === 38) {
+        modalVisible && moveActiveIndex('up');
+      } else if (e.which === 40) {
+        modalVisible && moveActiveIndex('down');
+      } else if (e.which === 13) {
+        modalVisible && $resultItems && activeIndex >= 0 && $resultItems.eq(activeIndex).children('a')[0].click();
+      }
+    }
+  });
+
+  $result.on('mouseover', '.search-result__item > a', function() {
+    var itemIndex = $(this).parent().data('index');
+    itemIndex >= 0 && (lastActiveIndex = activeIndex, activeIndex = itemIndex, updateResultItems());
+  });
+});
+</script>
+</div></div>
+
+
+<script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    function scrollToAnchor(anchor, duration, callback) {
+      var $root = this;
+      $root.animate({ scrollTop: $(anchor).position().top }, duration, function() {
+        window.history.replaceState(null, '', window.location.href.split('#')[0] + anchor);
+        callback && callback();
+      });
+    }
+    $.fn.scrollToAnchor = scrollToAnchor;
+  });
+})();
+(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    function affix(options) {
+      var $root = this, $window = $(window), $scrollTarget, $scroll,
+        offsetBottom = 0, scrollTarget = window, scroll = window.document, disabled = false, isOverallScroller = true,
+        rootTop, rootLeft, rootHeight, scrollBottom, rootBottomTop,
+        hasInit = false, curState;
+
+      function setOptions(options) {
+        var _options = options || {};
+        _options.offsetBottom && (offsetBottom = _options.offsetBottom);
+        _options.scrollTarget && (scrollTarget = _options.scrollTarget);
+        _options.scroll && (scroll = _options.scroll);
+        _options.disabled !== undefined && (disabled = _options.disabled);
+        $scrollTarget = $(scrollTarget);
+        isOverallScroller = window.isOverallScroller($scrollTarget[0]);
+        $scroll = $(scroll);
+      }
+      function preCalc() {
+        top();
+        rootHeight = $root.outerHeight();
+        rootTop = $root.offset().top + (isOverallScroller ? 0 :  $scrollTarget.scrollTop());
+        rootLeft = $root.offset().left;
+      }
+      function calc(needPreCalc) {
+        needPreCalc && preCalc();
+        scrollBottom = $scroll.outerHeight() - offsetBottom - rootHeight;
+        rootBottomTop = scrollBottom - rootTop;
+      }
+      function top() {
+        if (curState !== 'top') {
+          $root.removeClass('fixed').css({
+            left: 0,
+            top: 0
+          });
+          curState = 'top';
+        }
+      }
+      function fixed() {
+        if (curState !== 'fixed') {
+          $root.addClass('fixed').css({
+            left: rootLeft + 'px',
+            top: 0
+          });
+          curState = 'fixed';
+        }
+      }
+      function bottom() {
+        if (curState !== 'bottom') {
+          $root.removeClass('fixed').css({
+            left: 0,
+            top: rootBottomTop + 'px'
+          });
+          curState = 'bottom';
+        }
+      }
+      function setState() {
+        var scrollTop = $scrollTarget.scrollTop();
+        if (scrollTop >= rootTop && scrollTop <= scrollBottom) {
+          fixed();
+        } else if (scrollTop < rootTop) {
+          top();
+        } else {
+          bottom();
+        }
+      }
+      function init() {
+        if(!hasInit) {
+          var interval, timeout;
+          calc(true); setState();
+          // run calc every 100 millisecond
+          interval = setInterval(function() {
+            calc();
+          }, 100);
+          timeout = setTimeout(function() {
+            clearInterval(interval);
+          }, 45000);
+          window.pageLoad.then(function() {
+            setTimeout(function() {
+              clearInterval(interval);
+              clearTimeout(timeout);
+            }, 3000);
+          });
+          $scrollTarget.on('scroll', function() {
+            disabled || setState();
+          });
+          $window.on('resize', function() {
+            disabled || (calc(true), setState());
+          });
+          hasInit = true;
+        }
+      }
+
+      setOptions(options);
+      if (!disabled) {
+        init();
+      }
+      $window.on('resize', window.throttle(function() {
+        init();
+      }, 200));
+      return {
+        setOptions: setOptions,
+        refresh: function() {
+          calc(true, { animation: false }); setState();
+        }
+      };
+    }
+    $.fn.affix = affix;
+  });
+})();
+(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    function toc(options) {
+      var $root = this, $window = $(window), $scrollTarget, $scroller, $tocUl = $('<ul class="toc toc--ellipsis"></ul>'), $tocLi, $headings, $activeLast, $activeCur,
+        selectors = 'h1,h2,h3', container = 'body', scrollTarget = window, scroller = 'html, body', disabled = false,
+        headingsPos, scrolling = false, hasRendered = false, hasInit = false;
+
+      function setOptions(options) {
+        var _options = options || {};
+        _options.selectors && (selectors = _options.selectors);
+        _options.container && (container = _options.container);
+        _options.scrollTarget && (scrollTarget = _options.scrollTarget);
+        _options.scroller && (scroller = _options.scroller);
+        _options.disabled !== undefined && (disabled = _options.disabled);
+        $headings = $(container).find(selectors).filter('[id]');
+        $scrollTarget = $(scrollTarget);
+        $scroller = $(scroller);
+      }
+      function calc() {
+        headingsPos = [];
+        $headings.each(function() {
+          headingsPos.push(Math.floor($(this).position().top));
+        });
+      }
+      function setState(element, disabled) {
+        var scrollTop = $scrollTarget.scrollTop(), i;
+        if (disabled || !headingsPos || headingsPos.length < 1) { return; }
+        if (element) {
+          $activeCur = element;
+        } else {
+          for (i = 0; i < headingsPos.length; i++) {
+            if (scrollTop >= headingsPos[i]) {
+              $activeCur = $tocLi.eq(i);
+            } else {
+              $activeCur || ($activeCur = $tocLi.eq(i));
+              break;
+            }
+          }
+        }
+        $activeLast && $activeLast.removeClass('active');
+        ($activeLast = $activeCur).addClass('active');
+      }
+      function render() {
+        if(!hasRendered) {
+          $root.append($tocUl);
+          $headings.each(function() {
+            var $this = $(this);
+            $tocUl.append($('<li></li>').addClass('toc-' + $this.prop('tagName').toLowerCase())
+              .append($('<a></a>').text($this.text()).attr('href', '#' + $this.prop('id'))));
+          });
+          $tocLi = $tocUl.children('li');
+          $tocUl.on('click', 'a', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            scrolling = true;
+            setState($this.parent());
+            $scroller.scrollToAnchor($this.attr('href'), 400, function() {
+              scrolling = false;
+            });
+          });
+        }
+        hasRendered = true;
+      }
+      function init() {
+        var interval, timeout;
+        if(!hasInit) {
+          render(); calc(); setState(null, scrolling);
+          // run calc every 100 millisecond
+          interval = setInterval(function() {
+            calc();
+          }, 100);
+          timeout = setTimeout(function() {
+            clearInterval(interval);
+          }, 45000);
+          window.pageLoad.then(function() {
+            setTimeout(function() {
+              clearInterval(interval);
+              clearTimeout(timeout);
+            }, 3000);
+          });
+          $scrollTarget.on('scroll', function() {
+            disabled || setState(null, scrolling);
+          });
+          $window.on('resize', window.throttle(function() {
+            if (!disabled) {
+              render(); calc(); setState(null, scrolling);
+            }
+          }, 100));
+        }
+        hasInit = true;
+      }
+
+      setOptions(options);
+      if (!disabled) {
+        init();
+      }
+      $window.on('resize', window.throttle(function() {
+        init();
+      }, 200));
+      return {
+        setOptions: setOptions
+      };
+    }
+    $.fn.toc = toc;
+  });
+})();
+/*(function () {
+
+})();*/
+</script><script>
+  window.Lazyload.js(['https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js', 'https://cdn.bootcss.com/Chart.js/2.7.2/Chart.bundle.min.js'], function() {
+    var $canvas = null, $this = null, _ctx = null, _text = '';
+    $('.language-chart').each(function(){
+      $this = $(this);
+      $canvas = $('<canvas></canvas>');
+      _text = $this.text();
+      $this.text('').append($canvas);
+      _ctx = $canvas.get(0).getContext('2d');
+      (_ctx && _text) && (new Chart(_ctx, JSON.parse(_text)) && $this.attr('data-processed', true));
+    });
+  });
+</script>
+<script type="text/x-mathjax-config">
+	var _config = { tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']]
+	}};_config.TeX = { equationNumbers: { autoNumber: "all" } };MathJax.Hub.Config(_config);
+</script>
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  window.Lazyload.js('https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js', function() {
+    mermaid.initialize({
+      startOnLoad: true
+    });
+    mermaid.init(undefined, '.language-mermaid');
+  });
+</script>
+
+    </div>
+    <script>(function () {
+  var $root = document.getElementsByClassName('root')[0];
+  if (window.hasEvent('touchstart')) {
+    $root.dataset.isTouch = true;
+    document.addEventListener('touchstart', function(){}, false);
+  }
+})();
+</script>
+  </body>
 </html>
+

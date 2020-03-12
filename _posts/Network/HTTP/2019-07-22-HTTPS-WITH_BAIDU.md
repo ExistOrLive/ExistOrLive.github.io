@@ -1,11 +1,11 @@
 ---
-layout: post
 title:  "百度HTTPS握手过程"
 date:   2019-07-22
-categories: TCP/IP
 tags: HTTP
-excerpt: 
-mathjax: true
+article_header:
+  type: cover
+  image:
+    src: /screenshot.jpg
 ---
 
 # 百度HTTPS过程

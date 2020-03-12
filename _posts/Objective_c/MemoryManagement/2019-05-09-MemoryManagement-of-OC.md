@@ -1,11 +1,11 @@
 ---
-layout: post
 title:  "OC 内存管理"
 date:   2019-05-09
-categories: iOS
-tags: Objective-c
-excerpt: 
-mathjax: true
+tags: [Objective-c]
+article_header:
+  type: cover
+  image:
+    src: /screenshot.jpg
 ---
 
 # OC 内存管理

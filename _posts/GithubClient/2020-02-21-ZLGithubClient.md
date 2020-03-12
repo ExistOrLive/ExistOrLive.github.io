@@ -1,11 +1,12 @@
 ---
-layout: post
+layout: article
 title:  "ZLGithubClient Beta Download"
 date:   2020-02-21
-categories: iOS App
 tags: App
-excerpt: 
-mathjax: true
+article_header:
+  type: cover
+  image:
+    src: /screenshot.jpg
 ---
 
 # ZLGithubClient Beta Download
