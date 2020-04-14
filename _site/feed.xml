@@ -1,5 +1,297 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-12T20:40:55+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ExistOrLive’s Blog</title><subtitle>ExistOrLive's Blog
-</subtitle><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><entry><title type="html">ZLGithubClient Beta Download</title><link href="http://localhost:4000/2020/02/21/ZLGithubClient.html" rel="alternate" type="text/html" title="ZLGithubClient Beta Download" /><published>2020-02-21T00:00:00+08:00</published><updated>2020-02-21T00:00:00+08:00</updated><id>http://localhost:4000/2020/02/21/ZLGithubClient</id><content type="html" xml:base="http://localhost:4000/2020/02/21/ZLGithubClient.html">&lt;h1 id=&quot;zlgithubclient-beta-download&quot;&gt;ZLGithubClient Beta Download&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-30T01:06:59+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ExistOrLive’s Blog</title><subtitle>ExistOrLive's Blog
+</subtitle><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><entry><title type="html">Github Action For ZLGithubClient</title><link href="http://localhost:4000/2020/03/30/GithubAction.html" rel="alternate" type="text/html" title="Github Action For ZLGithubClient" /><published>2020-03-30T00:00:00+08:00</published><updated>2020-03-30T00:00:00+08:00</updated><id>http://localhost:4000/2020/03/30/GithubAction</id><content type="html" xml:base="http://localhost:4000/2020/03/30/GithubAction.html">&lt;h1 id=&quot;github-action&quot;&gt;Github Action&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Github Action 是 Github 提供的 持续集成服务。因此只有保存在Github上的工程才可以使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Github Action的配置在工程的主目录下的.github/workflows目录下的yaml文件中&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/CI/github_action1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在yaml配置文件中可以配置action的触发条件,运行环境，具体执行的操作。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;更具体的操作请参考&lt;a href=&quot;http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html&quot;&gt;Github Action 入门教程&lt;/a&gt;，&lt;a href=&quot;https://help.github.com/en/actions&quot;&gt;Github Action官方文档&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;github-action中的概念&quot;&gt;GitHub Action中的概念&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;workflow&lt;/code&gt; （工作流程）：持续集成一次运行的过程，就是一个 workflow。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;job&lt;/code&gt; （任务）：一个 workflow 由一个或多个 jobs 构成，含义是一次持续集成的运行，可以完成多个任务。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;step&lt;/code&gt;（步骤）：每个 job 由多个 step 构成，一步步完成。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;action&lt;/code&gt; （动作）：每个 step 可以依次执行一个或多个命令（action）。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;zlgithubclient-自动化打包实践&quot;&gt;ZLGithubClient 自动化打包实践&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://github.com/MengAndJie/GithubClient&quot;&gt;GithubClient&lt;/a&gt;工程在&lt;code class=&quot;highlighter-rouge&quot;&gt;.github/workflows/build.yml&lt;/code&gt;配置了自动打包并上传制品库的workflow。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# action 语法 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ZLGithub Build&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;                                       &lt;span class=&quot;c1&quot;&gt;# 触发条件 当master分支发生push和pr事件时，触发&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;              
+  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;                                  &lt;span class=&quot;c1&quot;&gt;# 仅有一个job build&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;                           &lt;span class=&quot;c1&quot;&gt;# job的name&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;macos-latest&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;# runner 运行系统 macos&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;                                
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;checkout&lt;/span&gt;                      &lt;span class=&quot;c1&quot;&gt;# step的名字          &lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2.0.0&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;# step使用的action &lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt; 
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;construct build enviroment&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;working-directory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./ZLGitHubClient&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;# 指定step 的工作目录&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;                              &lt;span class=&quot;c1&quot;&gt;# step 执行的脚本&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;gem cleanup&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;gem install bundler&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;bundle install&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;pod repo update&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;pod install&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;echo &quot;construct build enviroment success&quot;&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;archive app&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;working-directory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./ZLGitHubClient&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;# 指定step 的工作目录&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;                                         &lt;span class=&quot;c1&quot;&gt;# 指定step 执行脚本的环境变量&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;MATCH_KEYCHAIN_NAME&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;MATCH_PASSWORD&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;MATCH_GITHUB_URL&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;pwd &lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;bundle exec fastlane github_action_adhoc&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;echo &quot;ipa build success&quot;&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;upload github artifact&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;success()&lt;/span&gt;                               &lt;span class=&quot;c1&quot;&gt;# 当前step执行的条件是上一次step执行成功&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/upload-artifact@v1.0.0&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;# Artifact name&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ZLGitHubClient&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;# Directory containing files to upload&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./ZLGitHubClient/fastlane/ipa&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;upload artifact&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;working-directory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./ZLGitHubClient&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;# 指定run 的工作目录&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;success()&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;CODING_ARTIFACT_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;curl -T ./fastlane/ipa/ZLGitHubClient.ipa  -u $CODING_ARTIFACT_TOKEN  &quot;https://existorlive-generic.pkg.coding.net/ZLGitHubClient/adhoc/ZLGitHubClient.ipa&quot; -v                    # 上传ipa到制品库&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;echo &quot;work flow build end&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;name&quot;&gt;name&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;name选项 配置workflow的名字&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;on&quot;&gt;on&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;on&lt;/code&gt;选项 配置workflow的触发条件,也就是GitHub的各种事件，如下配置了当master分支发生了push和push_request事件时会触发&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;                               &lt;span class=&quot;c1&quot;&gt;# 触发条件&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;也可以配置定时触发&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;schedule&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# * is a special character in YAML so you have to quote this string&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;cron&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*/15&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://help.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events-schedule&quot;&gt;Events that trigger workflows&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;jobs&quot;&gt;jobs&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;jobs选项&lt;/code&gt; 定义了workflow中的各种任务。workflow由一个或多个任务组成。默认情况下，任务并行运行。要顺序运行任务，可以使用&lt;code class=&quot;highlighter-rouge&quot;&gt;job.&amp;lt;job_id&amp;gt;.needs&lt;/code&gt;选项定义对其他任务的依赖关系。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如下，配置了analyse，build，test，deploy四个job&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;analyse&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;analyse&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;macos-latest&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; 
+
+
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;needs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;analyse&lt;/span&gt;
+
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;test&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;needs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;analyse&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;deploy&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;needs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;analyse&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;name&lt;/p&gt;
+
+    &lt;p&gt;name 即job的名字&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;needs&lt;/p&gt;
+
+    &lt;p&gt;needs 表示当前job执行的条件是某几个job执行完成,如上所示build依赖于analyse执行完成&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;runs-on&lt;/p&gt;
+
+    &lt;p&gt;runs-on 表示当前job的执行环境&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;steps&lt;/p&gt;
+
+    &lt;p&gt;steps 表示当前job的执行步骤&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;steps&quot;&gt;steps&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;steps代表jobs中的步骤，step可以自定义脚本，也可以使用他人编译好的脚本，在github marketplace中发布和查询。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;checkout&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2.0.0&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt; 
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;construct build enviroment&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;working-directory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./ZLGitHubClient&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;# 指定run 的工作目录&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;gem cleanup&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;gem install bundler&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;bundle install&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;pod repo update&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;pod install&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;echo &quot;construct build enviroment success&quot;&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;archive app&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;working-directory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./ZLGitHubClient&lt;/span&gt;          &lt;span class=&quot;c1&quot;&gt;# 指定run 的工作目录&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;MATCH_KEYCHAIN_NAME&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;MATCH_PASSWORD&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;MATCH_GITHUB_URL&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;pwd &lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;bundle exec fastlane github_action_adhoc&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;echo &quot;ipa build success&quot;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;name&lt;/p&gt;
+
+    &lt;p&gt;name选型 step的名字&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;run&lt;/p&gt;
+
+    &lt;p&gt;run选项 可以直接指定运行的指令&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;uses&lt;/p&gt;
+
+    &lt;p&gt;uses选项 可以使用github marketplace中发布的action&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;working-directory&lt;/p&gt;
+
+    &lt;p&gt;working-directory 指定脚本的执行目录&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;env&lt;/p&gt;
+
+    &lt;p&gt;env选项指定脚本执行的环境变量&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;if&lt;/p&gt;
+
+    &lt;p&gt;if选项 指定当前step运行的条件&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;issues&quot;&gt;issues&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在workflow中可能会使用token，secret-key这样的私密信息，无法明文写在配置文件中。 这些信息可以在repository的setting配置为secret,然后在step中配置为env&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/CI/github_action2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/CI/github_action3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;workflow 默认在工程的根目录下执行，如果希望在其他目录执行，需要指定step的working-directory&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/DevOps/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/github_action.md&quot;&gt;原文地址&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="CI" /><summary type="html">Github Action Github Action 是 Github 提供的 持续集成服务。因此只有保存在Github上的工程才可以使用。 Github Action的配置在工程的主目录下的.github/workflows目录下的yaml文件中 在yaml配置文件中可以配置action的触发条件,运行环境，具体执行的操作。 更具体的操作请参考Github Action 入门教程，Github Action官方文档 GitHub Action中的概念 workflow （工作流程）：持续集成一次运行的过程，就是一个 workflow。 job （任务）：一个 workflow 由一个或多个 jobs 构成，含义是一次持续集成的运行，可以完成多个任务。 step（步骤）：每个 job 由多个 step 构成，一步步完成。 action （动作）：每个 step 可以依次执行一个或多个命令（action）。 ZLGithubClient 自动化打包实践 GithubClient工程在.github/workflows/build.yml配置了自动打包并上传制品库的workflow。 # action 语法 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions name: ZLGithub Build on: # 触发条件 当master分支发生push和pr事件时，触发 push: branches: - master pull_request: branches: - master jobs: build: # 仅有一个job build name: build # job的name runs-on: macos-latest # runner 运行系统 macos steps: - name: checkout # step的名字 uses: actions/checkout@v2.0.0 # step使用的action with: ref: master - name: construct build enviroment working-directory: ./ZLGitHubClient # 指定step 的工作目录 run: | # step 执行的脚本 gem cleanup gem install bundler bundle install pod repo update pod install echo &quot;construct build enviroment success&quot; - name: archive app working-directory: ./ZLGitHubClient # 指定step 的工作目录 env: # 指定step 执行脚本的环境变量 MATCH_KEYCHAIN_NAME: $ MATCH_PASSWORD: $ MATCH_GITHUB_URL: $ run: | pwd bundle exec fastlane github_action_adhoc echo &quot;ipa build success&quot; - name: upload github artifact if: success() # 当前step执行的条件是上一次step执行成功 uses: actions/upload-artifact@v1.0.0 with: # Artifact name name: ZLGitHubClient # Directory containing files to upload path: ./ZLGitHubClient/fastlane/ipa - name: upload artifact working-directory: ./ZLGitHubClient # 指定run 的工作目录 if: success() env: CODING_ARTIFACT_TOKEN: $ run: | curl -T ./fastlane/ipa/ZLGitHubClient.ipa -u $CODING_ARTIFACT_TOKEN &quot;https://existorlive-generic.pkg.coding.net/ZLGitHubClient/adhoc/ZLGitHubClient.ipa&quot; -v # 上传ipa到制品库 echo &quot;work flow build end&quot; name name选项 配置workflow的名字 on on选项 配置workflow的触发条件,也就是GitHub的各种事件，如下配置了当master分支发生了push和push_request事件时会触发 on: # 触发条件 push: branches: - master pull_request: branches: - master 也可以配置定时触发 on: schedule: # * is a special character in YAML so you have to quote this string - cron: '*/15 * * * *' Events that trigger workflows jobs jobs选项 定义了workflow中的各种任务。workflow由一个或多个任务组成。默认情况下，任务并行运行。要顺序运行任务，可以使用job.&amp;lt;job_id&amp;gt;.needs选项定义对其他任务的依赖关系。 如下，配置了analyse，build，test，deploy四个job jobs: - analyse: name: analyse runs-on: macos-latest steps: - - build: name: build needs: analyse - test: name: test needs: [analyse,build] - deploy: name: deploy needs: [analyse,build,deploy] name name 即job的名字 needs needs 表示当前job执行的条件是某几个job执行完成,如上所示build依赖于analyse执行完成 runs-on runs-on 表示当前job的执行环境 steps steps 表示当前job的执行步骤 steps steps代表jobs中的步骤，step可以自定义脚本，也可以使用他人编译好的脚本，在github marketplace中发布和查询。 steps: - name: checkout uses: actions/checkout@v2.0.0 with: ref: master - name: construct build enviroment working-directory: ./ZLGitHubClient # 指定run 的工作目录 run: | gem cleanup gem install bundler bundle install pod repo update pod install echo &quot;construct build enviroment success&quot; - name: archive app working-directory: ./ZLGitHubClient # 指定run 的工作目录 env: MATCH_KEYCHAIN_NAME: $ MATCH_PASSWORD: $ MATCH_GITHUB_URL: $ run: | pwd bundle exec fastlane github_action_adhoc echo &quot;ipa build success&quot; name name选型 step的名字 run run选项 可以直接指定运行的指令 uses uses选项 可以使用github marketplace中发布的action working-directory working-directory 指定脚本的执行目录 env env选项指定脚本执行的环境变量 if if选项 指定当前step运行的条件 issues 在workflow中可能会使用token，secret-key这样的私密信息，无法明文写在配置文件中。 这些信息可以在repository的setting配置为secret,然后在step中配置为env workflow 默认在工程的根目录下执行，如果希望在其他目录执行，需要指定step的working-directory 原文地址</summary></entry><entry><title type="html">jenkins插件</title><link href="http://localhost:4000/2020/03/30/jenkinsPlugin.html" rel="alternate" type="text/html" title="jenkins插件" /><published>2020-03-30T00:00:00+08:00</published><updated>2020-03-30T00:00:00+08:00</updated><id>http://localhost:4000/2020/03/30/jenkinsPlugin</id><content type="html" xml:base="http://localhost:4000/2020/03/30/jenkinsPlugin.html">&lt;h1 id=&quot;jenkins的常用插件&quot;&gt;Jenkins的常用插件&lt;/h1&gt;
+
+&lt;h2 id=&quot;用户权限管理-role-strategy-plugin&quot;&gt;用户权限管理 （Role Strategy Plugin）&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;下载插件 &lt;code class=&quot;highlighter-rouge&quot;&gt;Role-based Authorization Strategy&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;Configure Global Security&lt;/code&gt;的授权策略中打开&lt;code class=&quot;highlighter-rouge&quot;&gt;Role-Based Strategy&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;设置中出现Manage and Assign Roles ， 进入后可以创建角色，设置角色的权限并给用户分配角色&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在Manage Roles中可以创建全局角色，job角色和node角色，可以为不同角色分配权限。在Assign Roles可以为用户分配角色&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="CI" /><summary type="html">Jenkins的常用插件 用户权限管理 （Role Strategy Plugin） 下载插件 Role-based Authorization Strategy 在Configure Global Security的授权策略中打开Role-Based Strategy 设置中出现Manage and Assign Roles ， 进入后可以创建角色，设置角色的权限并给用户分配角色 在Manage Roles中可以创建全局角色，job角色和node角色，可以为不同角色分配权限。在Assign Roles可以为用户分配角色</summary></entry><entry><title type="html">ZLGithubClient Beta Download</title><link href="http://localhost:4000/2020/02/21/ZLGithubClient.html" rel="alternate" type="text/html" title="ZLGithubClient Beta Download" /><published>2020-02-21T00:00:00+08:00</published><updated>2020-02-21T00:00:00+08:00</updated><id>http://localhost:4000/2020/02/21/ZLGithubClient</id><content type="html" xml:base="http://localhost:4000/2020/02/21/ZLGithubClient.html">&lt;h1 id=&quot;zlgithubclient-beta-download&quot;&gt;ZLGithubClient Beta Download&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Github 自制iOS客户端&lt;/p&gt;
@@ -402,208 +694,7 @@
 
 &lt;h2 id=&quot;原文章地址&quot;&gt;原文章地址&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/%E7%99%BE%E5%BA%A6HTTPS%E8%BF%87%E7%A8%8B.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/%E7%99%BE%E5%BA%A6HTTPS%E8%BF%87%E7%A8%8B.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="HTTP" /><summary type="html">HTTPS 由于HTTP报文在网路上是以明文的方式传递的，因此很多时候在安全方面无法满足商用的要求，无法保证数据不被中间人截取和篡改(中间人攻击)。 对称加密 我们可以使用对称加密技术(DES,3DES,AES)对HTTP报文进行加密；AES加密技术是现在最流行且有效的加密算法，可以可靠的保证密文不被中间人解析，只要对称秘钥不泄漏。 如果中间人截取了对称秘钥，完全可以换成自己的秘钥传递给另一端，这样就不能解决中间人攻击。那么问题就变为怎么安全的传递对称秘钥？ 这个时候我们可以非对称加密技术加密对称秘钥，然后再在网路上传递 非对称加密 非对称加密包含两个秘钥：公钥和私钥。公钥可以将私钥加密的数据明文化，私钥可以将公钥加密的数据明文化。 首先由客户端向服务端发出握手请求；接着由服务端返回公钥；客户端受到公钥，生成加密报文用的对称秘钥，由公钥加密传递给服务端；最后服务端受到对称秘钥用私钥解析出来，之后就可以进行正常的数据交互了。 但是这还是不能避免中间人攻击，如果中间人劫持了公钥，再生成自己的公钥传递给客户端。这样中间人和服务端建立连接，客户端和中间人建立连接，中间人攻击还是构成了。 因此客户端必须要判断公钥的可靠性和完整性(即公钥是不是确实从服务端传递来的，而没有被篡改)；为解决这个问题，我会可以引入可靠的第三方CA机构 数字证书 CA机构即证书颁发机构，服务端会事先向CA机构申请数字证书。 数字证书的作用 认证正在访问的网站（是否为钓鱼网站） 保证数据的私密性和可靠性 数字证书的申请 首先服务端会生成自己的公钥和私钥，然后拿着公钥和服务端的一些信息向CA机构申请数字证书 CA机构拿着公钥和服务端信息通过Hash算法生成消息摘要，然后将消息摘要用自己的私钥加密，生成后的密文即数字签名。数字签名和原本的公钥及服务端信息组成数字证书 最后服务端拿到数字证书，等待客户端的握手请求 数字证书怎么保证交互的可靠性，完整性及私密性 服务端受到握手请求后，首先会将数字证书传递给客户端 我们的电脑和浏览器中已经内置了一部分权威机构的根证书，这些根证书中包含了CA的公匙。 数字证书包含公钥，服务端信息和数字签名。客户端首先会将公钥，服务端信息通过Hash算法生成一份消息摘要；然后将数字签名用CA的公钥解密出一份消息摘要；对比两份消息摘要，如果不一致即公钥被篡改，停止握手。 HASH算法的不可逆性保证了消息摘要无法篡改，CA机构的非对称加密保证了公钥来源的可靠性 HTTPS的握手 参考文档 漫画：什么是 HTTPS 协议？ 一篇文章读懂HTTPS及其背后的加密原理 原文章地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/%E7%99%BE%E5%BA%A6HTTPS%E8%BF%87%E7%A8%8B.md</summary></entry><entry><title type="html">OC Block</title><link href="http://localhost:4000/2019/05/09/Block.html" rel="alternate" type="text/html" title="OC Block" /><published>2019-05-09T00:00:00+08:00</published><updated>2019-05-09T00:00:00+08:00</updated><id>http://localhost:4000/2019/05/09/Block</id><content type="html" xml:base="http://localhost:4000/2019/05/09/Block.html">&lt;h1 id=&quot;block-代码块&quot;&gt;Block （代码块）&lt;/h1&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Block&lt;/strong&gt;是iOS 4 引入的C语言扩展功能，实质上是带有自动变量(局部变量)的匿名函数。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;如下，函数的定义是必须有名字的,函数可以通过函数指针来传递和调用;Block的定义不需要名字，但是需要赋给Block变量才可以使用&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
- *
- * 函数的定义必须是有名字的
- **/&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;funcpter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;funcpter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;err&quot;&gt;／&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;的定义不需要名字，然后赋给一个&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;变量&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;／&lt;/span&gt;
-
-  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;testBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;testBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;我们知道在函数的函数体中可以访问以下的变量：&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在函数体中定义的局部变量&lt;/li&gt;
-  &lt;li&gt;函数的参数&lt;/li&gt;
-  &lt;li&gt;静态变量&lt;/li&gt;
-  &lt;li&gt;静态全局变量&lt;/li&gt;
-  &lt;li&gt;全局变量&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;而在Block的闭包中，不仅可以访问以上的变量，还可以访问在定义Block的闭包中可以访问的一切变量（包括self，局部变量，实例变量).这些变量就是Block可以访问的&lt;code class=&quot;highlighter-rouge&quot;&gt;自动变量&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;如下图：在block中访问了局部变量，self，实例变量&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/test.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/result.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;如上图，打印了block中访问自动变量的地址，只有局部变量的地址是相同的。因此Block访问这些变量是将变量值做了一个浅拷贝，这样就没有办法修改原有的变量了。即&lt;code class=&quot;highlighter-rouge&quot;&gt;截获自动变量的瞬时值&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;block的实现&quot;&gt;Block的实现&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现1.png&quot; alt=&quot;block_实现1&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;如上图所示，我们在main函数中定义了一个block。接下来，我们用clang编译器命令(&lt;code class=&quot;highlighter-rouge&quot;&gt;clang -rewrite-objc main.m&lt;/code&gt;)将OC的代码翻译为C语言的实现。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;C语言实现如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;__main_block_impl_0&quot;&gt;__main_block_impl_0&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;的定义翻译为&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;这个结构体变量的定义。&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;的结构如下：&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;结构体中包括&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构体变量，&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;结构体指针，构造函数以及&lt;code class=&quot;highlighter-rouge&quot;&gt;e&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;str&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;等其他变量。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;中保存的是Block的类型以及具体实现（函数指针）；&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;中记录的是block的附加信息；&lt;code class=&quot;highlighter-rouge&quot;&gt;e&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;str&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;等变量保存的是block捕获的自动变量，在ARC中是强引用。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;__block_impl&quot;&gt;__block_impl&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构体如下：&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;可以看到&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构中包含&lt;code class=&quot;highlighter-rouge&quot;&gt;isa&lt;/code&gt;变量，保存block的类型，所以block是一个OC对象；&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;FuncPtr&lt;/code&gt;是一个函数指针，指向Block的具体实现。可以看到该函数的参数不只有block的参数，还有一个&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_Impl_0&lt;/code&gt;指针，通过这个指针函数可以访问block的自动变量。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;__main_block_desc_0&quot;&gt;__main_block_desc_0&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;结构如下，主要记录block的附加信息，包括结构体的大小，需要capture和dispose的变量列表&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;自动变量&quot;&gt;自动变量&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Block捕获的自动变量，会保存的在&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;对于基本数据类型，是将值拷贝到&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中，所以在Block中就无法访问原来的变量了。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在ARC中，捕获的OC对象是通过强引用保存到&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中，因此需要注意引用循环的问题。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;实质上是一种结构体，结构如下：其中&lt;code class=&quot;highlighter-rouge&quot;&gt;__forwarding&lt;/code&gt;保存的是&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;的地址，&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;保存的是&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;的值。&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;中会保存该结构体的指针。&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;block的类型以及内存管理&quot;&gt;Block的类型以及内存管理&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;在 OC中，总共由三种block类型：&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;_NSGlobalBlock,全局的静态block，不会访问任何的外部变量，它的生命周期是全局的。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;_NSStackBlock,保存在栈上的block，当定义block的闭包结束，就会被销毁&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;_NSMallocBlock,保存在堆上的block，当引用计数为0时，会被销毁。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;_nsglobalblock&quot;&gt;_NSGlobalBlock&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;不访问任何自动变量的Block都是_NSGlobalBlock类型，且类型不会改变。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;_nsstackblock&quot;&gt;_NSStackBlock&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;访问自动变量的block在定义时默认是_NSStackBlock类型，只有调用了copy类型，才会变成_NSMallocBlock类型。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;_nsmallocblock&quot;&gt;_NSMallocBlock&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;在ARC中，当Block被定义后，传给一个OC变量，会自动调用Block的copy方法，这个时候Block就会变为_NSMallocBlock类型。在MRC，则需要手动调用Copy&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/Block的类型以及内存管理1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/Block的类型以及内存管理2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;避免循环引用&quot;&gt;避免循环引用&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;由于Block在访问自动变量时，比较容易造成循环引用。对于这个问题，需要将引用的一方变为weak，避免循环引用。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-objc highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;__weak&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__typeof__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weakSelf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// 将引用一方变为weak&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;NSBlockOperation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSBlockOperation&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;op&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addExecutionBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;__strong&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__typeof__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strongSelf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weakSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// 在这里强引用一下weakself，避免在block执行过程中，weakself被销毁&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strongSelf&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strongSelf&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doMoreThing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someOperationQueue&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;原文章地址&quot;&gt;原文章地址&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="Objective-c" /><summary type="html">Block （代码块） Block是iOS 4 引入的C语言扩展功能，实质上是带有自动变量(局部变量)的匿名函数。 如下，函数的定义是必须有名字的,函数可以通过函数指针来传递和调用;Block的定义不需要名字，但是需要赋给Block变量才可以使用 /** * * 函数的定义必须是有名字的 **/ int func(int count) { printf(&quot;%d&quot;,count); return count; } int (*funcpter)(int) = &amp;amp;func; (*funcpter)(10); ／** * * block的定义不需要名字，然后赋给一个block变量 **／ int (^testBlock)(int) = ^int(int count){ printf(&quot;%d&quot;,count); return count; } testBlock(10); 我们知道在函数的函数体中可以访问以下的变量： 在函数体中定义的局部变量 函数的参数 静态变量 静态全局变量 全局变量 而在Block的闭包中，不仅可以访问以上的变量，还可以访问在定义Block的闭包中可以访问的一切变量（包括self，局部变量，实例变量).这些变量就是Block可以访问的自动变量. 如下图：在block中访问了局部变量，self，实例变量 如上图，打印了block中访问自动变量的地址，只有局部变量的地址是相同的。因此Block访问这些变量是将变量值做了一个浅拷贝，这样就没有办法修改原有的变量了。即截获自动变量的瞬时值 Block的实现 如上图所示，我们在main函数中定义了一个block。接下来，我们用clang编译器命令(clang -rewrite-objc main.m)将OC的代码翻译为C语言的实现。 C语言实现如下： __main_block_impl_0 Block的定义翻译为__main_block_impl_0这个结构体变量的定义。__main_block_impl_0的结构如下： 在__main_block_impl_0结构体中包括__block_impl结构体变量，__main_block_desc_0结构体指针，构造函数以及e,str,c等其他变量。 __block_impl中保存的是Block的类型以及具体实现（函数指针）；__main_block_desc_0中记录的是block的附加信息；e,str,c等变量保存的是block捕获的自动变量，在ARC中是强引用。 __block_impl __block_impl结构体如下： 可以看到__block_impl结构中包含isa变量，保存block的类型，所以block是一个OC对象； FuncPtr是一个函数指针，指向Block的具体实现。可以看到该函数的参数不只有block的参数，还有一个__main_block_Impl_0指针，通过这个指针函数可以访问block的自动变量。 __main_block_desc_0 __main_block_desc_0结构如下，主要记录block的附加信息，包括结构体的大小，需要capture和dispose的变量列表 自动变量 Block捕获的自动变量，会保存的在__main_block_impl结构体中。 对于基本数据类型，是将值拷贝到__main_block_impl结构体中，所以在Block中就无法访问原来的变量了。 在ARC中，捕获的OC对象是通过强引用保存到__main_block_impl结构体中，因此需要注意引用循环的问题。 __block变量实质上是一种结构体，结构如下：其中__forwarding保存的是__block变量的地址，c保存的是__block变量的值。__main_block_impl中会保存该结构体的指针。 Block的类型以及内存管理 在 OC中，总共由三种block类型： _NSGlobalBlock,全局的静态block，不会访问任何的外部变量，它的生命周期是全局的。 _NSStackBlock,保存在栈上的block，当定义block的闭包结束，就会被销毁 _NSMallocBlock,保存在堆上的block，当引用计数为0时，会被销毁。 _NSGlobalBlock 不访问任何自动变量的Block都是_NSGlobalBlock类型，且类型不会改变。 _NSStackBlock 访问自动变量的block在定义时默认是_NSStackBlock类型，只有调用了copy类型，才会变成_NSMallocBlock类型。 _NSMallocBlock 在ARC中，当Block被定义后，传给一个OC变量，会自动调用Block的copy方法，这个时候Block就会变为_NSMallocBlock类型。在MRC，则需要手动调用Copy 避免循环引用 由于Block在访问自动变量时，比较容易造成循环引用。对于这个问题，需要将引用的一方变为weak，避免循环引用。 __weak __typeof__(self) weakSelf = self; // 将引用一方变为weak NSBlockOperation *op = [[NSBlockOperation alloc] init]; [ op addExecutionBlock:^ { __strong __typeof__(self) strongSelf = weakSelf; // 在这里强引用一下weakself，避免在block执行过程中，weakself被销毁 [strongSelf doSomething]; [strongSelf doMoreThing]; } ]; [someOperationQueue addOperation:op]; 原文章地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md</summary></entry><entry><title type="html">OC 内存管理</title><link href="http://localhost:4000/2019/05/09/MemoryManagement-of-OC.html" rel="alternate" type="text/html" title="OC 内存管理" /><published>2019-05-09T00:00:00+08:00</published><updated>2019-05-09T00:00:00+08:00</updated><id>http://localhost:4000/2019/05/09/MemoryManagement-of-OC</id><content type="html" xml:base="http://localhost:4000/2019/05/09/MemoryManagement-of-OC.html">&lt;h1 id=&quot;oc-内存管理&quot;&gt;OC 内存管理&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/%E7%99%BE%E5%BA%A6HTTPS%E8%BF%87%E7%A8%8B.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/%E7%99%BE%E5%BA%A6HTTPS%E8%BF%87%E7%A8%8B.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="HTTP" /><summary type="html">HTTPS 由于HTTP报文在网路上是以明文的方式传递的，因此很多时候在安全方面无法满足商用的要求，无法保证数据不被中间人截取和篡改(中间人攻击)。 对称加密 我们可以使用对称加密技术(DES,3DES,AES)对HTTP报文进行加密；AES加密技术是现在最流行且有效的加密算法，可以可靠的保证密文不被中间人解析，只要对称秘钥不泄漏。 如果中间人截取了对称秘钥，完全可以换成自己的秘钥传递给另一端，这样就不能解决中间人攻击。那么问题就变为怎么安全的传递对称秘钥？ 这个时候我们可以非对称加密技术加密对称秘钥，然后再在网路上传递 非对称加密 非对称加密包含两个秘钥：公钥和私钥。公钥可以将私钥加密的数据明文化，私钥可以将公钥加密的数据明文化。 首先由客户端向服务端发出握手请求；接着由服务端返回公钥；客户端受到公钥，生成加密报文用的对称秘钥，由公钥加密传递给服务端；最后服务端受到对称秘钥用私钥解析出来，之后就可以进行正常的数据交互了。 但是这还是不能避免中间人攻击，如果中间人劫持了公钥，再生成自己的公钥传递给客户端。这样中间人和服务端建立连接，客户端和中间人建立连接，中间人攻击还是构成了。 因此客户端必须要判断公钥的可靠性和完整性(即公钥是不是确实从服务端传递来的，而没有被篡改)；为解决这个问题，我会可以引入可靠的第三方CA机构 数字证书 CA机构即证书颁发机构，服务端会事先向CA机构申请数字证书。 数字证书的作用 认证正在访问的网站（是否为钓鱼网站） 保证数据的私密性和可靠性 数字证书的申请 首先服务端会生成自己的公钥和私钥，然后拿着公钥和服务端的一些信息向CA机构申请数字证书 CA机构拿着公钥和服务端信息通过Hash算法生成消息摘要，然后将消息摘要用自己的私钥加密，生成后的密文即数字签名。数字签名和原本的公钥及服务端信息组成数字证书 最后服务端拿到数字证书，等待客户端的握手请求 数字证书怎么保证交互的可靠性，完整性及私密性 服务端受到握手请求后，首先会将数字证书传递给客户端 我们的电脑和浏览器中已经内置了一部分权威机构的根证书，这些根证书中包含了CA的公匙。 数字证书包含公钥，服务端信息和数字签名。客户端首先会将公钥，服务端信息通过Hash算法生成一份消息摘要；然后将数字签名用CA的公钥解密出一份消息摘要；对比两份消息摘要，如果不一致即公钥被篡改，停止握手。 HASH算法的不可逆性保证了消息摘要无法篡改，CA机构的非对称加密保证了公钥来源的可靠性 HTTPS的握手 参考文档 漫画：什么是 HTTPS 协议？ 一篇文章读懂HTTPS及其背后的加密原理 原文章地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E7%BD%91%E7%BB%9C/HTTP/%E7%99%BE%E5%BA%A6HTTPS%E8%BF%87%E7%A8%8B.md</summary></entry><entry><title type="html">OC 内存管理</title><link href="http://localhost:4000/2019/05/09/MemoryManagement-of-OC.html" rel="alternate" type="text/html" title="OC 内存管理" /><published>2019-05-09T00:00:00+08:00</published><updated>2019-05-09T00:00:00+08:00</updated><id>http://localhost:4000/2019/05/09/MemoryManagement-of-OC</id><content type="html" xml:base="http://localhost:4000/2019/05/09/MemoryManagement-of-OC.html">&lt;h1 id=&quot;oc-内存管理&quot;&gt;OC 内存管理&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;OC 的内存管理是通过引用计数的机制实现。每一个OC对象都有一个&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;的无符号整数属性，当对象被创建时，&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;为1；当对象被变量持有时，&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;加1；当变量不再持有对象时，&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;减1；在&lt;code class=&quot;highlighter-rouge&quot;&gt;retainCount&lt;/code&gt;为0时，对象被销毁。&lt;/p&gt;
@@ -810,4 +901,205 @@ ARC虽然会做一些工作来缩短返回值的生命时间，但不会在强�
 &lt;p&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000004943276#articaleHeader6&quot;&gt;Objective-C 内存管理——你需要知道的一切&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;文章原地址&quot;&gt;文章原地址&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/OC%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/OC%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="Objective-c" /><summary type="html">OC 内存管理 OC 的内存管理是通过引用计数的机制实现。每一个OC对象都有一个retainCount的无符号整数属性，当对象被创建时，retainCount为1；当对象被变量持有时，retainCount加1；当变量不再持有对象时，retainCount减1；在retainCount为0时，对象被销毁。 MRC 手动管理引用计数和内存,需要手动在代码的相应地方添加内存管理的代码。 手动内存管理的原则 ： 1、自己生成的对象，自己持有 2、不是自己生成的对象也可以持有 3、不需要自己持有的对象时，释放 4、不是自己持有的对象，不可以释放 ARC ARC 是苹果引入的一种自动内存管理机制，会根据引用计数自动监视对象的生存周期，实现方式是在编译时期自动在已有代码中插入合适的内存管理代码以及在 Runtime 做一些优化 在ARC环境下，一切内存管理代码都不可见，release，ratain，autorelease。retainCount都不可用（编译的时候会报错）,@autoreleasepool 在代码中可以使用. 我们只需要关心，是否有循环引用带来的内存泄露 及 autorelease带来的 内存峰值 for(int i = 0;i &amp;lt; 1000000; i++) { NSMutableString * str = [NSMutableString stringWithFormat:@&quot;Hello world&quot;]; /** * str 指向的对象不是自己生成的，该对象在生成时，会自动插入autorelease * 的内存管理代码; 返回时，引用计数为 1，在被str持有后引用计数 为2 * 当一次循环闭包结束,str的声明周期结束，自动插入release代码来释放对象 * 此时引用计数为 1 ,对象不会被销毁，内存泄露 ， 只有当autoreleasepool 调用 drain方法，同时为对象的引用计数减 1 **/ } // 解决方法 ： for(int i = 0; i &amp;lt;　1000000; i++) { @autoreleasepool { NSMutableString * str = [NSMutableString stringWithFormat:@&quot;Hello world&quot;]; } } for(int i = 0;i &amp;lt; 1000000; i++) { NSMutableString * str = [[NSMutableString alloc] initWithFormat:@&quot;asdasdasda&quot;]; /** * 这里不会有内存泄露的问题，对象由str生成并持有 ，引用计数为 1 * 当一次循环结束，str声明周期结束，自动插入release代码，引用计数减 1 * 此时对象引用计数为0，对象销毁 **/ } 变量标识符 __strong 是默认使用的标识符。只有还有一个强指针指向某个对象，这个对象就会一直存活。 __weak 声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，弱引用会被置为 nil __unsafe_unretained 声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，它不会被置为 nil。如果它引用的对象被回收掉了，该指针就变成了野指针。 __autoreleasing 用于标示使用引用传值的参数（id *），在函数返回时会被自动释放掉。 属性标识符 assign 表明 setter 仅仅是一个简单的赋值操作，通常用于基本的数值类型，例如CGFloat和NSInteger。 strong 表明属性定义一个拥有者关系。当给属性设定一个新值的时候，首先这个值进行 retain ，旧值进行 release ，然后进行赋值操作。 weak 表明属性定义了一个非拥有者关系。当给属性设定一个新值的时候，这个值不会进行 retain，旧值也不会进行 release， 而是进行类似 assign 的操作。不过当属性指向的对象被销毁时，该属性会被置为nil。 unsafe_unretained 的语义和 assign 类似，不过是用于对象类型的，表示一个非拥有(unretained)的，同时也不会在对象被销毁时置为nil的(unsafe)关系。 copy 类似于 strong，不过在赋值时进行 copy 操作而不是 retain 操作。通常在需要保留某个不可变对象（NSString最常见），并且防止它被意外改变时使用。 自动释放池 Autorelase Pool 提供了一种可以允许你向一个对象延迟发送release消息的机制。当你想放弃一个对象的所有权，同时又不希望这个对象立即被释放掉（例如在一个方法中返回一个对象时），Autorelease Pool 的作用就显现出来了 使用方式 由RunLoop在每次事件循环开启前创建 NSAutoreleasePool @autoreleasepool 自动释放池 释放的契机 系统在 runloop 中创建的 autoreleaspool 会在 runloop 一个 event 结束时进行释放操作。我们手动创建的 autoreleasepool 会在 block 执行完成之后进行 drain 操作 自动释放池和返回值 如果一个函数的返回值是指向一个对象的指针，那么这个对象肯定不能在函数返回之前进行 release，这样调用者在调用这个函数时得到的就是野指针了，在函数返回之后也不能立刻就 release，因为我们不知道调用者是不是 retain 了这个对象，如果我们直接 release 了，可能导致后面在使用这个对象时它已经成为 nil 了。 为了解决这个纠结的问题， Objective-C 中对对象指针的返回值进行了区分，一种叫做 retained return value，另一种叫做 unretained return value。前者表示调用者拥有这个返回值，后者表示调用者不拥有这个返回值，按照“谁拥有谁释放”的原则，对于前者调用者是要负责释放的，对于后者就不需要了。 按照苹果的命名 convention，以 alloc, copy, init, mutableCopy 和 new 这些方法打头的方法，返回的都是 retained return value，例如 [[NSString alloc] initWithFormat:]，而其他的则是 unretained return value，例如 [NSString stringWithFormat:]。我们在编写代码时也应该遵守这个 convention MRC中： // retained return value: // 调用者生成并持有，负责对象的释放 - (MyCustomCalss *) initWIthName:(NSString *) name { return [ [MyCustomClass alloc] init]; } // unretained return value： // 对象不是由调用者生成，不负责对象的释放，由autoreleasepool负责 + (MyCustomClass * ) myCustomClassWithName:(NSString *) name { // 添加autorelease ，是为了管理 对象生成时，引用计数的 加一 return [ [ [MyCustomClass alloc] init] autorelease]; } ARC中： 对于这两种方法，在ARC不需要过多关注他们的区别，ARC会自动为我们插入相应的内存管理代码，但还是要了解相应的原理 retained return value： 对于retained return value 方法 ， ARC 会在离开方法闭包的范围前，返回值赋值的时候，持有这个对象。当从方法中接收到返回值时，ARC会释放这个对象 unretained return value： ARC会在返回 返回值的时候，持有这个对象，然后离开局部闭包，之后当对象离开调用者生命周期的时候，释放；最坏的情况，会调用autorelease，但是调用者不能确定这个对象是否调用了autorelease ARC虽然会做一些工作来缩短返回值的生命时间，但不会在强制调用者做额外的工作 alloc/retain/release/dealloc的实现 苹果是以散列表的方式保存对象的引用计数，散列表的key为对象内存块地址的散列值，value为对象的引用计数 autoreleasepool的实现 在苹果的实现中，NSAutoreleasePool是保存在堆栈中的；当某个对象调用autorelease，是将该对象添加到栈顶的NSAutoreleasePool 参考文档 Java内存管理原理及内存区域详解 Objective-C 内存管理——你需要知道的一切 文章原地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/OC%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md</summary></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/OC%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/OC%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="Objective-c" /><summary type="html">OC 内存管理 OC 的内存管理是通过引用计数的机制实现。每一个OC对象都有一个retainCount的无符号整数属性，当对象被创建时，retainCount为1；当对象被变量持有时，retainCount加1；当变量不再持有对象时，retainCount减1；在retainCount为0时，对象被销毁。 MRC 手动管理引用计数和内存,需要手动在代码的相应地方添加内存管理的代码。 手动内存管理的原则 ： 1、自己生成的对象，自己持有 2、不是自己生成的对象也可以持有 3、不需要自己持有的对象时，释放 4、不是自己持有的对象，不可以释放 ARC ARC 是苹果引入的一种自动内存管理机制，会根据引用计数自动监视对象的生存周期，实现方式是在编译时期自动在已有代码中插入合适的内存管理代码以及在 Runtime 做一些优化 在ARC环境下，一切内存管理代码都不可见，release，ratain，autorelease。retainCount都不可用（编译的时候会报错）,@autoreleasepool 在代码中可以使用. 我们只需要关心，是否有循环引用带来的内存泄露 及 autorelease带来的 内存峰值 for(int i = 0;i &amp;lt; 1000000; i++) { NSMutableString * str = [NSMutableString stringWithFormat:@&quot;Hello world&quot;]; /** * str 指向的对象不是自己生成的，该对象在生成时，会自动插入autorelease * 的内存管理代码; 返回时，引用计数为 1，在被str持有后引用计数 为2 * 当一次循环闭包结束,str的声明周期结束，自动插入release代码来释放对象 * 此时引用计数为 1 ,对象不会被销毁，内存泄露 ， 只有当autoreleasepool 调用 drain方法，同时为对象的引用计数减 1 **/ } // 解决方法 ： for(int i = 0; i &amp;lt;　1000000; i++) { @autoreleasepool { NSMutableString * str = [NSMutableString stringWithFormat:@&quot;Hello world&quot;]; } } for(int i = 0;i &amp;lt; 1000000; i++) { NSMutableString * str = [[NSMutableString alloc] initWithFormat:@&quot;asdasdasda&quot;]; /** * 这里不会有内存泄露的问题，对象由str生成并持有 ，引用计数为 1 * 当一次循环结束，str声明周期结束，自动插入release代码，引用计数减 1 * 此时对象引用计数为0，对象销毁 **/ } 变量标识符 __strong 是默认使用的标识符。只有还有一个强指针指向某个对象，这个对象就会一直存活。 __weak 声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，弱引用会被置为 nil __unsafe_unretained 声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，它不会被置为 nil。如果它引用的对象被回收掉了，该指针就变成了野指针。 __autoreleasing 用于标示使用引用传值的参数（id *），在函数返回时会被自动释放掉。 属性标识符 assign 表明 setter 仅仅是一个简单的赋值操作，通常用于基本的数值类型，例如CGFloat和NSInteger。 strong 表明属性定义一个拥有者关系。当给属性设定一个新值的时候，首先这个值进行 retain ，旧值进行 release ，然后进行赋值操作。 weak 表明属性定义了一个非拥有者关系。当给属性设定一个新值的时候，这个值不会进行 retain，旧值也不会进行 release， 而是进行类似 assign 的操作。不过当属性指向的对象被销毁时，该属性会被置为nil。 unsafe_unretained 的语义和 assign 类似，不过是用于对象类型的，表示一个非拥有(unretained)的，同时也不会在对象被销毁时置为nil的(unsafe)关系。 copy 类似于 strong，不过在赋值时进行 copy 操作而不是 retain 操作。通常在需要保留某个不可变对象（NSString最常见），并且防止它被意外改变时使用。 自动释放池 Autorelase Pool 提供了一种可以允许你向一个对象延迟发送release消息的机制。当你想放弃一个对象的所有权，同时又不希望这个对象立即被释放掉（例如在一个方法中返回一个对象时），Autorelease Pool 的作用就显现出来了 使用方式 由RunLoop在每次事件循环开启前创建 NSAutoreleasePool @autoreleasepool 自动释放池 释放的契机 系统在 runloop 中创建的 autoreleaspool 会在 runloop 一个 event 结束时进行释放操作。我们手动创建的 autoreleasepool 会在 block 执行完成之后进行 drain 操作 自动释放池和返回值 如果一个函数的返回值是指向一个对象的指针，那么这个对象肯定不能在函数返回之前进行 release，这样调用者在调用这个函数时得到的就是野指针了，在函数返回之后也不能立刻就 release，因为我们不知道调用者是不是 retain 了这个对象，如果我们直接 release 了，可能导致后面在使用这个对象时它已经成为 nil 了。 为了解决这个纠结的问题， Objective-C 中对对象指针的返回值进行了区分，一种叫做 retained return value，另一种叫做 unretained return value。前者表示调用者拥有这个返回值，后者表示调用者不拥有这个返回值，按照“谁拥有谁释放”的原则，对于前者调用者是要负责释放的，对于后者就不需要了。 按照苹果的命名 convention，以 alloc, copy, init, mutableCopy 和 new 这些方法打头的方法，返回的都是 retained return value，例如 [[NSString alloc] initWithFormat:]，而其他的则是 unretained return value，例如 [NSString stringWithFormat:]。我们在编写代码时也应该遵守这个 convention MRC中： // retained return value: // 调用者生成并持有，负责对象的释放 - (MyCustomCalss *) initWIthName:(NSString *) name { return [ [MyCustomClass alloc] init]; } // unretained return value： // 对象不是由调用者生成，不负责对象的释放，由autoreleasepool负责 + (MyCustomClass * ) myCustomClassWithName:(NSString *) name { // 添加autorelease ，是为了管理 对象生成时，引用计数的 加一 return [ [ [MyCustomClass alloc] init] autorelease]; } ARC中： 对于这两种方法，在ARC不需要过多关注他们的区别，ARC会自动为我们插入相应的内存管理代码，但还是要了解相应的原理 retained return value： 对于retained return value 方法 ， ARC 会在离开方法闭包的范围前，返回值赋值的时候，持有这个对象。当从方法中接收到返回值时，ARC会释放这个对象 unretained return value： ARC会在返回 返回值的时候，持有这个对象，然后离开局部闭包，之后当对象离开调用者生命周期的时候，释放；最坏的情况，会调用autorelease，但是调用者不能确定这个对象是否调用了autorelease ARC虽然会做一些工作来缩短返回值的生命时间，但不会在强制调用者做额外的工作 alloc/retain/release/dealloc的实现 苹果是以散列表的方式保存对象的引用计数，散列表的key为对象内存块地址的散列值，value为对象的引用计数 autoreleasepool的实现 在苹果的实现中，NSAutoreleasePool是保存在堆栈中的；当某个对象调用autorelease，是将该对象添加到栈顶的NSAutoreleasePool 参考文档 Java内存管理原理及内存区域详解 Objective-C 内存管理——你需要知道的一切 文章原地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/OC%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86.md</summary></entry><entry><title type="html">OC Block</title><link href="http://localhost:4000/2019/05/09/Block.html" rel="alternate" type="text/html" title="OC Block" /><published>2019-05-09T00:00:00+08:00</published><updated>2019-05-09T00:00:00+08:00</updated><id>http://localhost:4000/2019/05/09/Block</id><content type="html" xml:base="http://localhost:4000/2019/05/09/Block.html">&lt;h1 id=&quot;block-代码块&quot;&gt;Block （代码块）&lt;/h1&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Block&lt;/strong&gt;是iOS 4 引入的C语言扩展功能，实质上是带有自动变量(局部变量)的匿名函数。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如下，函数的定义是必须有名字的,函数可以通过函数指针来传递和调用;Block的定义不需要名字，但是需要赋给Block变量才可以使用&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ *
+ * 函数的定义必须是有名字的
+ **/&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;funcpter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;funcpter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;／&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;的定义不需要名字，然后赋给一个&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;变量&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;／&lt;/span&gt;
+
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;testBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;testBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我们知道在函数的函数体中可以访问以下的变量：&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在函数体中定义的局部变量&lt;/li&gt;
+  &lt;li&gt;函数的参数&lt;/li&gt;
+  &lt;li&gt;静态变量&lt;/li&gt;
+  &lt;li&gt;静态全局变量&lt;/li&gt;
+  &lt;li&gt;全局变量&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;而在Block的闭包中，不仅可以访问以上的变量，还可以访问在定义Block的闭包中可以访问的一切变量（包括self，局部变量，实例变量).这些变量就是Block可以访问的&lt;code class=&quot;highlighter-rouge&quot;&gt;自动变量&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如下图：在block中访问了局部变量，self，实例变量&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/test.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/result.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如上图，打印了block中访问自动变量的地址，只有局部变量的地址是相同的。因此Block访问这些变量是将变量值做了一个浅拷贝，这样就没有办法修改原有的变量了。即&lt;code class=&quot;highlighter-rouge&quot;&gt;截获自动变量的瞬时值&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;block的实现&quot;&gt;Block的实现&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现1.png&quot; alt=&quot;block_实现1&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如上图所示，我们在main函数中定义了一个block。接下来，我们用clang编译器命令(&lt;code class=&quot;highlighter-rouge&quot;&gt;clang -rewrite-objc main.m&lt;/code&gt;)将OC的代码翻译为C语言的实现。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;C语言实现如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;__main_block_impl_0&quot;&gt;__main_block_impl_0&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;的定义翻译为&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;这个结构体变量的定义。&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;的结构如下：&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl_0&lt;/code&gt;结构体中包括&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构体变量，&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;结构体指针，构造函数以及&lt;code class=&quot;highlighter-rouge&quot;&gt;e&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;str&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;等其他变量。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;中保存的是Block的类型以及具体实现（函数指针）；&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;中记录的是block的附加信息；&lt;code class=&quot;highlighter-rouge&quot;&gt;e&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;str&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;等变量保存的是block捕获的自动变量，在ARC中是强引用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;__block_impl&quot;&gt;__block_impl&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构体如下：&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;可以看到&lt;code class=&quot;highlighter-rouge&quot;&gt;__block_impl&lt;/code&gt;结构中包含&lt;code class=&quot;highlighter-rouge&quot;&gt;isa&lt;/code&gt;变量，保存block的类型，所以block是一个OC对象；&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;FuncPtr&lt;/code&gt;是一个函数指针，指向Block的具体实现。可以看到该函数的参数不只有block的参数，还有一个&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_Impl_0&lt;/code&gt;指针，通过这个指针函数可以访问block的自动变量。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;__main_block_desc_0&quot;&gt;__main_block_desc_0&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_desc_0&lt;/code&gt;结构如下，主要记录block的附加信息，包括结构体的大小，需要capture和dispose的变量列表&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;自动变量&quot;&gt;自动变量&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Block捕获的自动变量，会保存的在&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;对于基本数据类型，是将值拷贝到&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中，所以在Block中就无法访问原来的变量了。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在ARC中，捕获的OC对象是通过强引用保存到&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;结构体中，因此需要注意引用循环的问题。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;实质上是一种结构体，结构如下：其中&lt;code class=&quot;highlighter-rouge&quot;&gt;__forwarding&lt;/code&gt;保存的是&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;的地址，&lt;code class=&quot;highlighter-rouge&quot;&gt;c&lt;/code&gt;保存的是&lt;code class=&quot;highlighter-rouge&quot;&gt;__block变量&lt;/code&gt;的值。&lt;code class=&quot;highlighter-rouge&quot;&gt;__main_block_impl&lt;/code&gt;中会保存该结构体的指针。&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/block_实现7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;block的类型以及内存管理&quot;&gt;Block的类型以及内存管理&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在 OC中，总共由三种block类型：&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;_NSGlobalBlock,全局的静态block，不会访问任何的外部变量，它的生命周期是全局的。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;_NSStackBlock,保存在栈上的block，当定义block的闭包结束，就会被销毁&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;_NSMallocBlock,保存在堆上的block，当引用计数为0时，会被销毁。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;_nsglobalblock&quot;&gt;_NSGlobalBlock&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;不访问任何自动变量的Block都是_NSGlobalBlock类型，且类型不会改变。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;_nsstackblock&quot;&gt;_NSStackBlock&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;访问自动变量的block在定义时默认是_NSStackBlock类型，只有调用了copy类型，才会变成_NSMallocBlock类型。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;_nsmallocblock&quot;&gt;_NSMallocBlock&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在ARC中，当Block被定义后，传给一个OC变量，会自动调用Block的copy方法，这个时候Block就会变为_NSMallocBlock类型。在MRC，则需要手动调用Copy&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/Block的类型以及内存管理1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/public/pageImage/Objective_c/Block/Block的类型以及内存管理2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;避免循环引用&quot;&gt;避免循环引用&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;由于Block在访问自动变量时，比较容易造成循环引用。对于这个问题，需要将引用的一方变为weak，避免循环引用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-objc highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;__weak&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__typeof__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weakSelf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// 将引用一方变为weak&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;NSBlockOperation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSBlockOperation&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;op&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addExecutionBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;__strong&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__typeof__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strongSelf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weakSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 在这里强引用一下weakself，避免在block执行过程中，weakself被销毁&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strongSelf&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doSomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strongSelf&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doMoreThing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someOperationQueue&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;原文章地址&quot;&gt;原文章地址&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md&quot;&gt;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="Objective-c" /><summary type="html">Block （代码块） Block是iOS 4 引入的C语言扩展功能，实质上是带有自动变量(局部变量)的匿名函数。 如下，函数的定义是必须有名字的,函数可以通过函数指针来传递和调用;Block的定义不需要名字，但是需要赋给Block变量才可以使用 /** * * 函数的定义必须是有名字的 **/ int func(int count) { printf(&quot;%d&quot;,count); return count; } int (*funcpter)(int) = &amp;amp;func; (*funcpter)(10); ／** * * block的定义不需要名字，然后赋给一个block变量 **／ int (^testBlock)(int) = ^int(int count){ printf(&quot;%d&quot;,count); return count; } testBlock(10); 我们知道在函数的函数体中可以访问以下的变量： 在函数体中定义的局部变量 函数的参数 静态变量 静态全局变量 全局变量 而在Block的闭包中，不仅可以访问以上的变量，还可以访问在定义Block的闭包中可以访问的一切变量（包括self，局部变量，实例变量).这些变量就是Block可以访问的自动变量. 如下图：在block中访问了局部变量，self，实例变量 如上图，打印了block中访问自动变量的地址，只有局部变量的地址是相同的。因此Block访问这些变量是将变量值做了一个浅拷贝，这样就没有办法修改原有的变量了。即截获自动变量的瞬时值 Block的实现 如上图所示，我们在main函数中定义了一个block。接下来，我们用clang编译器命令(clang -rewrite-objc main.m)将OC的代码翻译为C语言的实现。 C语言实现如下： __main_block_impl_0 Block的定义翻译为__main_block_impl_0这个结构体变量的定义。__main_block_impl_0的结构如下： 在__main_block_impl_0结构体中包括__block_impl结构体变量，__main_block_desc_0结构体指针，构造函数以及e,str,c等其他变量。 __block_impl中保存的是Block的类型以及具体实现（函数指针）；__main_block_desc_0中记录的是block的附加信息；e,str,c等变量保存的是block捕获的自动变量，在ARC中是强引用。 __block_impl __block_impl结构体如下： 可以看到__block_impl结构中包含isa变量，保存block的类型，所以block是一个OC对象； FuncPtr是一个函数指针，指向Block的具体实现。可以看到该函数的参数不只有block的参数，还有一个__main_block_Impl_0指针，通过这个指针函数可以访问block的自动变量。 __main_block_desc_0 __main_block_desc_0结构如下，主要记录block的附加信息，包括结构体的大小，需要capture和dispose的变量列表 自动变量 Block捕获的自动变量，会保存的在__main_block_impl结构体中。 对于基本数据类型，是将值拷贝到__main_block_impl结构体中，所以在Block中就无法访问原来的变量了。 在ARC中，捕获的OC对象是通过强引用保存到__main_block_impl结构体中，因此需要注意引用循环的问题。 __block变量实质上是一种结构体，结构如下：其中__forwarding保存的是__block变量的地址，c保存的是__block变量的值。__main_block_impl中会保存该结构体的指针。 Block的类型以及内存管理 在 OC中，总共由三种block类型： _NSGlobalBlock,全局的静态block，不会访问任何的外部变量，它的生命周期是全局的。 _NSStackBlock,保存在栈上的block，当定义block的闭包结束，就会被销毁 _NSMallocBlock,保存在堆上的block，当引用计数为0时，会被销毁。 _NSGlobalBlock 不访问任何自动变量的Block都是_NSGlobalBlock类型，且类型不会改变。 _NSStackBlock 访问自动变量的block在定义时默认是_NSStackBlock类型，只有调用了copy类型，才会变成_NSMallocBlock类型。 _NSMallocBlock 在ARC中，当Block被定义后，传给一个OC变量，会自动调用Block的copy方法，这个时候Block就会变为_NSMallocBlock类型。在MRC，则需要手动调用Copy 避免循环引用 由于Block在访问自动变量时，比较容易造成循环引用。对于这个问题，需要将引用的一方变为weak，避免循环引用。 __weak __typeof__(self) weakSelf = self; // 将引用一方变为weak NSBlockOperation *op = [[NSBlockOperation alloc] init]; [ op addExecutionBlock:^ { __strong __typeof__(self) strongSelf = weakSelf; // 在这里强引用一下weakself，避免在block执行过程中，weakself被销毁 [strongSelf doSomething]; [strongSelf doMoreThing]; } ]; [someOperationQueue addOperation:op]; 原文章地址 https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/Objective_C/Block/Block.md</summary></entry></feed>
