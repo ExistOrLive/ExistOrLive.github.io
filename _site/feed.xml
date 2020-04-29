@@ -1,5 +1,186 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-30T01:06:59+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ExistOrLive’s Blog</title><subtitle>ExistOrLive's Blog
-</subtitle><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><entry><title type="html">Github Action For ZLGithubClient</title><link href="http://localhost:4000/2020/03/30/GithubAction.html" rel="alternate" type="text/html" title="Github Action For ZLGithubClient" /><published>2020-03-30T00:00:00+08:00</published><updated>2020-03-30T00:00:00+08:00</updated><id>http://localhost:4000/2020/03/30/GithubAction</id><content type="html" xml:base="http://localhost:4000/2020/03/30/GithubAction.html">&lt;h1 id=&quot;github-action&quot;&gt;Github Action&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-29T16:10:16+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">ExistOrLive’s Blog</title><subtitle>ExistOrLive's Blog
+</subtitle><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><entry><title type="html">CALayer的frame的计算</title><link href="http://localhost:4000/2020/04/28/CALayer-frame.html" rel="alternate" type="text/html" title="CALayer的frame的计算" /><published>2020-04-28T00:00:00+08:00</published><updated>2020-04-28T00:00:00+08:00</updated><id>http://localhost:4000/2020/04/28/CALayer-frame</id><content type="html" xml:base="http://localhost:4000/2020/04/28/CALayer-frame.html">&lt;h1 id=&quot;calayer-的-frame-的计算&quot;&gt;CALayer 的 frame 的计算&lt;/h1&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;frame&lt;/code&gt; 代表图层或者视图在父图层或者父视图中的坐标和范围。&lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;frame&lt;/code&gt;属性是直接读取&lt;code class=&quot;highlighter-rouge&quot;&gt;CALayer&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;frame&lt;/code&gt;属性。而&lt;code class=&quot;highlighter-rouge&quot;&gt;CALayer&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;frame&lt;/code&gt;属性并没有关联实例变量，仅是setter和getter方法，是通过&lt;code class=&quot;highlighter-rouge&quot;&gt;bounds&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;position&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;anchorPosition&lt;/code&gt;,以及&lt;code class=&quot;highlighter-rouge&quot;&gt;transform&lt;/code&gt;等属性计算出来的。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bounds&lt;/code&gt;属性代表的是图层的内部坐标或者说是图层的尺寸&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;position&lt;/code&gt;属性代表的是图层的锚点在父图层中的坐标&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;anchorPosition&lt;/code&gt;属性代表的图层的锚点在本图层中的相对位置&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;transform&lt;/code&gt;属性代表的是图层的3D变换; &lt;code class=&quot;highlighter-rouge&quot;&gt;affineTransform&lt;/code&gt;属性代表的图层的2D仿射变换，是&lt;code class=&quot;highlighter-rouge&quot;&gt;transform&lt;/code&gt;属性转换得来&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;锚点&quot;&gt;锚点&lt;/h2&gt;
+
+&lt;p&gt;锚点是图层进行3D变换或者仿射变换的把柄。 例如如果做旋转变化，锚点就是旋转的轴心。&lt;/p&gt;
+
+&lt;p&gt;锚点的位置由&lt;code class=&quot;highlighter-rouge&quot;&gt;CALayer&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;anchorPoint&lt;/code&gt;属性和&lt;code class=&quot;highlighter-rouge&quot;&gt;anchorPointZ&lt;/code&gt;属性指定。&lt;code class=&quot;highlighter-rouge&quot;&gt;anchorPoint&lt;/code&gt;的默认值为{0.5,0.5},代表图层的中心。&lt;code class=&quot;highlighter-rouge&quot;&gt;anchorPointZ&lt;/code&gt;默认值为0。&lt;code class=&quot;highlighter-rouge&quot;&gt;anchorPointZ&lt;/code&gt;代表是z轴上锚点的位置，这里暂不讨论。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;锚点位置默认在图层的中心：{0.5,0.5}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;/public/iOS/CoreAnimation/anchorPosition1.png&quot; width=&quot;400&quot; /&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;锚点位置在图层右下角 {1，1}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;/public/iOS/CoreAnimation/anchorPosition2.png&quot; width=&quot;400&quot; /&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;锚点位置在图层左上角 {0，0}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;/public/iOS/CoreAnimation/anchorPosition3.png&quot; width=&quot;400&quot; /&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;可以看到锚点位置不同，frame的值也不一样&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;变换&quot;&gt;变换&lt;/h2&gt;
+
+&lt;p&gt;3D变化的基本公式：&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;/public/iOS/CoreAnimation/3DTransform.png&quot; width=&quot;400&quot; /&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;其中[x,y,z,1] 在图层上任意一点在以锚点为原点的坐标系中的坐标；因此3D变化是以锚点为原点的坐标系中计算的，而不是在父视图的坐标系中。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;由于frame只是二维上的概念，这里讨论的变化不涉及到三维：&lt;/p&gt;
+
+&lt;h3 id=&quot;平移变化&quot;&gt;平移变化&lt;/h3&gt;
+
+&lt;p&gt;将图层向右和向下各平移100个点，变换矩阵如下：&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{bmatrix}
+   1 &amp; 0 &amp; 0 &amp; 0 \\
+   0 &amp; 1 &amp; 0 &amp; 0 \\
+   0 &amp; 0 &amp; 1 &amp; 0 \\
+   100 &amp; 100 &amp; 0 &amp; 1
+  \end{bmatrix} %]]&gt;&lt;/script&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;/public/iOS/CoreAnimation/3Dtranslation.png&quot; width=&quot;300&quot; /&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;伸缩变化&quot;&gt;伸缩变化&lt;/h3&gt;
+
+&lt;p&gt;将图层宽放大至1.5倍，高放大至2倍，变化矩阵如下：&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{bmatrix}
+   1.5 &amp; 0 &amp; 0 &amp; 0 \\
+   0 &amp; 2 &amp; 0 &amp; 0 \\
+   0 &amp; 0 &amp; 1 &amp; 0 \\
+   0 &amp; 0 &amp; 0 &amp; 1
+  \end{bmatrix} %]]&gt;&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;锚点位置在中心：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;/public/iOS/CoreAnimation/3Dscale1.png&quot; width=&quot;300&quot; /&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;锚点位置在左上角：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;/public/iOS/CoreAnimation/3Dscale2.png&quot; width=&quot;300&quot; /&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;旋转变换&quot;&gt;旋转变换&lt;/h3&gt;
+
+&lt;p&gt;将图层以z轴为轴心顺时针旋转45度，变换矩阵如下：&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{bmatrix}
+   cos(a) &amp; sin(a) &amp; 0 &amp; 0 \\
+   -sin(a) &amp; cos(a) &amp; 0 &amp; 0 \\
+   0 &amp; 0 &amp; 1 &amp; 0 \\
+   0 &amp; 0 &amp; 0 &amp; 1
+  \end{bmatrix}   a=PI/4 %]]&gt;&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;锚点位置在中心：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;/public/iOS/CoreAnimation/3DRotate1.png&quot; width=&quot;300&quot; /&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;锚点位置在左上角：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;/public/iOS/CoreAnimation/3DRotate2.png&quot; width=&quot;300&quot; /&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;上面展示了3种基本的变换类型，平移变换，伸缩变化以及旋转变换。任何复杂的变换都是这三种变换组合得来。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;由上面的例子可以得到：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;变换前后bounds，position不变&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;变换会导致frame的变化&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;变换都是在以锚点为原点的坐标系中计算的&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;frame指定的范围不一定等同于bounds指定的范围。frame指定的范围是一个恰好能够容纳图层且边分别平行于x轴与y轴的矩形区域&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CALayer&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;frame&lt;/code&gt;属性描述的是一个恰好能够容纳图层且边分别平行于x轴与y轴的矩形区域。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CALayer&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;frame&lt;/code&gt;属性并不是一个实际存在的实例变量，是通过&lt;code class=&quot;highlighter-rouge&quot;&gt;bounds&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;anchorPosition&lt;/code&gt;,&lt;code class=&quot;highlighter-rouge&quot;&gt;position&lt;/code&gt;以及&lt;code class=&quot;highlighter-rouge&quot;&gt;transform&lt;/code&gt;计算得来&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;frame&lt;/code&gt;指定的范围不一定等同于&lt;code class=&quot;highlighter-rouge&quot;&gt;bounds&lt;/code&gt;指定的范围&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="iOS" /><summary type="html">CALayer 的 frame 的计算 frame 代表图层或者视图在父图层或者父视图中的坐标和范围。UIView的frame属性是直接读取CALayer的frame属性。而CALayer的frame属性并没有关联实例变量，仅是setter和getter方法，是通过bounds,position,anchorPosition,以及transform等属性计算出来的。 bounds属性代表的是图层的内部坐标或者说是图层的尺寸 position属性代表的是图层的锚点在父图层中的坐标 anchorPosition属性代表的图层的锚点在本图层中的相对位置 transform属性代表的是图层的3D变换; affineTransform属性代表的图层的2D仿射变换，是transform属性转换得来 锚点 锚点是图层进行3D变换或者仿射变换的把柄。 例如如果做旋转变化，锚点就是旋转的轴心。 锚点的位置由CALayer的anchorPoint属性和anchorPointZ属性指定。anchorPoint的默认值为{0.5,0.5},代表图层的中心。anchorPointZ默认值为0。anchorPointZ代表是z轴上锚点的位置，这里暂不讨论。 锚点位置默认在图层的中心：{0.5,0.5} 锚点位置在图层右下角 {1，1} 锚点位置在图层左上角 {0，0} 可以看到锚点位置不同，frame的值也不一样 变换 3D变化的基本公式： 其中[x,y,z,1] 在图层上任意一点在以锚点为原点的坐标系中的坐标；因此3D变化是以锚点为原点的坐标系中计算的，而不是在父视图的坐标系中。 由于frame只是二维上的概念，这里讨论的变化不涉及到三维： 平移变化 将图层向右和向下各平移100个点，变换矩阵如下： 伸缩变化 将图层宽放大至1.5倍，高放大至2倍，变化矩阵如下： 锚点位置在中心： 锚点位置在左上角： 旋转变换 将图层以z轴为轴心顺时针旋转45度，变换矩阵如下： 锚点位置在中心： 锚点位置在左上角： 上面展示了3种基本的变换类型，平移变换，伸缩变化以及旋转变换。任何复杂的变换都是这三种变换组合得来。 由上面的例子可以得到： 变换前后bounds，position不变 变换会导致frame的变化 变换都是在以锚点为原点的坐标系中计算的 frame指定的范围不一定等同于bounds指定的范围。frame指定的范围是一个恰好能够容纳图层且边分别平行于x轴与y轴的矩形区域 总结 CALayer和UIView的frame属性描述的是一个恰好能够容纳图层且边分别平行于x轴与y轴的矩形区域。 CALayer和UIView的frame属性并不是一个实际存在的实例变量，是通过bounds,anchorPosition,position以及transform计算得来 frame指定的范围不一定等同于bounds指定的范围</summary></entry><entry><title type="html">jenkins插件</title><link href="http://localhost:4000/2020/03/30/jenkinsPlugin.html" rel="alternate" type="text/html" title="jenkins插件" /><published>2020-03-30T00:00:00+08:00</published><updated>2020-03-30T00:00:00+08:00</updated><id>http://localhost:4000/2020/03/30/jenkinsPlugin</id><content type="html" xml:base="http://localhost:4000/2020/03/30/jenkinsPlugin.html">&lt;h1 id=&quot;jenkins的常用插件&quot;&gt;Jenkins的常用插件&lt;/h1&gt;
+
+&lt;h2 id=&quot;用户权限管理-role-strategy-plugin&quot;&gt;用户权限管理 （Role Strategy Plugin）&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;下载插件 &lt;code class=&quot;highlighter-rouge&quot;&gt;Role-based Authorization Strategy&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;Configure Global Security&lt;/code&gt;的授权策略中打开&lt;code class=&quot;highlighter-rouge&quot;&gt;Role-Based Strategy&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;设置中出现Manage and Assign Roles ， 进入后可以创建角色，设置角色的权限并给用户分配角色&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在Manage Roles中可以创建全局角色，job角色和node角色，可以为不同角色分配权限。在Assign Roles可以为用户分配角色&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="CI" /><summary type="html">Jenkins的常用插件 用户权限管理 （Role Strategy Plugin） 下载插件 Role-based Authorization Strategy 在Configure Global Security的授权策略中打开Role-Based Strategy 设置中出现Manage and Assign Roles ， 进入后可以创建角色，设置角色的权限并给用户分配角色 在Manage Roles中可以创建全局角色，job角色和node角色，可以为不同角色分配权限。在Assign Roles可以为用户分配角色</summary></entry><entry><title type="html">Github Action For ZLGithubClient</title><link href="http://localhost:4000/2020/03/30/GithubAction.html" rel="alternate" type="text/html" title="Github Action For ZLGithubClient" /><published>2020-03-30T00:00:00+08:00</published><updated>2020-03-30T00:00:00+08:00</updated><id>http://localhost:4000/2020/03/30/GithubAction</id><content type="html" xml:base="http://localhost:4000/2020/03/30/GithubAction.html">&lt;h1 id=&quot;github-action&quot;&gt;Github Action&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Github Action 是 Github 提供的 持续集成服务。因此只有保存在Github上的工程才可以使用。&lt;/p&gt;
@@ -264,34 +445,60 @@
   &lt;li&gt;workflow 默认在工程的根目录下执行，如果希望在其他目录执行，需要指定step的working-directory&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/DevOps/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/github_action.md&quot;&gt;原文地址&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="CI" /><summary type="html">Github Action Github Action 是 Github 提供的 持续集成服务。因此只有保存在Github上的工程才可以使用。 Github Action的配置在工程的主目录下的.github/workflows目录下的yaml文件中 在yaml配置文件中可以配置action的触发条件,运行环境，具体执行的操作。 更具体的操作请参考Github Action 入门教程，Github Action官方文档 GitHub Action中的概念 workflow （工作流程）：持续集成一次运行的过程，就是一个 workflow。 job （任务）：一个 workflow 由一个或多个 jobs 构成，含义是一次持续集成的运行，可以完成多个任务。 step（步骤）：每个 job 由多个 step 构成，一步步完成。 action （动作）：每个 step 可以依次执行一个或多个命令（action）。 ZLGithubClient 自动化打包实践 GithubClient工程在.github/workflows/build.yml配置了自动打包并上传制品库的workflow。 # action 语法 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions name: ZLGithub Build on: # 触发条件 当master分支发生push和pr事件时，触发 push: branches: - master pull_request: branches: - master jobs: build: # 仅有一个job build name: build # job的name runs-on: macos-latest # runner 运行系统 macos steps: - name: checkout # step的名字 uses: actions/checkout@v2.0.0 # step使用的action with: ref: master - name: construct build enviroment working-directory: ./ZLGitHubClient # 指定step 的工作目录 run: | # step 执行的脚本 gem cleanup gem install bundler bundle install pod repo update pod install echo &quot;construct build enviroment success&quot; - name: archive app working-directory: ./ZLGitHubClient # 指定step 的工作目录 env: # 指定step 执行脚本的环境变量 MATCH_KEYCHAIN_NAME: $ MATCH_PASSWORD: $ MATCH_GITHUB_URL: $ run: | pwd bundle exec fastlane github_action_adhoc echo &quot;ipa build success&quot; - name: upload github artifact if: success() # 当前step执行的条件是上一次step执行成功 uses: actions/upload-artifact@v1.0.0 with: # Artifact name name: ZLGitHubClient # Directory containing files to upload path: ./ZLGitHubClient/fastlane/ipa - name: upload artifact working-directory: ./ZLGitHubClient # 指定run 的工作目录 if: success() env: CODING_ARTIFACT_TOKEN: $ run: | curl -T ./fastlane/ipa/ZLGitHubClient.ipa -u $CODING_ARTIFACT_TOKEN &quot;https://existorlive-generic.pkg.coding.net/ZLGitHubClient/adhoc/ZLGitHubClient.ipa&quot; -v # 上传ipa到制品库 echo &quot;work flow build end&quot; name name选项 配置workflow的名字 on on选项 配置workflow的触发条件,也就是GitHub的各种事件，如下配置了当master分支发生了push和push_request事件时会触发 on: # 触发条件 push: branches: - master pull_request: branches: - master 也可以配置定时触发 on: schedule: # * is a special character in YAML so you have to quote this string - cron: '*/15 * * * *' Events that trigger workflows jobs jobs选项 定义了workflow中的各种任务。workflow由一个或多个任务组成。默认情况下，任务并行运行。要顺序运行任务，可以使用job.&amp;lt;job_id&amp;gt;.needs选项定义对其他任务的依赖关系。 如下，配置了analyse，build，test，deploy四个job jobs: - analyse: name: analyse runs-on: macos-latest steps: - - build: name: build needs: analyse - test: name: test needs: [analyse,build] - deploy: name: deploy needs: [analyse,build,deploy] name name 即job的名字 needs needs 表示当前job执行的条件是某几个job执行完成,如上所示build依赖于analyse执行完成 runs-on runs-on 表示当前job的执行环境 steps steps 表示当前job的执行步骤 steps steps代表jobs中的步骤，step可以自定义脚本，也可以使用他人编译好的脚本，在github marketplace中发布和查询。 steps: - name: checkout uses: actions/checkout@v2.0.0 with: ref: master - name: construct build enviroment working-directory: ./ZLGitHubClient # 指定run 的工作目录 run: | gem cleanup gem install bundler bundle install pod repo update pod install echo &quot;construct build enviroment success&quot; - name: archive app working-directory: ./ZLGitHubClient # 指定run 的工作目录 env: MATCH_KEYCHAIN_NAME: $ MATCH_PASSWORD: $ MATCH_GITHUB_URL: $ run: | pwd bundle exec fastlane github_action_adhoc echo &quot;ipa build success&quot; name name选型 step的名字 run run选项 可以直接指定运行的指令 uses uses选项 可以使用github marketplace中发布的action working-directory working-directory 指定脚本的执行目录 env env选项指定脚本执行的环境变量 if if选项 指定当前step运行的条件 issues 在workflow中可能会使用token，secret-key这样的私密信息，无法明文写在配置文件中。 这些信息可以在repository的setting配置为secret,然后在step中配置为env workflow 默认在工程的根目录下执行，如果希望在其他目录执行，需要指定step的working-directory 原文地址</summary></entry><entry><title type="html">jenkins插件</title><link href="http://localhost:4000/2020/03/30/jenkinsPlugin.html" rel="alternate" type="text/html" title="jenkins插件" /><published>2020-03-30T00:00:00+08:00</published><updated>2020-03-30T00:00:00+08:00</updated><id>http://localhost:4000/2020/03/30/jenkinsPlugin</id><content type="html" xml:base="http://localhost:4000/2020/03/30/jenkinsPlugin.html">&lt;h1 id=&quot;jenkins的常用插件&quot;&gt;Jenkins的常用插件&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/ExistOrLive/DocumentForLearning/blob/master/iOS/DevOps/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/github_action.md&quot;&gt;原文地址&lt;/a&gt;&lt;/p&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="CI" /><summary type="html">Github Action Github Action 是 Github 提供的 持续集成服务。因此只有保存在Github上的工程才可以使用。 Github Action的配置在工程的主目录下的.github/workflows目录下的yaml文件中 在yaml配置文件中可以配置action的触发条件,运行环境，具体执行的操作。 更具体的操作请参考Github Action 入门教程，Github Action官方文档 GitHub Action中的概念 workflow （工作流程）：持续集成一次运行的过程，就是一个 workflow。 job （任务）：一个 workflow 由一个或多个 jobs 构成，含义是一次持续集成的运行，可以完成多个任务。 step（步骤）：每个 job 由多个 step 构成，一步步完成。 action （动作）：每个 step 可以依次执行一个或多个命令（action）。 ZLGithubClient 自动化打包实践 GithubClient工程在.github/workflows/build.yml配置了自动打包并上传制品库的workflow。 # action 语法 https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions name: ZLGithub Build on: # 触发条件 当master分支发生push和pr事件时，触发 push: branches: - master pull_request: branches: - master jobs: build: # 仅有一个job build name: build # job的name runs-on: macos-latest # runner 运行系统 macos steps: - name: checkout # step的名字 uses: actions/checkout@v2.0.0 # step使用的action with: ref: master - name: construct build enviroment working-directory: ./ZLGitHubClient # 指定step 的工作目录 run: | # step 执行的脚本 gem cleanup gem install bundler bundle install pod repo update pod install echo &quot;construct build enviroment success&quot; - name: archive app working-directory: ./ZLGitHubClient # 指定step 的工作目录 env: # 指定step 执行脚本的环境变量 MATCH_KEYCHAIN_NAME: $ MATCH_PASSWORD: $ MATCH_GITHUB_URL: $ run: | pwd bundle exec fastlane github_action_adhoc echo &quot;ipa build success&quot; - name: upload github artifact if: success() # 当前step执行的条件是上一次step执行成功 uses: actions/upload-artifact@v1.0.0 with: # Artifact name name: ZLGitHubClient # Directory containing files to upload path: ./ZLGitHubClient/fastlane/ipa - name: upload artifact working-directory: ./ZLGitHubClient # 指定run 的工作目录 if: success() env: CODING_ARTIFACT_TOKEN: $ run: | curl -T ./fastlane/ipa/ZLGitHubClient.ipa -u $CODING_ARTIFACT_TOKEN &quot;https://existorlive-generic.pkg.coding.net/ZLGitHubClient/adhoc/ZLGitHubClient.ipa&quot; -v # 上传ipa到制品库 echo &quot;work flow build end&quot; name name选项 配置workflow的名字 on on选项 配置workflow的触发条件,也就是GitHub的各种事件，如下配置了当master分支发生了push和push_request事件时会触发 on: # 触发条件 push: branches: - master pull_request: branches: - master 也可以配置定时触发 on: schedule: # * is a special character in YAML so you have to quote this string - cron: '*/15 * * * *' Events that trigger workflows jobs jobs选项 定义了workflow中的各种任务。workflow由一个或多个任务组成。默认情况下，任务并行运行。要顺序运行任务，可以使用job.&amp;lt;job_id&amp;gt;.needs选项定义对其他任务的依赖关系。 如下，配置了analyse，build，test，deploy四个job jobs: - analyse: name: analyse runs-on: macos-latest steps: - - build: name: build needs: analyse - test: name: test needs: [analyse,build] - deploy: name: deploy needs: [analyse,build,deploy] name name 即job的名字 needs needs 表示当前job执行的条件是某几个job执行完成,如上所示build依赖于analyse执行完成 runs-on runs-on 表示当前job的执行环境 steps steps 表示当前job的执行步骤 steps steps代表jobs中的步骤，step可以自定义脚本，也可以使用他人编译好的脚本，在github marketplace中发布和查询。 steps: - name: checkout uses: actions/checkout@v2.0.0 with: ref: master - name: construct build enviroment working-directory: ./ZLGitHubClient # 指定run 的工作目录 run: | gem cleanup gem install bundler bundle install pod repo update pod install echo &quot;construct build enviroment success&quot; - name: archive app working-directory: ./ZLGitHubClient # 指定run 的工作目录 env: MATCH_KEYCHAIN_NAME: $ MATCH_PASSWORD: $ MATCH_GITHUB_URL: $ run: | pwd bundle exec fastlane github_action_adhoc echo &quot;ipa build success&quot; name name选型 step的名字 run run选项 可以直接指定运行的指令 uses uses选项 可以使用github marketplace中发布的action working-directory working-directory 指定脚本的执行目录 env env选项指定脚本执行的环境变量 if if选项 指定当前step运行的条件 issues 在workflow中可能会使用token，secret-key这样的私密信息，无法明文写在配置文件中。 这些信息可以在repository的setting配置为secret,然后在step中配置为env workflow 默认在工程的根目录下执行，如果希望在其他目录执行，需要指定step的working-directory 原文地址</summary></entry><entry><title type="html">iOS的通知 (iOS 10 +)</title><link href="http://localhost:4000/2020/03/26/iOS-Notification(iOS10+).html" rel="alternate" type="text/html" title="iOS的通知 (iOS 10 +)" /><published>2020-03-26T00:00:00+08:00</published><updated>2020-03-26T00:00:00+08:00</updated><id>http://localhost:4000/2020/03/26/iOS-Notification(iOS10+)</id><content type="html" xml:base="http://localhost:4000/2020/03/26/iOS-Notification(iOS10+).html">&lt;h1 id=&quot;ios的通知-ios-10-&quot;&gt;iOS的通知 (iOS 10 +)&lt;/h1&gt;
 
-&lt;h2 id=&quot;用户权限管理-role-strategy-plugin&quot;&gt;用户权限管理 （Role Strategy Plugin）&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;苹果系统提供了通知机制，既可以让iOS设备从远端的推送服务器接受通知，也可以由设备的app发送本地通知。既可以在设备的通知中心展示通知提示view，发出提示音，修改app icon的角标（给用户显式的提示），也可以静默地唤醒后台的app执行一段时间（约30s）后台任务。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;usernotificationframework与pushkitframework&quot;&gt;UserNotification.framework与PushKit.framework&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://developer.apple.com/documentation/usernotifications?language=objc&quot;&gt;UserNotification&lt;/a&gt;&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;从服务器向用户设备推送面向用户的通知，或者从您的应用程序本地生成通知。&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;不论你的app是否在设备上运行，设备都可以接受推送，并展示通知的提示，播放声音，以及修改角标。&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;app可以创建本地通知，并指定触发条件（时间或者地点的变化）。在条件满足时，显示通知。&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;使用该框架：&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. 定义设备支持的通知类型
+2. 定义通知支持的自定义操作
+3. 安排本地通知
+4. 处理已经发送的通知
+5. 响应用户对通知的操作
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://developer.apple.com/documentation/pushkit?language=objc&quot;&gt;PushKit&lt;/a&gt;&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;响应与WatchOs表盘更新(app’s complications)、文件提供商(file providers)和VoIP服务相关的推送通知。&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;PushKit 提供专有的通知来支持更新watchos的表盘元素，响应文件提供商的修改以及接受Voip呼叫。不同于UserNotification框架，PushKit不会展示通知提示，发出提示音，修改角标等显式操作，而会唤醒应用并给与时间响应。&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;UserNotification.framework与PushKit.framework的区别：&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;下载插件 &lt;code class=&quot;highlighter-rouge&quot;&gt;Role-based Authorization Strategy&lt;/code&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在&lt;code class=&quot;highlighter-rouge&quot;&gt;Configure Global Security&lt;/code&gt;的授权策略中打开&lt;code class=&quot;highlighter-rouge&quot;&gt;Role-Based Strategy&lt;/code&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;设置中出现Manage and Assign Roles ， 进入后可以创建角色，设置角色的权限并给用户分配角色&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在Manage Roles中可以创建全局角色，job角色和node角色，可以为不同角色分配权限。在Assign Roles可以为用户分配角色&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/public/CI/plugin-userpersmissionmanager-5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="CI" /><summary type="html">Jenkins的常用插件 用户权限管理 （Role Strategy Plugin） 下载插件 Role-based Authorization Strategy 在Configure Global Security的授权策略中打开Role-Based Strategy 设置中出现Manage and Assign Roles ， 进入后可以创建角色，设置角色的权限并给用户分配角色 在Manage Roles中可以创建全局角色，job角色和node角色，可以为不同角色分配权限。在Assign Roles可以为用户分配角色</summary></entry><entry><title type="html">ZLGithubClient Beta Download</title><link href="http://localhost:4000/2020/02/21/ZLGithubClient.html" rel="alternate" type="text/html" title="ZLGithubClient Beta Download" /><published>2020-02-21T00:00:00+08:00</published><updated>2020-02-21T00:00:00+08:00</updated><id>http://localhost:4000/2020/02/21/ZLGithubClient</id><content type="html" xml:base="http://localhost:4000/2020/02/21/ZLGithubClient.html">&lt;h1 id=&quot;zlgithubclient-beta-download&quot;&gt;ZLGithubClient Beta Download&lt;/h1&gt;
+  &lt;li&gt;UserNotification 可以提供面向用户的显式通知（提示音，角标等），PushKit没有提供显式的通知。&lt;/li&gt;
+  &lt;li&gt;UserNotification 可以发送本地通知，PushKit只能接受apns&lt;/li&gt;
+  &lt;li&gt;UserNotification 场景比较通用，但是PushKit只有在WatchOS更新表盘，Voip等场景下才能使用&lt;/li&gt;
+  &lt;li&gt;UserNotification也支持后台静默唤醒的推送，但是实时性不高，可靠性不强，优先级很低；PushKit则提供更为实时可靠的通知。&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>ExistOrLive</name><email>2068531506@qq.com</email></author><category term="iOS" /><summary type="html">iOS的通知 (iOS 10 +) 苹果系统提供了通知机制，既可以让iOS设备从远端的推送服务器接受通知，也可以由设备的app发送本地通知。既可以在设备的通知中心展示通知提示view，发出提示音，修改app icon的角标（给用户显式的提示），也可以静默地唤醒后台的app执行一段时间（约30s）后台任务。 UserNotification.framework与PushKit.framework UserNotification 从服务器向用户设备推送面向用户的通知，或者从您的应用程序本地生成通知。 不论你的app是否在设备上运行，设备都可以接受推送，并展示通知的提示，播放声音，以及修改角标。 app可以创建本地通知，并指定触发条件（时间或者地点的变化）。在条件满足时，显示通知。 使用该框架： 1. 定义设备支持的通知类型 2. 定义通知支持的自定义操作 3. 安排本地通知 4. 处理已经发送的通知 5. 响应用户对通知的操作 PushKit 响应与WatchOs表盘更新(app’s complications)、文件提供商(file providers)和VoIP服务相关的推送通知。 PushKit 提供专有的通知来支持更新watchos的表盘元素，响应文件提供商的修改以及接受Voip呼叫。不同于UserNotification框架，PushKit不会展示通知提示，发出提示音，修改角标等显式操作，而会唤醒应用并给与时间响应。 UserNotification.framework与PushKit.framework的区别： UserNotification 可以提供面向用户的显式通知（提示音，角标等），PushKit没有提供显式的通知。 UserNotification 可以发送本地通知，PushKit只能接受apns UserNotification 场景比较通用，但是PushKit只有在WatchOS更新表盘，Voip等场景下才能使用 UserNotification也支持后台静默唤醒的推送，但是实时性不高，可靠性不强，优先级很低；PushKit则提供更为实时可靠的通知。</summary></entry><entry><title type="html">ZLGithubClient Beta Download</title><link href="http://localhost:4000/2020/02/21/ZLGithubClient.html" rel="alternate" type="text/html" title="ZLGithubClient Beta Download" /><published>2020-02-21T00:00:00+08:00</published><updated>2020-02-21T00:00:00+08:00</updated><id>http://localhost:4000/2020/02/21/ZLGithubClient</id><content type="html" xml:base="http://localhost:4000/2020/02/21/ZLGithubClient.html">&lt;h1 id=&quot;zlgithubclient-beta-download&quot;&gt;ZLGithubClient Beta Download&lt;/h1&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Github 自制iOS客户端&lt;/p&gt;

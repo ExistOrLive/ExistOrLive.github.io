@@ -1,11 +1,11 @@
 ---
 title: iOS的通知 (iOS 10 +)
-date: 2020-03-26 17:29:00
-description: iOS 10 + 推送相关的framework以及可以实现场景和功能
-categories:
- - iOS
- - APNS
+date: 2020-03-26
 tags: iOS
+article_header:
+  type: cover
+  image:
+    src: /screenshot.jpg
 ---
 
 # iOS的通知 (iOS 10 +)

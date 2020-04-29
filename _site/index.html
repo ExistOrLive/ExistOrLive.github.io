@@ -280,6 +280,29 @@
 
 <!-- end custom main top snippet -->
 <article itemscope itemtype="http://schema.org/WebPage"><header style="display:none;"><h1>Home</h1></header><meta itemprop="headline" content="Home"><meta itemprop="author" content="ExistOrLive"/><div class="js-article-content"><div class="layout--articles"><div class="article-list items items--divided"><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2020/04/28/CALayer-frame.html"><h2 itemprop="headline" class="item__header">CALayer的frame的计算</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">CALayer 的 frame 的计算
+
+frame 代表图层或者视图在父图层或者父视图中的坐标和范围。UIView的frame属性是直接读取CALayer的frame属性。而CALayer的frame属性并没有关联实例变量，仅是setter和getter方法，是通过bounds,position,anchorPosition,以及transform等属性计算出来的。
+
+
+  
+    bounds属性代表的是图层的内部坐标或者说是图层的尺寸
+  
+  
+    position属性代表的是图层的锚点在父图层中的坐标
+  
+  
+    anchorPosition属性代表的图层的锚点在本图层中的相对位置
+  
+  
+    transform属性代表的是图层的3D变换; affine...</div><p><a href="/2020/04/28/CALayer-frame.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=iOS">iOS</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Apr 28, 2020</span>
+            </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2020-04-28T00:00:00+08:00">
+    <meta itemprop="keywords" content="iOS"></div>
+      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
           <header><a href="/2020/03/30/jenkinsPlugin.html"><h2 itemprop="headline" class="item__header">jenkins插件</h2></a></header>
           <div class="item__description"><div class="article__content" itemprop="description articleBody">Jenkins的常用插件
 
@@ -343,6 +366,32 @@ GitHub Action中的概念
             </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Mar 30, 2020</span>
             </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2020-03-30T00:00:00+08:00">
     <meta itemprop="keywords" content="CI"></div>
+      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
+          <header><a href="/2020/03/26/iOS-Notification(iOS10+).html"><h2 itemprop="headline" class="item__header">iOS的通知 (iOS 10 +)</h2></a></header>
+          <div class="item__description"><div class="article__content" itemprop="description articleBody">iOS的通知 (iOS 10 +)
+
+
+  苹果系统提供了通知机制，既可以让iOS设备从远端的推送服务器接受通知，也可以由设备的app发送本地通知。既可以在设备的通知中心展示通知提示view，发出提示音，修改app icon的角标（给用户显式的提示），也可以静默地唤醒后台的app执行一段时间（约30s）后台任务。
+
+
+UserNotification.framework与PushKit.framework
+
+
+  
+    UserNotification
+
+    
+      从服务器向用户设备推送面向用户的通知，或者从您的应用程序本地生成通知。
+    
+
+    
+      不论你的app是否在设备上运行，设备都可以接受推送，并展示通知的提示，播放声音，以及修改角标。
+   ...</div><p><a href="/2020/03/26/iOS-Notification(iOS10+).html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
+              <a class="button button--secondary button--pill button--sm"
+                href="/archive.html?tag=iOS">iOS</a>
+            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>Mar 26, 2020</span>
+            </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2020-03-26T00:00:00+08:00">
+    <meta itemprop="keywords" content="iOS"></div>
       </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
           <header><a href="/2020/02/21/ZLGithubClient.html"><h2 itemprop="headline" class="item__header">ZLGithubClient Beta Download</h2></a></header>
           <div class="item__description"><div class="article__content" itemprop="description articleBody">ZLGithubClient Beta Download
@@ -483,80 +532,20 @@ POST 传输实体主体
             </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>May 12, 2019</span>
             </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2019-05-12T00:00:00+08:00">
     <meta itemprop="keywords" content="HTTP"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2019/05/09/MemoryManagement-of-OC.html"><h2 itemprop="headline" class="item__header">OC 内存管理</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">OC 内存管理
-
-
-  OC 的内存管理是通过引用计数的机制实现。每一个OC对象都有一个retainCount的无符号整数属性，当对象被创建时，retainCount为1；当对象被变量持有时，retainCount加1；当变量不再持有对象时，retainCount减1；在retainCount为0时，对象被销毁。
-
-
-MRC
-
-
-  手动管理引用计数和内存,需要手动在代码的相应地方添加内存管理的代码。
-
-
-
-
-手动内存管理的原则 ：
-
-1、自己生成的对象，自己持有
-2、不是自己生成的对象也可以持有
-3、不需要自己持有的对象时，释放
-4、不是自己持有的对象，不可以释放
-
-
-
-
-ARC
-
-
-  ARC 是苹果引入的一种自动内存管理机制，会根据引用计数自动监视对象的生存周期，实现方式是在编译...</div><p><a href="/2019/05/09/MemoryManagement-of-OC.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=Objective-c">Objective-c</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>May 09, 2019</span>
-            </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2019-05-09T00:00:00+08:00">
-    <meta itemprop="keywords" content="Objective-c"></div>
-      </article><article class="item" itemscope itemtype="http://schema.org/BlogPosting"><div class="item__content">
-          <header><a href="/2019/05/09/Block.html"><h2 itemprop="headline" class="item__header">OC Block</h2></a></header>
-          <div class="item__description"><div class="article__content" itemprop="description articleBody">Block （代码块）
-
-
-  Block是iOS 4 引入的C语言扩展功能，实质上是带有自动变量(局部变量)的匿名函数。
-
-
-
-  如下，函数的定义是必须有名字的,函数可以通过函数指针来传递和调用;Block的定义不需要名字，但是需要赋给Block变量才可以使用
-
-
-/**
- *
- * 函数的定义必须是有名字的
- **/
-int func(int count)
-{
-    printf("%d",count);
-    return count;
-}
-
-int (*funcpter)(int) = &amp;func;
-
-(*funcpter)(10);
-
-／**
-  *
-  * block的定义不需要名字，然后赋给一个block变量
-  **／
-
-  int (^testBlock...</div><p><a href="/2019/05/09/Block.html">Read more</a></p></div><div class="article__info clearfix"><ul class="left-col menu"><li>
-              <a class="button button--secondary button--pill button--sm"
-                href="/archive.html?tag=Objective-c">Objective-c</a>
-            </li></ul><ul class="right-col menu"><li><i class="far fa-calendar-alt"></i> <span>May 09, 2019</span>
-            </li></ul></div><meta itemprop="author" content="ExistOrLive"/><meta itemprop="datePublished" content="2019-05-09T00:00:00+08:00">
-    <meta itemprop="keywords" content="Objective-c"></div>
       </article></div>
-</div><div class="layout--home"></div>
+</div><div class="layout--home"><div class="pagination"><p>10 post articles, 2 pages.</p>
+    <div class="pagination__menu">
+      <ul class="menu menu--nowrap"><li><div class="button button--secondary button--circle disabled">
+            <i class="fas fa-angle-left"></i>
+          </div></li><li>
+              <div class="button button--primary button--circle focus"><span>1</span></div>
+            </li><li>
+                <a class="button button--secondary button--circle" href="/page2"><span>2</span></a>
+              </li><li><a class="button button--secondary button--circle" href="/page2">
+            <i class="fas fa-angle-right"></i>
+          </a></li></ul>
+    </div>
+  </div></div>
 <script>/*(function () {
 
 })();*/
