@@ -131,7 +131,8 @@ comments:
     clientSecret: "df9e968335a482aec1ce77766e923d5c5c1cfea3"
     repository  : "https://github.com/ExistOrLive/ExistOrLive.github.io"
     owner       : "existorlive"
-    admin       : "existorlive"
+    admin: 
+      - "existorlive"
       # - your GitHub Id
 
   ## Valine
