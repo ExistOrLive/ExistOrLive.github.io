@@ -3,6 +3,8 @@ title: CALayer的frame的计算
 date: 2020-04-28
 description: CALayer的frame的计算
 tags: iOS
+key : "Caculation_For_Frame_Of_CALayer"
+excerpt_type: "html"
 article_header:
   type: cover
   image:

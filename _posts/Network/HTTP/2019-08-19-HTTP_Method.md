@@ -2,6 +2,8 @@
 title:  "HTTP请求方法"
 date:   2019-08-19
 tags: HTTP
+excerpt_type: "html"
+key: "HTTP_METHOD"
 article_header:
   type: cover
   image:

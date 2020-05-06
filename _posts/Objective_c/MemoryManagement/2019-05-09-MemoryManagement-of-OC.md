@@ -2,6 +2,8 @@
 title:  "OC 内存管理"
 date:   2019-05-09
 tags: [Objective-c]
+excerpt_type: "html"
+key: "MemoryManagementOfOC"
 article_header:
   type: cover
   image:

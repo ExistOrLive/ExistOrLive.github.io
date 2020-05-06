@@ -2,6 +2,8 @@
 title:  "百度HTTPS握手过程"
 date:   2019-07-22
 tags: HTTP
+excerpt_type: "html"
+key: "HTTPS_WITH_BAIDU"
 article_header:
   type: cover
   image:

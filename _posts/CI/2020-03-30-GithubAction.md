@@ -3,6 +3,8 @@ layout: article
 title:  "Github Action For ZLGithubClient"
 date:   2020-03-30
 tags: CI
+key : "Github_Action_For_ZLGithubClient"
+excerpt_type: "html"
 article_header:
   type: cover
   image:

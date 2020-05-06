@@ -108,7 +108,7 @@ sources: # bootcdn (default), unpkg
 ## => Sharing
 ##############################
 sharing:
-  provider: false # false (default), "addtoany", "addthis", "custom"
+  provider: "addtoany"
 
   ## AddThis
   addthis:
@@ -159,7 +159,7 @@ pageview:
 ## => Search
 ##############################
 search:
-  provider: default # "default" (default), false, "google", "custom"
+  provider: "google"
 
   ## Google Custom Search Engine
   google:
@@ -169,7 +169,7 @@ search:
 ## => Analytics
 ##############################
 analytics:
-  provider: false # false (default), "google", "custom"
+  provider: "google"
 
   ## Google Analytics
   google:

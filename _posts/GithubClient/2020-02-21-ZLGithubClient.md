@@ -3,6 +3,8 @@ layout: article
 title:  "ZLGithubClient Beta Download"
 date:   2020-02-21
 tags: App
+key : "ZLGithubClient_Beta_Download"
+excerpt_type: "html"
 article_header:
   type: cover
   image:

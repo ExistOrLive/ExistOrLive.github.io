@@ -3,6 +3,8 @@ layout: article
 title:  "jenkins插件"
 date:   2020-03-30
 tags: CI
+key : "Jenkins_Plugin"
+excerpt_type: "html"
 article_header:
   type: cover
   image:

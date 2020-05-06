@@ -2,6 +2,8 @@
 title: iOS的通知 (iOS 10 +)
 date: 2020-03-26
 tags: iOS
+excerpt_type: "html"
+key: "iOS_Notification"
 article_header:
   type: cover
   image:
