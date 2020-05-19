@@ -1,5 +1,5 @@
 ---
-title: Touch事件从始至终
+title: (UIKit Framework) UITouch事件的处理 
 date: 2020-04-30
 tags: iOS UIKit
 excerpt_type: "html"
@@ -11,7 +11,7 @@ article_header:
 ---
 
 
-# Touch事件从始至终
+# (UIKit Framework) UITouch事件的处理
 
 iOS系统在运行过程中，会收到各种不同的事件，包括`touch事件`，`motion事件`，`remote control事件`以及`press 事件`。
 

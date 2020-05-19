@@ -16,36 +16,19 @@ article_header:
 
 > Github 自制iOS客户端     
 
-![][4]
+![][2]
 
 ## 下载链接
 
-- [Github Source][1]
+- [Coding Artifacts Source][1]
 
-![][5]
+![][3]
 
-- [Gitee Source][2]
+[1]: itms-services://?action=download-manifest&url=https://existorlive.github.io/public/GithubClient/CodingArtifacts/manifest.plist
 
-![][6]
+[2]: /public/GithubClient/ipa/icon-57.png
 
-- [Coding Artifacts Source][3]
-
-![][7]
-
-
-[1]: itms-services://?action=download-manifest&url=https://existorlive.github.io/public/GithubClient/Github/manifest.plist
-
-[2]: itms-services://?action=download-manifest&url=https://existorlive.gitee.io/public/GithubClient/Gitee/manifest.plist
-
-[3]: itms-services://?action=download-manifest&url=https://existorlive.gitee.io/public/GithubClient/CodingArtifacts/manifest.plist
-
-[4]: /public/GithubClient/ipa/icon-57.png
-
-[5]: /public/GithubClient/QRCode/Github.png
-
-[6]: /public/GithubClient/QRCode/Gitee.png
-
-[7]: /public/GithubClient/QRCode/Coding.png
+[3]: /public/GithubClient/QRCode/coding.png
 
 
 

@@ -17,13 +17,13 @@
 					<key>kind</key>
 					<string>display-image</string>
 					<key>url</key>
-					<string>https://existorlive.gitee.io/public/GithubClient/ipa/icon-57.png</string>
+					<string>https://existorlive.github.io/public/GithubClient/ipa/icon-57.png</string>
 				</dict>
 				<dict>
 					<key>kind</key>
 					<string>full-size-image</string>
 					<key>url</key>
-					<string>https://existorlive.gitee.io/public/GithubClient/ipa/icon-1024.png</string>
+					<string>https://existorlive.github.io/public/GithubClient/ipa/icon-1024.png</string>
 				</dict>
 			</array>
 			<key>metadata</key>
