@@ -127,11 +127,75 @@ IMP class_getMethodImplementation(Class cls, SEL sel)
 
 2. 查询接受者所属类的`方法列表`,如果找到则返回，未找到进入步骤3
 
-3. 沿着继承体系继续向上查找，如果找到则返回，未找到进入`消息转发`的流程
-
+3. 沿着`继承体系`继续向上查找，如果找到则返回，未找到进入`消息转发`的流程
 
 ## 消息转发 
 
+当一个OC对象收到一条消息，OC对象会在所属类的`fast map`，`方法列表`以及在`继承树`中查询是否有对应的方法实现。如果能够找到，则直接调用方法实现；如果没有找到，则进入`消息转发`的流程。`消息转发`可以理解为在运行时发现消息没有对应的方法实现时，进行动态补救的过程。
+
+#### 动态方法解析（dynamic method resolution）
+
+对象在收到无法解读的消息后，首先会进行`动态方法解析`，涉及以下两个方法：
+
+```objc 
+
+@interface NSObject<NSObject>
+
++ (BOOL)resolveClassMethod:(SEL)sel OBJC_AVAILABLE(10.5, 2.0, 9.0, 1.0, 2.0);
+
++ (BOOL)resolveInstanceMethod:(SEL)sel OBJC_AVAILABLE(10.5, 2.0, 9.0, 1.0, 2.0);
+
+@end
+
+```
+
+`+resolveInstanceMethod:`在无法找到实例方法实现时调用；
+`+resolveClassMethod:`在无法找到类方法实现时调用；
+
+`在这两个方法中可以在运行时为当前类添加sel的方法实现，前提是方法实现的代码在编译时已经存在。`
+
+
+```objc
+//  例子
+
+id dynamicGetter(id obj, SEL selector){
+    return @"dynamicGetter";
+}
+
+void dynamicSetter(id obj, SEL selector,id value){
+    NSLog(@"dynamicSetter %@",value);
+}
+
+@interface Test : NSObject
+
+@property(nonatomic,strong) NSString * property1;
+
+@end
+
+@implementation Test
+
+@dynamic property1;     // @dynamic 修饰属性，属性不生成对应的setter和getter方法
+
++ (BOOL)resolveInstanceMethod:(SEL)sel {
+    NSString * selStr = NSStringFromSelector(sel);
+    if([selStr isEqualsToString:@"setProperty1:"]){
+        class_addMethod(self, sel, (IMP)dynamicSetter, "v@:");
+        return YES;
+    } else if([selStr isEqualsToString:@"property1"]) {
+        class_addMethod(self, sel, (IMP)dynamicGetter, "@@:");
+        return YES;
+    }
+    return [super resolveInstanceMethod:sel];
+}
+
+@end
+
+
+```
+
+> 在以上代码中，`Test`类声明了`property1`属性，但是用`@dynamic`修饰了`property1`属性，`property1`不会生成对应的setter和getter方法。
+
+> 当试图调用`property1`的setter或者getter方法，在`Test`类的方法列表和继承树中都找不到对应的方法实现，就进入`动态方法解析`，调用`+resolveInstanceMethod:`。在这个方法中为`property1`的setter或者getter方法添加方法实现，方法实现是已经存在的函数。`+resolveInstanceMethod:` 返回YES后，就重新走一遍`消息发送`的流程,此时`property1`的setter或者getter方法已经有了方法实现。
 
 
 
