@@ -185,7 +185,7 @@ void dynamicSetter(id obj, SEL selector,id value){
         class_addMethod(self, sel, (IMP)dynamicGetter, "@@:");
         return YES;
     }
-    return [super resolveInstanceMethod:sel];
+    return [super resolveInstanceMethod:sel];     // 子类无法处理时，记得调用父类的resolveInstanceMethod
 }
 
 @end
@@ -195,17 +195,109 @@ void dynamicSetter(id obj, SEL selector,id value){
 
 > 在以上代码中，`Test`类声明了`property1`属性，但是用`@dynamic`修饰了`property1`属性，`property1`不会生成对应的setter和getter方法。
 
-> 当试图调用`property1`的setter或者getter方法，在`Test`类的方法列表和继承树中都找不到对应的方法实现，就进入`动态方法解析`，调用`+resolveInstanceMethod:`。在这个方法中为`property1`的setter或者getter方法添加方法实现，方法实现是已经存在的函数。`+resolveInstanceMethod:` 返回YES后，就重新走一遍`消息发送`的流程,此时`property1`的setter或者getter方法已经有了方法实现。
+> 当试图调用`property1`的setter或者getter方法，在`Test`类的方法列表和继承树中都找不到对应的方法实现，就进入`动态方法解析`，调用`+resolveInstanceMethod:`。在这个方法中为`property1`的setter或者getter方法添加方法实现，方法实现是已经存在的函数。
+
+> `+resolveInstanceMethod:` 返回YES后，就重新走一遍`消息发送`的流程,此时`property1`的setter或者getter方法已经有了方法实现; 返回 NO 后，则继续`消息转发`的流程
+
+
+#### -forwardingTargetForSelector:
+
+当`动态方法解析`无法处理未知消息，就会调用对象 `-forwardingTargetForSelector:`，试图将消息完整的转发给另一个对象，在方法中无法修改消息的内容(selector 和 参数)。
+
+```objc
+//  例子
+@interface Test1 : NSObject
+
+@property(nonatomic,strong) NSString * property1;
+
+@end
+
+@implementation Test1
+
+@end
 
 
 
+@interface Test : NSObject
+
+@property(nonatomic,strong) NSString * property1;
+
+@property(nonatomic,strong) Test1* test1;
+
+@end
+
+@implementation Test
+
+@dynamic property1;     // @dynamic 修饰属性，属性不生成对应的setter和getter方法
+
+- (id)forwardingTargetForSelector:(SEL)selector {
+    if([selStr isEqualsToString:@"setProperty1:"] || 
+       [selStr isEqualsToString:@"property1"]) {
+         return _test1;   
+    }
+
+    return [super forwardingTargetForSelector:selector]; // 子类无法处理时，记得调用父类的forwardingTargetForSelector
+               
+}
+
+@end
+
+```
+
+> 在以上代码中，当调用`Test`的`property1`的setter或者getter方法，找不到方法实现，动态方法解析没有处理时，调用到`-forwardingTargetForSelector:`方法，在这里将消息完整转发给`Test1`类的实例。
+
+注意： `-forwardingTargetForSelector:`不能返回`self`,否则会陷入无限循环
 
 
+#### -forwardInvocation:
+
+如果`-forwardingTargetForSelector:`不能够处理消息，就会调用到`-forwardInvocation:`
+
+```objc
+- (void)forwardInvocation:(NSInvocation *)anInvocation OBJC_SWIFT_UNAVAILABLE("");
+```
+
+如果转发算法到了这一步，会启动完整的消息转发机制。首先会创建`NSInvocation`对象，`NSInvocation`对象会将`receiver`，`selector`以及参数都封装起来，并作为参数传递到`-forwardInvocation:`方法。而在`-forwardInvocation:`方法中可以修改`receiver`，`selector`以及参数，使得`NSInvocation`成为一次有效的调用。
+
+实现`-forwardInvocation:`方法时，若发现某调用操作不应由本类处理，则需要调用父类的同名方法。这样继承体系中每个类都有机会处理此调用请求，直到`NSObject`。在`NSObject`的`-forwardInvocation:`方法中，还会继而调用`doseNotRecognizerSelector:`抛出异常，表明消息最终未能处理。
+
+### 消息转发的全流程
+
+
+<div align="center"><img src="/public/Objective_c/NSObject/msg_forward1.png" alt="图1"  align="top" /></div>
+
+在上图中， 接收者在每一步中均有机会处理消息。步骤越往后，处理消息的代价就越大。最好能够在第一步就处理完，这样运行期系统就可以将此方法缓存起来。如果此类的实例收到同名的消息，那么根本无需启动消息转发流程。若想在第三步将消息转给备用的接受者，那么建议还是在第二步进行转发，第三步的代价会比第二步大得多。
+
+
+
+## 总结
+
+- Objective-C的方法调用成为`消息发送`，消息由`receiver`，`selector`以及`参数`组成。
+
+- Objective-C的消息发送是`动态绑定`的，在运行期确定方法实现。
+
+- Objective-C的消息发送实际上调用的是`msg_send()`函数，在类的`fastmap`，`方法列表`以及继承体系中寻找方法实现。
+
+- 如果某次方法调用无法找到方法实现，就进入`消息转发`的流程。
+
+- 消息转发首先进行动态方法解析，调用`+resolveInstanceMethod:`或者`+resolveClassMethod:`，试图为消息添加对应的方法实现。
+
+- `-forwardingTargetForSelector:` 会完整的转发消息，不会修改消息的`selector`和`参数`。
+
+- 经过以上两步还不能处理消息，就调用`-forwardInvocation:`启动完整的消息转发机制，可以任意修改消息的`receiver`，`selector`以及`参数`。
 
 
 ## 参考文档
 
 [Objective-C 消息发送与转发机制原理][1]
 
+[Effective Objective-C 2.0][2]
+
+这里贴上[大神](https://github.com/yulingtianxia)的消息发送和消息转发的流程图：
+
+<div align="center"><img src="/public/Objective_c/NSObject/msg_forward2.jpg" alt="图1"  align="top" /></div>
+
 
 [1]:http://yulingtianxia.com/blog/2016/06/15/Objective-C-Message-Sending-and-Forwarding/
+
+[2]: https://baike.baidu.com/item/Effective%20Objective-C%202.0/22878393?fr=aladdin
