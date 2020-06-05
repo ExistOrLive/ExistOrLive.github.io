@@ -96,7 +96,7 @@ void test1(int a){
 
 OC的方法方法调用就属于`动态绑定`，在编译期硬编码到指令中的是`objc_msgSend()`的函数调用，而调用的具体方法实现在运行期确定。
 
-## objc_msgSend()
+## 消息发送 objc_msgSend()
 
 `objc_msgSend()` 函数实现的伪代码大致如下：先确定对象的类，再确定方法的具体实现并调用
 
@@ -133,7 +133,7 @@ IMP class_getMethodImplementation(Class cls, SEL sel)
 
 当一个OC对象收到一条消息，OC对象会在所属类的`fast map`，`方法列表`以及在`继承树`中查询是否有对应的方法实现。如果能够找到，则直接调用方法实现；如果没有找到，则进入`消息转发`的流程。`消息转发`可以理解为在运行时发现消息没有对应的方法实现时，进行动态补救的过程。
 
-#### 动态方法解析（dynamic method resolution）
+### 动态方法解析（dynamic method resolution）
 
 对象在收到无法解读的消息后，首先会进行`动态方法解析`，涉及以下两个方法：
 
@@ -200,7 +200,7 @@ void dynamicSetter(id obj, SEL selector,id value){
 > `+resolveInstanceMethod:` 返回YES后，就重新走一遍`消息发送`的流程,此时`property1`的setter或者getter方法已经有了方法实现; 返回 NO 后，则继续`消息转发`的流程
 
 
-#### -forwardingTargetForSelector:
+### -forwardingTargetForSelector:
 
 当`动态方法解析`无法处理未知消息，就会调用对象 `-forwardingTargetForSelector:`，试图将消息完整的转发给另一个对象，在方法中无法修改消息的内容(selector 和 参数)。
 
@@ -249,7 +249,7 @@ void dynamicSetter(id obj, SEL selector,id value){
 注意： `-forwardingTargetForSelector:`不能返回`self`,否则会陷入无限循环
 
 
-#### -forwardInvocation:
+### -forwardInvocation:
 
 如果`-forwardingTargetForSelector:`不能够处理消息，就会调用到`-forwardInvocation:`
 
